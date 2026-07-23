@@ -1,0 +1,148 @@
+import React, { useEffect, useRef } from 'react';
+import { GameEngine } from '../game/GameEngine';
+
+interface MinimapWidgetProps {
+  engine: GameEngine;
+}
+
+export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
+  const minimapCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = minimapCanvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animId: number;
+
+    const renderMinimap = () => {
+      const size = canvas.width;
+      const center = size / 2;
+      const scale = size / 6000; // Map 6000px to canvas size
+
+      ctx.clearRect(0, 0, size, size);
+
+      // Circular clipping path
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(center, center, center - 2, 0, Math.PI * 2);
+      ctx.clip();
+
+      // Terrain Background
+      ctx.fillStyle = '#0f1a14';
+      ctx.fillRect(0, 0, size, size);
+
+      // Lake
+      ctx.fillStyle = '#0284c7';
+      ctx.beginPath();
+      ctx.arc(4700 * scale, 1400 * scale, 600 * scale, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Pathways
+      ctx.strokeStyle = '#27382b';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(3000 * scale, 3000 * scale);
+      ctx.lineTo(1400 * scale, 3000 * scale);
+      ctx.lineTo(1400 * scale, 1200 * scale);
+      ctx.lineTo(3000 * scale, 1100 * scale);
+      ctx.lineTo(4500 * scale, 1400 * scale);
+      ctx.lineTo(4400 * scale, 3100 * scale);
+      ctx.lineTo(4500 * scale, 4600 * scale);
+      ctx.lineTo(1500 * scale, 5100 * scale);
+      ctx.stroke();
+
+      // Fireflies
+      engine.fireflies.forEach((f) => {
+        if (!f.collected) {
+          ctx.fillStyle = '#fef08a';
+          ctx.fillRect(f.x * scale - 1, f.y * scale - 1, 2, 2);
+        }
+      });
+
+      // Active Story Destination Beacon
+      const activeWp = engine.getActiveStoryWaypoint();
+      if (activeWp) {
+        const wpX = activeWp.x * scale;
+        const wpY = activeWp.y * scale;
+
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath();
+        ctx.arc(wpX, wpY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Direction Arrow from player to target
+        const playerX = engine.player.x * scale;
+        const playerY = engine.player.y * scale;
+
+        const angle = Math.atan2(activeWp.y - engine.player.y, activeWp.x - engine.player.x);
+
+        // Arrow head
+        const arrowDist = 28;
+        const arrowX = playerX + Math.cos(angle) * arrowDist;
+        const arrowY = playerY + Math.sin(angle) * arrowDist;
+
+        ctx.strokeStyle = '#fde047';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(playerX, playerY);
+        ctx.lineTo(arrowX, arrowY);
+        ctx.stroke();
+
+        ctx.fillStyle = '#fde047';
+        ctx.beginPath();
+        ctx.arc(arrowX, arrowY, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Player Icon (Center dot)
+      const px = engine.player.x * scale;
+      const py = engine.player.y * scale;
+
+      ctx.fillStyle = '#c084fc';
+      ctx.beginPath();
+      ctx.arc(px, py, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.restore();
+
+      // Circular Border
+      ctx.strokeStyle = 'rgba(167, 139, 250, 0.4)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(center, center, center - 2, 0, Math.PI * 2);
+      ctx.stroke();
+
+      animId = requestAnimationFrame(renderMinimap);
+    };
+
+    animId = requestAnimationFrame(renderMinimap);
+
+    return () => {
+      cancelAnimationFrame(animId);
+    };
+  }, [engine]);
+
+  const storyObj = engine.getStoryObjectiveInfo();
+
+  return (
+    <div className="minimap-widget-container pointer-events-auto">
+      <canvas
+        ref={minimapCanvasRef}
+        width={140}
+        height={140}
+        className="minimap-canvas"
+      />
+      {storyObj && (
+        <div className="minimap-distance-tag">
+          🎯 {storyObj.distanceMeters}m
+        </div>
+      )}
+    </div>
+  );
+};

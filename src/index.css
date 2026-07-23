@@ -1,0 +1,537 @@
+:root {
+  --bg-navy: #0b132b;
+  --bg-forest: #12261a;
+  --accent-yellow: #fef08a;
+  --accent-orange: #fb923c;
+  --accent-lavender: #c084fc;
+  --accent-sky: #38bdf8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-navy);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #f8fafc;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.ui-overlay-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+  z-index: 10;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 0.6rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.game-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fef08a;
+  letter-spacing: 0.02em;
+}
+
+.icon-sparkle {
+  color: #fde047;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.zone-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  color: #e9d5ff;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.firefly-counter, .coffee-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(254, 240, 138, 0.15);
+  border: 1px solid rgba(254, 240, 138, 0.3);
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fef08a;
+}
+
+.ui-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ui-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.ui-btn-primary {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  cursor: pointer;
+}
+
+.ui-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f8fafc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ui-btn-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Minimap Radar Widget */
+.minimap-widget-container {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 25;
+}
+
+.minimap-canvas {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(167, 139, 250, 0.25);
+  background: #0f1a14;
+}
+
+.minimap-distance-tag {
+  margin-top: 0.4rem;
+  background: rgba(15, 10, 25, 0.85);
+  border: 1px solid rgba(254, 240, 138, 0.3);
+  color: #fef08a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* JRPG Bottom Dialogue Box */
+.rpg-dialogue-overlay {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 820px;
+  z-index: 60;
+  cursor: pointer;
+}
+
+.rpg-dialogue-card {
+  background: rgba(15, 10, 28, 0.95);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(192, 132, 252, 0.5);
+  border-radius: 24px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(167, 139, 250, 0.2);
+}
+
+.rpg-speaker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.rpg-avatar-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(251, 146, 60, 0.3));
+  border: 1px solid rgba(254, 240, 138, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.rpg-speaker-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.rpg-speaker-name {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fef08a;
+}
+
+.rpg-chapter-tag {
+  font-size: 0.75rem;
+  color: #c084fc;
+  font-weight: 500;
+}
+
+.rpg-text-bubble {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  min-height: 80px;
+}
+
+.rpg-dialogue-text {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f1f5f9;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.rpg-cursor {
+  color: #fde047;
+  font-weight: 800;
+  animation: blink 0.8s infinite;
+  margin-left: 2px;
+}
+
+.rpg-action-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.rpg-next-prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #fef08a;
+  background: rgba(254, 240, 138, 0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(254, 240, 138, 0.3);
+}
+
+.rpg-skip-prompt {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Guided Story Objective Compass Banner */
+.story-objective-banner {
+  position: absolute;
+  top: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+}
+
+.story-banner-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 10, 28, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(254, 240, 138, 0.4);
+  padding: 0.55rem 1.4rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(254, 240, 138, 0.15);
+}
+
+.story-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.story-banner-label {
+  color: #fb923c;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.story-banner-title {
+  color: #fef08a;
+  font-weight: 700;
+}
+
+.story-banner-dist {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+}
+
+/* Prologue Cutscene Card */
+.prologue-modal-card {
+  background: rgba(15, 10, 25, 0.95);
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 580px;
+  padding: 2.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(251, 146, 60, 0.2);
+}
+
+.prologue-text-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem;
+  border-radius: 18px;
+}
+
+/* Task Completion Toast */
+.task-toast-container {
+  position: absolute;
+  top: 9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+}
+
+.task-toast-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2);
+  animation: slideDown 0.4s ease-out;
+}
+
+.task-toast-label {
+  font-size: 0.7rem;
+  color: #34d399;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.task-toast-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fef08a;
+}
+
+/* Tasks List Modal */
+.tasks-list-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-card-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+}
+
+.task-card-item.completed {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.task-details {
+  flex: 1;
+}
+
+.task-title-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fef08a;
+  margin: 0 0 0.2rem 0;
+}
+
+.task-desc-text {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin: 0 0 0.4rem 0;
+}
+
+.task-progress-bar-bg {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.task-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fb923c, #fef08a);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.task-count-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+/* Custom Settings Sliders & Toggles */
+.golden-slider {
+  width: 100%;
+  accent-color: #fef08a;
+  height: 6px;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.styled-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #8b5cf6;
+  cursor: pointer;
+}
+
+.settings-select {
+  width: 100%;
+  background: rgba(30, 27, 75, 0.8);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #e9d5ff;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+/* Interaction Prompt */
+.interaction-prompt {
+  align-self: center;
+  margin-bottom: 1.5rem;
+}
+
+.prompt-bubble {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(254, 240, 138, 0.4);
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(254, 240, 138, 0.2);
+}
+
+.key-cap {
+  background: #fef08a;
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prompt-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fef08a;
+}
+
+/* Modal Backdrops */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 20, 0.78);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
