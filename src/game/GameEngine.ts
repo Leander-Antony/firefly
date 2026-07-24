@@ -500,8 +500,8 @@ export class GameEngine {
     this.player.x += this.player.vx;
     this.player.y += this.player.vy;
 
-    this.player.x = Math.max(40, Math.min(5960, this.player.x));
-    this.player.y = Math.max(40, Math.min(5960, this.player.y));
+    this.player.x = Math.max(40, Math.min(9960, this.player.x));
+    this.player.y = Math.max(40, Math.min(9960, this.player.y));
 
     if (Math.floor(this.player.x) % 50 === 0 || Math.floor(this.player.y) % 50 === 0) {
       this.savedState.playerX = this.player.x;

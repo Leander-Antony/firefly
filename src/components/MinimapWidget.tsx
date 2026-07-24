@@ -20,7 +20,7 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
     const renderMinimap = () => {
       const size = canvas.width;
       const center = size / 2;
-      const scale = size / 6000; // Map 6000px to canvas size
+      const scale = size / 10000; // Scale 10,000px map to minimap canvas
 
       ctx.clearRect(0, 0, size, size);
 
@@ -31,30 +31,52 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
       ctx.clip();
 
       // Terrain Background
-      ctx.fillStyle = '#0f1a14';
+      ctx.fillStyle = '#0a140d';
       ctx.fillRect(0, 0, size, size);
 
-      // Lake
+      // Firefly Lake (East)
       ctx.fillStyle = '#0284c7';
       ctx.beginPath();
-      ctx.arc(4700 * scale, 1400 * scale, 600 * scale, 0, Math.PI * 2);
+      ctx.arc(8000 * scale, 3500 * scale, 1100 * scale, 0, Math.PI * 2);
       ctx.fill();
 
-      // Pathways
-      ctx.strokeStyle = '#27382b';
-      ctx.lineWidth = 4;
+      // Waterfall Pools (Northeast)
+      ctx.fillStyle = '#38bdf8';
       ctx.beginPath();
-      ctx.moveTo(3000 * scale, 3000 * scale);
-      ctx.lineTo(1400 * scale, 3000 * scale);
-      ctx.lineTo(1400 * scale, 1200 * scale);
-      ctx.lineTo(3000 * scale, 1100 * scale);
-      ctx.lineTo(4500 * scale, 1400 * scale);
-      ctx.lineTo(4400 * scale, 3100 * scale);
-      ctx.lineTo(4500 * scale, 4600 * scale);
-      ctx.lineTo(1500 * scale, 5100 * scale);
+      ctx.arc(8000 * scale, 1500 * scale, 700 * scale, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Arcade Ruins Glow (Northwest)
+      ctx.fillStyle = '#a855f7';
+      ctx.beginPath();
+      ctx.arc(2000 * scale, 1500 * scale, 600 * scale, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cauliflower Ridge Sunset Glow (Southwest)
+      ctx.fillStyle = '#eab308';
+      ctx.beginPath();
+      ctx.arc(2000 * scale, 8200 * scale, 800 * scale, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Connecting Trail Network
+      ctx.strokeStyle = '#2d4030';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(5000 * scale, 5000 * scale); // Central Glade
+      ctx.lineTo(2000 * scale, 1500 * scale); // Arcade Ruins
+      ctx.lineTo(2000 * scale, 2800 * scale); // Rain Bench
+      ctx.lineTo(2000 * scale, 4800 * scale); // Meadow
+      ctx.lineTo(5000 * scale, 2000 * scale); // Whisper Tree
+      ctx.lineTo(8000 * scale, 1500 * scale); // Starlight Bridge
+      ctx.lineTo(8000 * scale, 3500 * scale); // Lake
+      ctx.lineTo(8000 * scale, 4800 * scale); // Coffee Corner
+      ctx.lineTo(8000 * scale, 7800 * scale); // Memory Hollow
+      ctx.lineTo(5000 * scale, 8500 * scale); // Observatory
+      ctx.lineTo(2000 * scale, 8200 * scale); // Cauliflower Ridge
+      ctx.lineTo(2000 * scale, 9200 * scale); // Train Station
       ctx.stroke();
 
-      // Fireflies
+      // Fireflies Dots
       engine.fireflies.forEach((f) => {
         if (!f.collected) {
           ctx.fillStyle = '#fef08a';
@@ -79,7 +101,6 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
 
         const angle = Math.atan2(activeWp.y - engine.player.y, activeWp.x - engine.player.x);
 
-        // Arrow head
         const arrowDist = 28;
         const arrowX = playerX + Math.cos(angle) * arrowDist;
         const arrowY = playerY + Math.sin(angle) * arrowDist;
@@ -97,7 +118,7 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
         ctx.fill();
       }
 
-      // Player Icon (Center dot)
+      // Player Icon (Center purple dot)
       const px = engine.player.x * scale;
       const py = engine.player.y * scale;
 
@@ -112,7 +133,7 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
       ctx.restore();
 
       // Circular Border
-      ctx.strokeStyle = 'rgba(167, 139, 250, 0.4)';
+      ctx.strokeStyle = 'rgba(167, 139, 250, 0.45)';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.arc(center, center, center - 2, 0, Math.PI * 2);

@@ -52,10 +52,20 @@ export const JournalModal: React.FC<JournalModalProps> = ({ engine, onClose }) =
         className="journal-modal"
       >
         {/* Header */}
-        <div className="journal-header">
+        <div className="journal-header flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BookOpen className="text-amber-300" size={24} />
             <h2 className="journal-title">Traveler's Notebook & Story</h2>
+            <button
+              onClick={() => {
+                engine.savedState.hasSeenPrologue = false;
+                onClose();
+              }}
+              className="ui-btn text-xs py-1 px-2.5 flex items-center gap-1.5 ml-3"
+              title="Replay Prologue Intro Cutscene"
+            >
+              <Sparkles size={14} /> Replay Prologue
+            </button>
           </div>
           <button onClick={onClose} className="close-btn">
             <X size={20} />

@@ -56,7 +56,11 @@ export type ZoneId =
   | 'lake'
   | 'whisper_tree'
   | 'memory_hollow'
-  | 'train_station';
+  | 'train_station'
+  | 'arcade_ruins'
+  | 'starlight_bridge'
+  | 'cauliflower_ridge'
+  | 'observatory';
 
 export interface ZoneInfo {
   id: ZoneId;

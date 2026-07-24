@@ -1,6 +1,6 @@
 import type { GameSettings, SavedGameState } from '../types/game';
 
-const STORAGE_KEY = 'firefly_diaries_save_v4';
+const STORAGE_KEY = 'firefly_diaries_save_v5_remember';
 
 export const DEFAULT_SETTINGS: GameSettings = {
   masterVolume: 0.8,
@@ -40,8 +40,8 @@ export const INITIAL_SAVE_STATE: SavedGameState = {
   keptWhisperNotes: [],
   coffeeCount: 0,
   coffeeMessagesUnlocked: [],
-  playerX: 3000,
-  playerY: 3000,
+  playerX: 5000,
+  playerY: 5000,
   visitedZones: ['central_glade'],
   hasReachedEnding: false,
   settings: DEFAULT_SETTINGS,
