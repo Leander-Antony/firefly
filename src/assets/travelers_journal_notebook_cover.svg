@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Drop Shadow Filter -->
+    <filter id="open-journal-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#020617" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="leather-outer-back" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="40%" stop-color="#451a03"/>
+      <stop offset="80%" stop-color="#270e02"/>
+      <stop offset="100%" stop-color="#100501"/>
+    </linearGradient>
+
+    <!-- Aged Parchment Left Page (Slight curve shading towards spine) -->
+    <linearGradient id="parchment-left-page" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="70%" stop-color="#fffbeb"/>
+      <stop offset="92%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Aged Parchment Right Page -->
+    <linearGradient id="parchment-right-page" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.8"/>
+      <stop offset="8%" stop-color="#fde68a"/>
+      <stop offset="30%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+
+    <linearGradient id="gold-tab-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5c0"/>
+      <stop offset="40%" stop-color="#fde047"/>
+      <stop offset="75%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#open-journal-shadow)" transform="translate(0, 0)">
+    <!-- ================= 1. LEATHER OUTER BACKING COVER ================= -->
+    <!-- Heavy Leather Book Backing -->
+    <rect x="20" y="50" width="472" height="412" rx="14" fill="url(#leather-outer-back)" stroke="#100501" stroke-width="3"/>
+
+    <!-- Leather Stitched Outer Border -->
+    <rect x="30" y="60" width="452" height="392" rx="10" fill="none" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.65"/>
+
+    <!-- ================= 2. OPEN TWO-PAGE PARCHMENT SPREAD ================= -->
+    <!-- Stacked Page Depth Shadow (Left & Right underlying pages) -->
+    <path d="M 36 68 L 252 75 L 252 445 L 36 438 Z" fill="#b45309"/>
+    <path d="M 476 68 L 260 75 L 260 445 L 476 438 Z" fill="#b45309"/>
+
+    <!-- Left Open Page -->
+    <path d="M 40 70 
+             C 100 66, 190 66, 252 75 
+             L 252 440 
+             C 190 432, 100 432, 40 435 Z" 
+          fill="url(#parchment-left-page)" stroke="#78350f" stroke-width="1.5"/>
+
+    <!-- Right Open Page -->
+    <path d="M 472 70 
+             C 412 66, 322 66, 260 75 
+             L 260 440 
+             C 322 432, 412 432, 472 435 Z" 
+          fill="url(#parchment-right-page)" stroke="#78350f" stroke-width="1.5"/>
+
+    <!-- ================= 3. SPINE CREASE & SHADOW ================= -->
+    <!-- Deep Spine Center Shadow -->
+    <rect x="251" y="73" width="10" height="369" fill="#451a03" opacity="0.5"/>
+    <line x1="256" y1="73" x2="256" y2="442" stroke="#270e02" stroke-width="2"/>
+
+    <!-- Hanging Red Silk Ribbon Bookmark -->
+    <path d="M 251 70 L 251 475 L 256 462 L 261 475 L 261 70 Z" fill="#ef4444" stroke="#991b1b" stroke-width="1"/>
+    <path d="M 252 70 L 252 468" stroke="#fca5a5" stroke-width="1" opacity="0.8"/>
+
+    <!-- ================= 4. GOLD CORNER CLIPS / FILIGREE CORNER TABS ================= -->
+    <!-- Top-Left Corner Tab -->
+    <polygon points="40,70 75,70 40,105" fill="url(#gold-tab-grad)" stroke="#451a03" stroke-width="1"/>
+    <circle cx="52" cy="82" r="3" fill="#451a03"/>
+
+    <!-- Top-Right Corner Tab -->
+    <polygon points="472,70 437,70 472,105" fill="url(#gold-tab-grad)" stroke="#451a03" stroke-width="1"/>
+    <circle cx="460" cy="82" r="3" fill="#451a03"/>
+
+    <!-- Bottom-Left Corner Tab -->
+    <polygon points="40,435 75,435 40,400" fill="url(#gold-tab-grad)" stroke="#451a03" stroke-width="1"/>
+    <circle cx="52" cy="423" r="3" fill="#451a03"/>
+
+    <!-- Bottom-Right Corner Tab -->
+    <polygon points="472,435 437,435 472,400" fill="url(#gold-tab-grad)" stroke="#451a03" stroke-width="1"/>
+    <circle cx="460" cy="423" r="3" fill="#451a03"/>
+
+    <!-- ================= 5. FAINT WATERMARK & RULE LINES (OPTIONAL PAGE GUIDES) ================= -->
+    <!-- Faint Rule Lines on Left Page -->
+    <g stroke="#d97706" stroke-width="1" opacity="0.25">
+      <line x1="70" y1="120" x2="230" y2="120"/>
+      <line x1="70" y1="150" x2="230" y2="150"/>
+      <line x1="70" y1="180" x2="230" y2="180"/>
+      <line x1="70" y1="210" x2="230" y2="210"/>
+      <line x1="70" y1="240" x2="230" y2="240"/>
+      <line x1="70" y1="270" x2="230" y2="270"/>
+      <line x1="70" y1="300" x2="230" y2="300"/>
+      <line x1="70" y1="330" x2="230" y2="330"/>
+      <line x1="70" y1="360" x2="230" y2="360"/>
+
+      <!-- Faint Rule Lines on Right Page -->
+      <line x1="282" y1="120" x2="442" y2="120"/>
+      <line x1="282" y1="150" x2="442" y2="150"/>
+      <line x1="282" y1="180" x2="442" y2="180"/>
+      <line x1="282" y1="210" x2="442" y2="210"/>
+      <line x1="282" y1="240" x2="442" y2="240"/>
+      <line x1="282" y1="270" x2="442" y2="270"/>
+      <line x1="282" y1="300" x2="442" y2="300"/>
+      <line x1="282" y1="330" x2="442" y2="330"/>
+      <line x1="282" y1="360" x2="442" y2="360"/>
+    </g>
+
+    <!-- Faint Compass Rose Watermark on Right Page Center -->
+    <g opacity="0.12" stroke="#78350f" fill="none" stroke-width="1.5">
+      <circle cx="362" cy="240" r="50"/>
+      <polygon points="362,180 367,235 362,240 357,235" fill="#78350f"/>
+      <polygon points="362,300 367,245 362,240 357,245" fill="#78350f"/>
+      <polygon points="422,240 367,245 362,240 367,235" fill="#78350f"/>
+      <polygon points="302,240 357,245 362,240 357,235" fill="#78350f"/>
+    </g>
+  </g>
+</svg>

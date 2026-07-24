@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <filter id="purple-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur1"/>
+      <feGaussianBlur stdDeviation="20" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <linearGradient id="trunk-wood" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="35%" stop-color="#2e1065"/>
+      <stop offset="75%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <radialGradient id="purple-spore-aura" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f0abfc" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#c084fc" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#7e22ce" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#3b0764" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="canopy-leaf-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d0fe"/>
+      <stop offset="30%" stop-color="#e879f9"/>
+      <stop offset="70%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#581c87"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Spore Light Aura -->
+  <circle cx="256" cy="220" r="220" fill="url(#purple-spore-aura)"/>
+
+  <!-- Ground Spreading Roots -->
+  <g filter="url(#purple-glow)">
+    <path d="M 120 460 Q 180 440 230 400 Q 256 380 280 400 Q 330 440 400 460 L 415 470 Q 330 445 285 410 Q 256 395 225 410 Q 170 445 105 470 Z" fill="#2e1065"/>
+    <path d="M 60 480 Q 140 455 210 410 Q 256 400 300 410 Q 370 455 450 480 L 440 488 Q 365 462 295 420 Q 256 412 215 420 Q 145 462 70 488 Z" fill="#1e1b4b"/>
+  </g>
+
+  <!-- Gnarled Ancient Trunk & Main Branches -->
+  <path d="M 215 420 
+           C 200 350, 180 300, 160 250 
+           C 180 260, 210 280, 230 250 
+           C 210 200, 170 170, 150 140 
+           C 180 160, 220 180, 245 210 
+           C 260 170, 270 130, 275 90 
+           C 285 130, 295 170, 310 210 
+           C 330 180, 360 160, 390 140 
+           C 370 170, 330 200, 310 250 
+           C 330 280, 360 260, 380 250 
+           C 360 300, 340 350, 325 420 
+           C 290 410, 250 410, 215 420 Z" 
+        fill="url(#trunk-wood)"/>
+
+  <!-- Bioluminescent Trunk Rune Veins -->
+  <path d="M 270 410 C 265 340, 245 280, 255 220" stroke="#f0abfc" stroke-width="3" fill="none" filter="url(#purple-glow)" opacity="0.9"/>
+  <path d="M 240 380 C 230 320, 210 270, 220 230" stroke="#e879f9" stroke-width="2.5" fill="none" filter="url(#purple-glow)" opacity="0.8"/>
+  <path d="M 295 380 C 305 320, 315 270, 305 230" stroke="#e879f9" stroke-width="2.5" fill="none" filter="url(#purple-glow)" opacity="0.8"/>
+
+  <!-- Lush Glowing Canopy (Layered Leaves) -->
+  <g filter="url(#purple-glow)">
+    <!-- Back Canopy Layer -->
+    <circle cx="150" cy="140" r="75" fill="#581c87"/>
+    <circle cx="360" cy="140" r="75" fill="#581c87"/>
+    <circle cx="256" cy="80" r="85" fill="#6b21a8"/>
+    
+    <!-- Mid Canopy Layer -->
+    <circle cx="180" cy="160" r="70" fill="url(#canopy-leaf-1)"/>
+    <circle cx="330" cy="160" r="70" fill="url(#canopy-leaf-1)"/>
+    <circle cx="256" cy="110" r="95" fill="url(#canopy-leaf-1)"/>
+    <circle cx="120" cy="190" r="60" fill="url(#canopy-leaf-1)"/>
+    <circle cx="390" cy="190" r="60" fill="url(#canopy-leaf-1)"/>
+
+    <!-- Front Highlights -->
+    <circle cx="230" cy="90" r="55" fill="#f0abfc" opacity="0.7"/>
+    <circle cx="280" cy="95" r="50" fill="#f5d0fe" opacity="0.8"/>
+    <circle cx="160" cy="145" r="45" fill="#e879f9" opacity="0.7"/>
+    <circle cx="350" cy="145" r="45" fill="#e879f9" opacity="0.7"/>
+  </g>
+
+  <!-- Floating Luminescent Purple Spores & Magic Wisps -->
+  <g filter="url(#purple-glow)">
+    <circle cx="140" cy="240" r="4.5" fill="#ffffff"/>
+    <circle cx="370" cy="250" r="5" fill="#f0abfc"/>
+    <circle cx="220" cy="310" r="3.5" fill="#f5d0fe"/>
+    <circle cx="300" cy="320" r="4" fill="#ffffff"/>
+    <circle cx="100" cy="150" r="3" fill="#f0abfc"/>
+    <circle cx="410" cy="130" r="4.5" fill="#ffffff"/>
+    <circle cx="256" cy="40" r="5" fill="#f5d0fe"/>
+    <circle cx="180" cy="60" r="3.5" fill="#e879f9"/>
+    <circle cx="330" cy="50" r="4" fill="#ffffff"/>
+    <circle cx="260" cy="450" r="4.5" fill="#f0abfc"/>
+    <circle cx="190" cy="430" r="3" fill="#ffffff"/>
+    <circle cx="330" cy="430" r="3.5" fill="#f5d0fe"/>
+  </g>
+</svg>

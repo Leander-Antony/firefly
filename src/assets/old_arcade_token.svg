@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Brass Metallic Glow Filter -->
+    <filter id="brass-shine-token" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="b1"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="token-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#1e1b4b" flood-opacity="0.4"/>
+    </filter>
+
+    <!-- Metallic Gradients -->
+    <linearGradient id="brass-rim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5c0"/>
+      <stop offset="25%" stop-color="#fde047"/>
+      <stop offset="50%" stop-color="#eab308"/>
+      <stop offset="75%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <radialGradient id="brass-inner-face" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#eab308"/>
+      <stop offset="80%" stop-color="#a16207"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </radialGradient>
+  </defs>
+
+  <g filter="url(#token-shadow)" transform="translate(0, 0)">
+    <!-- Outer Golden Brass Coin Rim -->
+    <circle cx="256" cy="256" r="190" fill="url(#brass-rim-grad)"/>
+    <circle cx="256" cy="256" r="175" fill="#78350f"/>
+    
+    <!-- Coin Beveled Edge Inner Face -->
+    <circle cx="256" cy="256" r="168" fill="url(#brass-inner-face)"/>
+    <circle cx="256" cy="256" r="150" fill="none" stroke="#fef08a" stroke-width="4" opacity="0.8"/>
+    <circle cx="256" cy="256" r="142" fill="none" stroke="#78350f" stroke-width="2.5" opacity="0.6"/>
+
+    <!-- Engraved Arcade Joystick & Stars Logo (Center) -->
+    <g filter="url(#brass-shine-token)">
+      <!-- Arcade Joystick Icon Engraved in Brass -->
+      <circle cx="256" cy="290" r="35" fill="#78350f" opacity="0.8"/>
+      <circle cx="256" cy="290" r="30" fill="url(#brass-rim-grad)"/>
+      <line x1="256" y1="290" x2="256" y2="210" stroke="#78350f" stroke-width="12" stroke-linecap="round"/>
+      <line x1="256" y1="290" x2="256" y2="210" stroke="#fef08a" stroke-width="6" stroke-linecap="round"/>
+      
+      <circle cx="256" cy="195" r="28" fill="#78350f"/>
+      <circle cx="256" cy="195" r="24" fill="url(#brass-rim-grad)"/>
+      <circle cx="248" cy="187" r="6" fill="#ffffff" opacity="0.8"/>
+
+      <!-- Engraved Stars around Logo -->
+      <polygon points="170,256 174,264 182,266 176,272 178,280 170,275 162,280 164,272 158,266 166,264" fill="#78350f"/>
+      <polygon points="170,256 174,264 182,266 176,272 178,280 170,275 162,280 164,272 158,266 166,264" fill="#fde047" transform="scale(0.85) translate(30, 45)"/>
+
+      <polygon points="340,256 344,264 352,266 346,272 348,280 340,275 332,280 334,272 328,266 336,264" fill="#78350f"/>
+      <polygon points="340,256 344,264 352,266 346,272 348,280 340,275 332,280 334,272 328,266 336,264" fill="#fde047" transform="scale(0.85) translate(60, 45)"/>
+    </g>
+
+    <!-- Engraved Curved Text "NO CASH VALUE • ARCADE TOKEN" -->
+    <path id="text-path-top" d="M 120 256 A 136 136 0 0 1 392 256" fill="none"/>
+    <text font-family="'Courier New', monospace" font-weight="900" font-size="16" fill="#451a03">
+      <textPath href="#text-path-top" startOffset="50%" text-anchor="middle">★ ARCADE TOKEN ★</textPath>
+    </text>
+
+    <path id="text-path-bottom" d="M 392 256 A 136 136 0 0 1 120 256" fill="none"/>
+    <text font-family="'Courier New', monospace" font-weight="900" font-size="14" fill="#451a03">
+      <textPath href="#text-path-bottom" startOffset="50%" text-anchor="middle">NO CASH VALUE</textPath>
+    </text>
+
+    <!-- Metallic Diagonal Specular Reflection Highlight -->
+    <path d="M 170 80 C 260 80, 390 170, 430 270 C 400 230, 300 130, 170 80 Z" fill="#ffffff" opacity="0.25"/>
+  </g>
+</svg>

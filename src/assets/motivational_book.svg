@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <filter id="book-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.4"/>
+    </filter>
+
+    <linearGradient id="cloth-bound-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="40%" stop-color="#1e1b4b"/>
+      <stop offset="80%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <linearGradient id="gold-emboss" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff099"/>
+      <stop offset="40%" stop-color="#eab308"/>
+      <stop offset="80%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#book-shadow)" transform="translate(10, 10)">
+    <!-- Pages Block Behind Cover -->
+    <rect x="145" y="75" width="245" height="360" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+
+    <!-- Cloth-bound Hardcover Front -->
+    <rect x="120" y="70" width="260" height="370" rx="10" fill="url(#cloth-bound-blue)" stroke="#0f172a" stroke-width="2.5"/>
+
+    <!-- Spine Ridge Line Left -->
+    <rect x="120" y="70" width="22" height="370" rx="4" fill="#0f172a"/>
+    <line x1="142" y1="70" x2="142" y2="440" stroke="url(#gold-emboss)" stroke-width="2"/>
+
+    <!-- Gold Foil Decorative Corner Protectors -->
+    <polygon points="142,70 180,70 142,108" fill="url(#gold-emboss)"/>
+    <polygon points="380,70 342,70 380,108" fill="url(#gold-emboss)"/>
+    <polygon points="142,440 180,440 142,402" fill="url(#gold-emboss)"/>
+    <polygon points="380,440 342,440 380,402" fill="url(#gold-emboss)"/>
+
+    <!-- Outer Gold Foil Filigree Border Framing Cover -->
+    <rect x="155" y="85" width="210" height="340" rx="6" fill="none" stroke="url(#gold-emboss)" stroke-width="2.5"/>
+    <rect x="162" y="92" width="196" height="326" rx="4" fill="none" stroke="url(#gold-emboss)" stroke-width="1"/>
+
+    <!-- Gold Embossed Book Emblem & Title -->
+    <!-- Center Emblem (Rising Sun & Star Motif) -->
+    <circle cx="260" cy="195" r="28" fill="none" stroke="url(#gold-emboss)" stroke-width="2.5"/>
+    <polygon points="260,160 264,175 275,165 268,178 282,182 269,188 280,200 266,196 270,210 260,200 250,210 254,196 240,200 251,188 238,182 252,178 245,165 256,175" fill="url(#gold-emboss)"/>
+
+    <!-- Embossed Book Title: "There's Always Tomorrow" -->
+    <text x="260" y="260" text-anchor="middle" font-family="'Georgia', serif" font-weight="bold" font-size="18" fill="url(#gold-emboss)">THERE'S ALWAYS</text>
+    <text x="260" y="295" text-anchor="middle" font-family="'Georgia', serif" font-weight="bold" font-size="22" fill="url(#gold-emboss)">TOMORROW</text>
+
+    <!-- Hanging Red Silk Ribbon Bookmark -->
+    <path d="M 250 440 L 250 475 L 260 460 L 270 475 L 270 440 Z" fill="#ef4444"/>
+  </g>
+</svg>

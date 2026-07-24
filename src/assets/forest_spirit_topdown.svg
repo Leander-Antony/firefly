@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Multi-stage Bloom & Glow Filters -->
+    <filter id="spirit-glow-25d" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="16" result="blur2"/>
+      <feGaussianBlur stdDeviation="30" result="blur3"/>
+      <feMerge>
+        <feMergeNode in="blur3"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="lantern-bloom-25d" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="12" result="b1"/>
+      <feGaussianBlur stdDeviation="24" result="b2"/>
+      <feGaussianBlur stdDeviation="40" result="b3"/>
+      <feMerge>
+        <feMergeNode in="b3"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="drop-shadow-25d" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#020a08" flood-opacity="0.85"/>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="spirit-ground-25d" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#5bf0d9" stop-opacity="0.5"/>
+      <stop offset="45%" stop-color="#1ba38c" stop-opacity="0.25"/>
+      <stop offset="80%" stop-color="#09382f" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#041411" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="lantern-cast-25d" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff2a3" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#ffab00" stop-opacity="0.6"/>
+      <stop offset="65%" stop-color="#d95200" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#571900" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloak & Fabric -->
+    <linearGradient id="cloak-grad-25d" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#245448"/>
+      <stop offset="35%" stop-color="#153830"/>
+      <stop offset="75%" stop-color="#0b211c"/>
+      <stop offset="100%" stop-color="#040f0c"/>
+    </linearGradient>
+
+    <linearGradient id="hood-grad-25d" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b7a6c"/>
+      <stop offset="50%" stop-color="#204c43"/>
+      <stop offset="100%" stop-color="#0e2924"/>
+    </linearGradient>
+
+    <!-- Spirit Core -->
+    <radialGradient id="spirit-core-25d" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#91f7e9"/>
+      <stop offset="65%" stop-color="#32c7b0"/>
+      <stop offset="90%" stop-color="#117d6b"/>
+      <stop offset="100%" stop-color="#084239"/>
+    </radialGradient>
+
+    <linearGradient id="iron-25d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b7480"/>
+      <stop offset="40%" stop-color="#3d434a"/>
+      <stop offset="80%" stop-color="#202428"/>
+      <stop offset="100%" stop-color="#101214"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= 1. GROUND PLANE & LIGHT CAST (45° PERSPECTIVE) ================= -->
+  <!-- Spirit Ground Aura -->
+  <ellipse cx="256" cy="420" rx="190" ry="60" fill="url(#spirit-ground-25d)"/>
+
+  <!-- Lantern Forward Cone Light Spread (Projected onto ground) -->
+  <polygon points="380,310 490,260 500,470 380,420" fill="url(#lantern-cast-25d)" opacity="0.85"/>
+  <ellipse cx="430" cy="400" rx="75" ry="45" fill="url(#lantern-cast-25d)" opacity="0.6"/>
+
+  <!-- ================= 2. SPIRIT TAIL & CLOAK BASE (BACKGROUND) ================= -->
+  <!-- Ethereal Spirit Wisps at ground hem -->
+  <g filter="url(#spirit-glow-25d)" opacity="0.85">
+    <path d="M 160 390 C 130 425, 90 440, 70 455 C 110 445, 150 430, 180 405 Z" fill="#64eed8"/>
+    <path d="M 256 410 C 250 445, 235 470, 220 485 C 250 470, 265 445, 275 415 Z" fill="#3cdbbf"/>
+    <path d="M 350 390 C 380 425, 410 440, 430 455 C 390 445, 360 430, 330 405 Z" fill="#64eed8"/>
+  </g>
+
+  <!-- Main Cloak Body (Draped 45° angle) -->
+  <g filter="url(#drop-shadow-25d)">
+    <!-- Back Cloak Spread -->
+    <path d="M 170 170 
+             C 120 220, 100 320, 140 400 
+             C 185 440, 327 440, 372 400 
+             C 412 320, 392 220, 342 170 
+             C 300 230, 212 230, 170 170 Z" 
+          fill="url(#cloak-grad-25d)" stroke="#0b1e19" stroke-width="2"/>
+
+    <!-- Outer Cloak Folds & Highlights -->
+    <path d="M 170 170 C 145 240, 140 330, 185 415 C 160 350, 165 260, 185 200 Z" fill="#2d6153" opacity="0.7"/>
+    <path d="M 342 170 C 367 240, 372 330, 327 415 C 352 350, 347 260, 327 200 Z" fill="#2d6153" opacity="0.7"/>
+
+    <!-- Glowing Rune Embroidery at Cloak Hem -->
+    <path d="M 155 395 Q 256 445 357 395" fill="none" stroke="#5bf0d9" stroke-width="3" stroke-dasharray="8,5,2,5" filter="url(#spirit-glow-25d)" opacity="0.8"/>
+  </g>
+
+  <!-- ================= 3. TORSO & ETHEREAL INNER BODY ================= -->
+  <!-- Glowing Spirit Torso visible beneath open mantle -->
+  <path d="M 215 200 Q 256 220 297 200 Q 285 310 256 360 Q 227 310 215 200 Z" fill="url(#spirit-core-25d)" filter="url(#spirit-glow-25d)" opacity="0.9"/>
+  <!-- Inner Ribs / Magic Core Lines -->
+  <path d="M 235 240 Q 256 250 277 240" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8" filter="url(#spirit-glow-25d)"/>
+  <path d="M 240 265 Q 256 275 272 265" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.7" filter="url(#spirit-glow-25d)"/>
+  <path d="M 245 290 Q 256 298 267 290" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6" filter="url(#spirit-glow-25d)"/>
+
+  <!-- ================= 4. LEFT ARM & TRAVELER'S STAFF ================= -->
+  <g>
+    <!-- Left Sleeve -->
+    <path d="M 175 180 Q 145 210 135 250 Q 155 255 175 220 Z" fill="#153830" stroke="#2b6154" stroke-width="1.5"/>
+    <!-- Spirit Hand -->
+    <ellipse cx="135" cy="255" rx="6" ry="7" fill="#76f2df" filter="url(#spirit-glow-25d)"/>
+    <!-- Wooden Staff Shaft -->
+    <line x1="135" y1="140" x2="135" y2="440" stroke="#422915" stroke-width="5" stroke-linecap="round"/>
+    <line x1="135" y1="140" x2="135" y2="440" stroke="#6e4627" stroke-width="2" stroke-linecap="round"/>
+    <!-- Gnarled Staff Crown & Spirit Crystal -->
+    <path d="M 125 145 C 120 130, 130 115, 135 110 C 140 115, 150 130, 145 145 Z" fill="#2d1b0d"/>
+    <polygon points="135,100 142,112 135,124 128,112" fill="#5bf0d9" filter="url(#spirit-glow-25d)"/>
+    <polygon points="135,103 139,112 135,120 131,112" fill="#ffffff"/>
+  </g>
+
+  <!-- ================= 5. RIGHT ARM & HELD IRON LANTERN (45° ANGLE) ================= -->
+  <!-- Right Arm reaching forward & right -->
+  <g filter="url(#drop-shadow-25d)">
+    <!-- Arm Sleeve -->
+    <path d="M 337 180 Q 365 200 380 230 Q 360 240 335 215 Z" fill="#153830" stroke="#2b6154" stroke-width="1.5"/>
+    <!-- Spirit Hand -->
+    <ellipse cx="380" cy="235" rx="7" ry="6" fill="#76f2df" filter="url(#spirit-glow-25d)"/>
+
+    <!-- Iron Lantern Chain -->
+    <line x1="380" y1="238" x2="380" y2="265" stroke="#333840" stroke-width="2.5" stroke-dasharray="4,2"/>
+
+    <!-- 45° Perspective Small Iron Lantern -->
+    <!-- Top Handle Ring & Cap -->
+    <circle cx="380" cy="263" r="4.5" fill="none" stroke="#525a66" stroke-width="2"/>
+    <polygon points="368,272 392,272 388,280 372,280" fill="#a67c1e" stroke="#3d2a03" stroke-width="1"/>
+
+    <!-- Lantern Roof -->
+    <polygon points="364,280 396,280 402,292 358,292" fill="url(#iron-25d)" stroke="#0e1012" stroke-width="1.5"/>
+
+    <!-- Glass Housing & Radiant Firefly Flame -->
+    <rect x="362" y="292" width="36" height="42" rx="3" fill="#ff9100" filter="url(#lantern-bloom-25d)"/>
+    <circle cx="380" cy="313" r="10" fill="#ffffff" filter="url(#spirit-glow-25d)"/>
+
+    <!-- Iron Frame Bars & Corner Posts -->
+    <rect x="360" y="292" width="40" height="4" fill="#272b30"/>
+    <rect x="360" y="330" width="40" height="4" fill="#272b30"/>
+    <line x1="364" y1="292" x2="364" y2="334" stroke="#121417" stroke-width="2.5"/>
+    <line x1="380" y1="292" x2="380" y2="334" stroke="#121417" stroke-width="2"/>
+    <line x1="396" y1="292" x2="396" y2="334" stroke="#121417" stroke-width="2.5"/>
+
+    <!-- Lantern Base & Bottom Spire -->
+    <polygon points="358,334 402,334 394,344 366,344" fill="url(#iron-25d)" stroke="#0e1012" stroke-width="1.5"/>
+    <polygon points="377,344 383,344 380,352" fill="#272b30"/>
+  </g>
+
+  <!-- ================= 6. HOODED HEAD & FACE (45° TOP-DOWN ANGLE) ================= -->
+  <!-- Shoulder Mantle Cowl -->
+  <path d="M 160 160 
+           C 160 100, 205 85, 256 85 
+           C 307 85, 352 100, 352 160 
+           C 352 210, 307 235, 256 235 
+           C 205 235, 160 210, 160 160 Z" 
+        fill="url(#hood-grad-25d)" stroke="#387a6c" stroke-width="2.5" filter="url(#drop-shadow-25d)"/>
+
+  <!-- Deep Hood Opening Shadow (Facing 45° forward-down) -->
+  <path d="M 195 130 C 195 90, 317 90, 317 130 C 317 195, 195 195, 195 130 Z" fill="#040d0b"/>
+
+  <!-- Ethereal Spirit Antlers emerging from Hood Crown -->
+  <g filter="url(#spirit-glow-25d)" opacity="0.95">
+    <!-- Left Antler -->
+    <path d="M 222 100 C 200 80, 180 75, 160 55 C 175 70, 190 82, 224 105 Z" fill="#64eed8"/>
+    <path d="M 195 78 C 180 62, 175 48, 170 35 C 180 50, 190 64, 202 80 Z" fill="#a0f8eb"/>
+    
+    <!-- Right Antler -->
+    <path d="M 290 100 C 312 80, 332 75, 352 55 C 337 70, 322 82, 288 105 Z" fill="#64eed8"/>
+    <path d="M 317 78 C 332 62, 337 48, 342 35 C 332 50, 322 64, 310 80 Z" fill="#a0f8eb"/>
+  </g>
+
+  <!-- Glowing Spirit Face Core inside Hood -->
+  <ellipse cx="256" cy="145" rx="36" ry="32" fill="url(#spirit-core-25d)" filter="url(#spirit-glow-25d)"/>
+
+  <!-- Bright Spirit Eyes (Angled slightly down) -->
+  <ellipse cx="238" cy="144" rx="7" ry="5" transform="rotate(-5 238 144)" fill="#ffffff" filter="url(#spirit-glow-25d)"/>
+  <ellipse cx="274" cy="144" rx="7" ry="5" transform="rotate(5 274 144)" fill="#ffffff" filter="url(#spirit-glow-25d)"/>
+
+  <!-- Hood Fold Overhang Peak -->
+  <path d="M 195 125 
+           C 215 90, 297 90, 317 125 
+           C 285 110, 227 110, 195 125 Z" 
+        fill="#26574a" stroke="#52b59f" stroke-width="2"/>
+
+  <!-- ================= 7. FLOATING MAGIC & PARTICLES ================= -->
+  <g filter="url(#spirit-glow-25d)">
+    <!-- Spirit Orbs -->
+    <circle cx="100" cy="180" r="4.5" fill="#a0f8eb" opacity="0.9"/>
+    <circle cx="130" cy="350" r="3.5" fill="#5bf0d9" opacity="0.8"/>
+    <circle cx="390" cy="390" r="5" fill="#76f2df" opacity="0.85"/>
+    <circle cx="420" cy="120" r="3.5" fill="#a0f8eb" opacity="0.9"/>
+    <circle cx="210" cy="45" r="3" fill="#5bf0d9" opacity="0.75"/>
+    <circle cx="305" cy="40" r="4" fill="#80f7e6" opacity="0.85"/>
+  </g>
+
+  <g filter="url(#lantern-bloom-25d)">
+    <!-- Warm Firefly Embers near Lantern -->
+    <circle cx="425" cy="280" r="3.5" fill="#ffea00"/>
+    <circle cx="445" cy="340" r="3" fill="#ff9100"/>
+    <circle cx="410" cy="370" r="2.5" fill="#ffd000"/>
+  </g>
+</svg>

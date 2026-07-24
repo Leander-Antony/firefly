@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Drop Shadow Filter -->
+    <filter id="football-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="leather-brown" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9a3412"/>
+      <stop offset="40%" stop-color="#7c2d12"/>
+      <stop offset="80%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#1c0a00"/>
+    </linearGradient>
+
+    <radialGradient id="moss-base" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="60%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#052e16"/>
+    </radialGradient>
+  </defs>
+
+  <g filter="url(#football-shadow)" transform="translate(0, 0)">
+    <!-- ================= 1. MOSSY FOREST PATCH BASE ================= -->
+    <ellipse cx="256" cy="390" rx="170" ry="50" fill="url(#moss-base)"/>
+    <!-- Moss Texture Tufts -->
+    <circle cx="160" cy="385" r="14" fill="#22c55e" opacity="0.6"/>
+    <circle cx="210" cy="405" r="18" fill="#16a34a" opacity="0.7"/>
+    <circle cx="310" cy="400" r="16" fill="#22c55e" opacity="0.6"/>
+    <circle cx="360" cy="380" r="12" fill="#15803d"/>
+
+    <!-- ================= 2. CLASSIC LEATHER FOOTBALL (RESTING ANGLED) ================= -->
+    <g transform="rotate(-20 256 260)">
+      <!-- Oval Pigskin/Leather Body Silhouette -->
+      <path d="M 100 260 
+               C 100 150, 412 150, 412 260 
+               C 412 370, 100 370, 100 260 Z" 
+            fill="url(#leather-brown)" stroke="#270e02" stroke-width="3"/>
+
+      <!-- Leather Seam Lines -->
+      <path d="M 100 260 Q 256 160 412 260" fill="none" stroke="#270e02" stroke-width="3"/>
+      <path d="M 100 260 Q 256 360 412 260" fill="none" stroke="#270e02" stroke-width="3"/>
+
+      <!-- White Stripes near Points -->
+      <path d="M 150 200 C 145 230, 145 290, 150 320" fill="none" stroke="#fef3c7" stroke-width="8" opacity="0.85"/>
+      <path d="M 362 200 C 367 230, 367 290, 362 320" fill="none" stroke="#fef3c7" stroke-width="8" opacity="0.85"/>
+
+      <!-- White Lacing Assembly (Center) -->
+      <!-- White Base Lace Strip -->
+      <rect x="200" y="255" width="112" height="10" rx="3" fill="#fef3c7" stroke="#451a03" stroke-width="1.5"/>
+      <!-- Cross Lacing Threads (8 Laces) -->
+      <line x1="210" y1="242" x2="210" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="225" y1="242" x2="225" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="240" y1="242" x2="240" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="255" y1="242" x2="255" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="270" y1="242" x2="270" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="285" y1="242" x2="285" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+      <line x1="300" y1="242" x2="300" y2="278" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- Vintage Scuff Marks & Scratches on Leather Surface -->
+      <path d="M 170 230 Q 185 225 190 235" stroke="#fde047" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M 310 290 Q 325 300 340 295" stroke="#fde047" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M 230 320 Q 250 330 260 322" stroke="#fde047" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+      <path d="M 130 270 Q 140 280 135 290" stroke="#1c0a00" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+    </g>
+  </g>
+</svg>

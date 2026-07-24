@@ -11,6 +11,8 @@ import { PrologueCutscene } from './components/PrologueCutscene';
 import { RPGDialogueBox } from './components/RPGDialogueBox';
 import { EndingScreen } from './components/EndingScreen';
 import { SoundEngine } from './audio/SoundEngine';
+import { TelescopeModal } from './components/TelescopeModal';
+import { BirdFeedingModal } from './components/BirdFeedingModal';
 
 export function App() {
   const engineRef = useRef<GameEngine | null>(null);
@@ -20,7 +22,7 @@ export function App() {
   const engine = engineRef.current;
 
   const [activeModal, setActiveModal] = useState<
-    'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | null
+    'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding' | null
   >(engine.activeModal);
 
   const [isMuted, setIsMuted] = useState(false);
@@ -166,6 +168,14 @@ export function App() {
 
       {activeModal === 'settings' && (
         <SettingsModal engine={engine} onClose={handleCloseModal} />
+      )}
+
+      {activeModal === 'telescope' && (
+        <TelescopeModal onClose={handleCloseModal} />
+      )}
+
+      {activeModal === 'bird_feeding' && (
+        <BirdFeedingModal onClose={handleCloseModal} />
       )}
 
       {/* Cutscene Ending Screen */}

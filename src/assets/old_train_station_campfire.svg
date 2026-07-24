@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Campfire Bloom & Glow Filters -->
+    <filter id="fire-glow-station" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="b1"/>
+      <feGaussianBlur stdDeviation="20" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="platform-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0f0714" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="fire-spread-station" cx="40%" cy="75%" r="65%">
+      <stop offset="0%" stop-color="#fff176" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#ff9800" stop-opacity="0.6"/>
+      <stop offset="65%" stop-color="#e65100" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#2d0b00" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="station-wood" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+
+    <linearGradient id="iron-rails" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="50%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Light Spread from Campfire -->
+  <ellipse cx="256" cy="400" rx="220" ry="85" fill="url(#fire-spread-station)"/>
+
+  <g filter="url(#platform-shadow)" transform="translate(10, 0)">
+    <!-- ================= 1. RUSTIC TRAIN STATION PLATFORM & CANOPY ================= -->
+    <!-- Wooden Station Canopy Roof (Top Left/Center) -->
+    <g>
+      <!-- Roof Beam Support Pillars -->
+      <rect x="70" y="140" width="16" height="230" fill="#451a03" stroke="#1c0a00" stroke-width="1.5"/>
+      <rect x="400" y="140" width="16" height="230" fill="#451a03" stroke="#1c0a00" stroke-width="1.5"/>
+
+      <!-- Cross Braces -->
+      <polygon points="70,160 140,210 125,210 70,175" fill="#78350f"/>
+      <polygon points="416,160 346,210 361,210 416,175" fill="#78350f"/>
+
+      <!-- Slanted Wooden Roof Canopy -->
+      <polygon points="40,110 450,110 470,145 20,145" fill="url(#station-wood)" stroke="#1c0a00" stroke-width="2"/>
+      <line x1="20" y1="145" x2="470" y2="145" stroke="#fde047" stroke-width="2" opacity="0.6"/>
+
+      <!-- Hanging Vintage Station Sign -->
+      <g>
+        <rect x="180" y="145" width="130" height="30" rx="4" fill="#fef3c7" stroke="#78350f" stroke-width="2"/>
+        <text x="245" y="165" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="11" fill="#78350f">STATION NO. 9</text>
+      </g>
+    </g>
+
+    <!-- Elevated Wooden Station Platform Deck -->
+    <g>
+      <!-- Deck Surface Slab -->
+      <polygon points="40,360 450,360 470,390 20,390" fill="#92400e" stroke="#270e02" stroke-width="2"/>
+      <polygon points="20,390 470,390 460,420 30,420" fill="#451a03" stroke="#270e02" stroke-width="2"/>
+      
+      <!-- Plank Lines -->
+      <line x1="120" y1="360" x2="110" y2="390" stroke="#451a03" stroke-width="1.5"/>
+      <line x1="200" y1="360" x2="190" y2="390" stroke="#451a03" stroke-width="1.5"/>
+      <line x1="280" y1="360" x2="270" y2="390" stroke="#451a03" stroke-width="1.5"/>
+      <line x1="360" y1="360" x2="350" y2="390" stroke="#451a03" stroke-width="1.5"/>
+    </g>
+
+    <!-- ================= 2. VINTAGE TRAIN TRACKS ================= -->
+    <g>
+      <!-- Wooden Ties / Sleepers -->
+      <polygon points="10,450 480,450 475,465 5,465" fill="#451a03"/>
+      <polygon points="20,475 490,475 485,490 15,490" fill="#451a03"/>
+
+      <!-- Parallel Steel Rails (Perspected) -->
+      <line x1="0" y1="445" x2="500" y2="445" stroke="url(#iron-rails)" stroke-width="5"/>
+      <line x1="0" y1="470" x2="500" y2="470" stroke="url(#iron-rails)" stroke-width="5"/>
+      <!-- Top Rail Metallic Highlight -->
+      <line x1="0" y1="443" x2="500" y2="443" stroke="#e2e8f0" stroke-width="1.5" opacity="0.8"/>
+      <line x1="0" y1="468" x2="500" y2="468" stroke="#e2e8f0" stroke-width="1.5" opacity="0.8"/>
+    </g>
+
+    <!-- ================= 3. CRACKLING LOG CAMPFIRE ================= -->
+    <!-- Positioned on the platform center-left -->
+    <g transform="translate(60, 20)">
+      <!-- Fire Stone Ring -->
+      <ellipse cx="140" cy="350" rx="40" ry="18" fill="#1e293b"/>
+
+      <!-- Crossed Wooden Logs -->
+      <polygon points="110,355 170,335 165,325 105,345" fill="#451a03"/>
+      <polygon points="165,355 105,335 110,325 170,345" fill="#78350f"/>
+
+      <!-- Glowing Embers Bed -->
+      <ellipse cx="138" cy="342" rx="22" ry="10" fill="#ef4444" filter="url(#fire-glow-station)"/>
+      <ellipse cx="138" cy="342" rx="12" ry="5" fill="#ffeb3b" filter="url(#fire-glow-station)"/>
+
+      <!-- Multi-stage Campfire Flames -->
+      <g filter="url(#fire-glow-station)">
+        <path d="M 120 345 Q 112 315 125 288 Q 138 260 142 230 Q 155 272 162 305 Q 170 325 158 345 Z" fill="#f97316" opacity="0.95"/>
+        <path d="M 126 345 Q 122 320 132 298 Q 140 270 142 250 Q 150 282 155 315 Q 158 332 152 345 Z" fill="#facc15"/>
+        <path d="M 132 345 Q 129 328 136 310 Q 141 292 142 278 Q 146 296 149 320 Q 151 336 147 345 Z" fill="#ffffff"/>
+      </g>
+
+      <!-- Floating Fire Sparks & Embers -->
+      <g filter="url(#fire-glow-station)">
+        <circle cx="150" cy="200" r="3" fill="#ffffff"/>
+        <circle cx="130" cy="170" r="2.5" fill="#facc15"/>
+        <circle cx="165" cy="150" r="3.5" fill="#ff9800"/>
+        <circle cx="140" cy="110" r="2" fill="#ffeb3b"/>
+        <circle cx="180" cy="210" r="2.5" fill="#f97316"/>
+        <circle cx="115" cy="230" r="2" fill="#facc15"/>
+      </g>
+    </g>
+  </g>
+</svg>

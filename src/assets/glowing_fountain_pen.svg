@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Radiant Nib Glow Filter -->
+    <filter id="pen-gold-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b1"/>
+      <feGaussianBlur stdDeviation="15" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <linearGradient id="brass-pen-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="35%" stop-color="#ca8a04"/>
+      <stop offset="75%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+
+    <linearGradient id="gold-nib-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(0, 0)">
+    <!-- Standalone Fountain Pen Sprite (Diagonal 45° Angle) -->
+    <g transform="rotate(-45 256 256)" filter="url(#pen-gold-glow)">
+      <!-- Pen Barrel (Brass body) -->
+      <rect x="238" y="100" width="36" height="220" rx="10" fill="url(#brass-pen-body)" stroke="#451a03" stroke-width="2"/>
+      
+      <!-- Pen Cap Ring Accents -->
+      <rect x="236" y="160" width="40" height="8" rx="2" fill="#ffffff" opacity="0.8"/>
+      <rect x="236" y="240" width="40" height="12" rx="2" fill="#fde047"/>
+
+      <!-- Pocket Clip -->
+      <rect x="268" y="110" width="8" height="90" rx="3" fill="#ffffff"/>
+
+      <!-- Grip Section -->
+      <polygon points="242,320 270,320 264,360 248,360" fill="#1e293b"/>
+
+      <!-- Gold Nib Head -->
+      <polygon points="248,360 264,360 270,390 256,415 242,390" fill="url(#gold-nib-grad)" stroke="#ca8a04" stroke-width="1.5"/>
+      <!-- Nib Slit & Breather Hole -->
+      <line x1="256" y1="365" x2="256" y2="413" stroke="#451a03" stroke-width="1.5"/>
+      <circle cx="256" cy="385" r="3" fill="#451a03"/>
+    </g>
+
+    <!-- Floating Golden Sparks around Nib Tip -->
+    <g filter="url(#pen-gold-glow)">
+      <circle cx="130" cy="370" r="4.5" fill="#ffffff"/>
+      <circle cx="110" cy="410" r="3.5" fill="#fde047"/>
+      <circle cx="160" cy="420" r="4" fill="#ffffff"/>
+      <polygon points="120,340 123,346 129,348 123,350 120,356 117,350 111,348 117,346" fill="#fde047"/>
+      <polygon points="170,380 172,384 176,386 172,388 170,392 168,388 164,386 168,384" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>

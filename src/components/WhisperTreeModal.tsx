@@ -29,30 +29,30 @@ export const WhisperTreeModal: React.FC<WhisperTreeModalProps> = ({ engine, onCl
   const handleBurn = () => {
     if (!text.trim()) return;
     setActionState('burning');
-    SoundEngine.playPageFlip();
+    SoundEngine.playFireflyCollect();
     setTimeout(() => {
       onClose();
-    }, 1400);
+    }, 1800);
   };
 
   const handleThrowToWind = () => {
     if (!text.trim()) return;
     setActionState('blowing');
-    SoundEngine.playPageFlip();
+    SoundEngine.playFireflyCollect();
     setTimeout(() => {
       onClose();
-    }, 1400);
+    }, 1800);
   };
 
   return (
-    <div className="modal-backdrop">
+    <div className="modal-backdrop z-50">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="whisper-modal-card"
+        className="whisper-modal-card relative overflow-hidden"
       >
-        <button onClick={onClose} className="close-btn absolute top-4 right-4">
+        <button onClick={onClose} className="close-btn absolute top-4 right-4 z-30">
           <X size={20} />
         </button>
 
@@ -61,8 +61,8 @@ export const WhisperTreeModal: React.FC<WhisperTreeModalProps> = ({ engine, onCl
             <Sparkles size={24} />
           </div>
           <h2 className="text-xl font-serif text-purple-100">The Whisper Tree</h2>
-          <p className="text-sm text-purple-300/80 italic mt-1">
-            "You don't have to tell anyone. You can leave it here."
+          <p className="text-xs text-purple-300/80 italic mt-1 max-w-sm mx-auto">
+            "Some words are not ready for another heart. Leave them here. The forest keeps promises."
           </p>
         </div>
 
@@ -91,14 +91,14 @@ export const WhisperTreeModal: React.FC<WhisperTreeModalProps> = ({ engine, onCl
                   disabled={!text.trim()}
                   className="whisper-btn btn-wind"
                 >
-                  <Wind size={16} /> Throw to Wind
+                  <Wind size={16} /> Whisper to Wind
                 </button>
                 <button
                   onClick={handleBurn}
                   disabled={!text.trim()}
                   className="whisper-btn btn-burn"
                 >
-                  <Flame size={16} /> Burn
+                  <Flame size={16} /> Release to Campfire
                 </button>
               </div>
             </motion.div>
@@ -107,26 +107,50 @@ export const WhisperTreeModal: React.FC<WhisperTreeModalProps> = ({ engine, onCl
           {actionState === 'burning' && (
             <motion.div
               key="burning-anim"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0, scale: 0.8, filter: 'blur(8px)' }}
-              transition={{ duration: 1.2 }}
-              className="text-center py-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="relative text-center py-12 overflow-hidden flex flex-col items-center justify-center"
             >
-              <Flame size={48} className="text-orange-500 animate-bounce mx-auto mb-2" />
-              <p className="text-orange-200 font-serif text-lg">Dissolving into glowing embers...</p>
+              {/* Floating Orange Ember Particles */}
+              {Array.from({ length: 14 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ y: 80, x: (i - 7) * 20, opacity: 1, scale: 1 }}
+                  animate={{ y: -120, x: (i - 7) * 35 + Math.sin(i) * 30, opacity: 0, scale: 0.2 }}
+                  transition={{ duration: 1.6, delay: i * 0.08 }}
+                  className="absolute w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_12px_#f97316]"
+                />
+              ))}
+
+              <Flame size={54} className="text-orange-500 animate-pulse mx-auto mb-3" />
+              <p className="text-orange-200 font-serif text-lg font-bold">Dissolving into glowing embers...</p>
+              <p className="text-xs text-amber-300/70 italic mt-1">The fire warms the forest night.</p>
             </motion.div>
           )}
 
           {actionState === 'blowing' && (
             <motion.div
               key="blowing-anim"
-              initial={{ x: 0, y: 0, opacity: 1 }}
-              animate={{ x: 300, y: -150, opacity: 0, rotate: 25 }}
-              transition={{ duration: 1.2 }}
-              className="text-center py-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="relative text-center py-12 overflow-hidden flex flex-col items-center justify-center"
             >
-              <Wind size={48} className="text-sky-300 animate-pulse mx-auto mb-2" />
-              <p className="text-sky-200 font-serif text-lg">Floating away on forest breezes...</p>
+              {/* Floating Breeze Particles */}
+              {Array.from({ length: 14 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ x: -140, y: (i - 7) * 15, opacity: 1, scale: 1 }}
+                  animate={{ x: 220, y: (i - 7) * 25 + Math.cos(i) * 20, opacity: 0, scale: 0.3 }}
+                  transition={{ duration: 1.6, delay: i * 0.08 }}
+                  className="absolute w-3 h-1.5 rounded-full bg-sky-300/80 shadow-[0_0_10px_#38bdf8]"
+                />
+              ))}
+
+              <Wind size={54} className="text-sky-300 animate-pulse mx-auto mb-3" />
+              <p className="text-sky-200 font-serif text-lg font-bold">Floating away on forest breezes...</p>
+              <p className="text-xs text-sky-300/70 italic mt-1">The wind carries your secret into the trees.</p>
             </motion.div>
           )}
         </AnimatePresence>

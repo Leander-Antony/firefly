@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Glow Filters -->
+    <filter id="campfire-bloom" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="10" result="blur1" />
+      <feGaussianBlur stdDeviation="24" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="soft-drop-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0f0714" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Gradients -->
+    <!-- Firelight Cast -->
+    <radialGradient id="firelight-spread" cx="30%" cy="60%" r="70%">
+      <stop offset="0%" stop-color="#fff176" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#ff9800" stop-opacity="0.6"/>
+      <stop offset="65%" stop-color="#e65100" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#3e1400" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Fur Color Gradients -->
+    <linearGradient id="orange-tabby" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+
+    <linearGradient id="cream-fur" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+
+    <linearGradient id="calico-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c87"/>
+      <stop offset="40%" stop-color="#3b0764"/>
+      <stop offset="100%" stop-color="#1e0236"/>
+    </linearGradient>
+
+    <!-- Fire Flame Gradients -->
+    <linearGradient id="flame-core" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="75%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+
+    <!-- Cozy Cushion Rug -->
+    <radialGradient id="cushion-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#be123c"/>
+      <stop offset="70%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#4c0519"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ground Plane Shadow & Firelight Spread -->
+  <ellipse cx="256" cy="380" rx="210" ry="75" fill="url(#firelight-spread)"/>
+
+  <!-- ================= 1. COZY WOVEN BLANKET / CUSHION ================= -->
+  <g filter="url(#soft-drop-shadow)">
+    <!-- Woven Mat Base -->
+    <ellipse cx="320" cy="370" rx="145" ry="70" fill="url(#cushion-grad)"/>
+    <!-- Cushion Decorative Fringe & Pattern -->
+    <ellipse cx="320" cy="370" rx="135" ry="63" fill="none" stroke="#fbcfe8" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
+  </g>
+
+  <!-- ================= 2. CAMPFIRE ================= -->
+  <g filter="url(#soft-drop-shadow)">
+    <!-- Campfire River Stones Ring -->
+    <ellipse cx="140" cy="380" rx="60" ry="30" fill="#1e293b"/>
+    <!-- Individual Stones -->
+    <ellipse cx="85" cy="380" rx="12" ry="9" fill="#475569"/>
+    <ellipse cx="105" cy="395" rx="15" ry="10" fill="#334155"/>
+    <ellipse cx="135" cy="402" rx="18" ry="11" fill="#475569"/>
+    <ellipse cx="170" cy="396" rx="16" ry="10" fill="#334155"/>
+    <ellipse cx="192" cy="382" rx="13" ry="9" fill="#475569"/>
+    <ellipse cx="185" cy="365" rx="14" ry="9" fill="#334155"/>
+    <ellipse cx="155" cy="358" rx="16" ry="9" fill="#475569"/>
+    <ellipse cx="115" cy="360" rx="15" ry="9" fill="#334155"/>
+    <ellipse cx="90" cy="368" rx="12" ry="8" fill="#475569"/>
+
+    <!-- Wooden Logs -->
+    <polygon points="100,385 180,360 175,350 95,375" fill="#451a03" stroke="#270e02" stroke-width="1.5"/>
+    <polygon points="175,385 95,360 100,350 180,375" fill="#78350f" stroke="#270e02" stroke-width="1.5"/>
+    <polygon points="120,395 160,350 152,342 112,387" fill="#451a03"/>
+
+    <!-- Glowing Embers Bed -->
+    <ellipse cx="138" cy="372" rx="30" ry="15" fill="#ef4444" filter="url(#campfire-bloom)"/>
+    <ellipse cx="138" cy="372" rx="18" ry="8" fill="#ffeb3b" filter="url(#campfire-bloom)"/>
+
+    <!-- Multi-stage Campfire Flames -->
+    <g filter="url(#campfire-bloom)">
+      <!-- Outer Flame -->
+      <path d="M 115 375 Q 105 340 120 310 Q 135 280 140 250 Q 155 295 165 330 Q 175 350 160 375 Z" fill="#f97316" opacity="0.9"/>
+      <!-- Mid Flame -->
+      <path d="M 122 375 Q 118 345 130 320 Q 140 290 142 270 Q 152 305 158 340 Q 162 360 154 375 Z" fill="#facc15"/>
+      <!-- Inner Core Flame -->
+      <path d="M 128 375 Q 125 355 134 335 Q 140 315 141 300 Q 146 320 150 345 Q 152 365 147 375 Z" fill="url(#flame-core)"/>
+    </g>
+  </g>
+
+  <!-- ================= 3. SLEEPING ORANGE & CALICO CAT ================= -->
+  <!-- Positioned curled peacefully on the cozy cushion facing the fire -->
+  <g filter="url(#soft-drop-shadow)">
+    <!-- Main Curled Body Base -->
+    <path d="M 330 280 
+             C 400 280, 430 340, 410 390 
+             C 390 435, 300 440, 250 410 
+             C 215 390, 220 340, 250 310 
+             C 275 285, 300 280, 330 280 Z" 
+          fill="url(#orange-tabby)"/>
+
+    <!-- Cream Fur Chest & Belly Area (Inner curve) -->
+    <path d="M 270 330 C 290 310, 340 310, 365 345 C 380 370, 360 410, 300 415 C 265 410, 250 370, 270 330 Z" fill="url(#cream-fur)"/>
+
+    <!-- Calico Dark Patches (Chocolate/Black spots on back) -->
+    <!-- Patch 1 on Back -->
+    <path d="M 345 282 C 375 285, 415 315, 395 350 C 375 320, 345 305, 345 282 Z" fill="url(#calico-dark)"/>
+    <!-- Patch 2 on Rear -->
+    <path d="M 380 375 C 410 365, 415 400, 385 418 C 370 405, 370 385, 380 375 Z" fill="url(#calico-dark)"/>
+
+    <!-- Orange Tabby Stripes on Back & Flank -->
+    <path d="M 320 285 C 330 295, 335 310, 325 322" stroke="#c2410c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 300 292 C 310 305, 312 320, 305 330" stroke="#c2410c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 370 300 C 382 312, 385 330, 375 340" stroke="#c2410c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Tucked Fluffy Sleeping Head -->
+    <g transform="translate(0, 0)">
+      <!-- Head Base -->
+      <circle cx="260" cy="340" r="38" fill="url(#orange-tabby)"/>
+      <!-- Cream Muzzle & Cheek Patch -->
+      <ellipse cx="250" cy="352" rx="22" ry="18" fill="url(#cream-fur)"/>
+      <!-- Calico Patch over Left Ear/Eye -->
+      <path d="M 232 320 C 240 310, 265 312, 260 335 C 245 340, 230 335, 232 320 Z" fill="url(#calico-dark)"/>
+
+      <!-- Cute Ears -->
+      <!-- Left Ear (Faced towards fire) -->
+      <polygon points="230,315 220,285 248,300" fill="url(#orange-tabby)"/>
+      <polygon points="232,312 225,290 244,302" fill="#fbcfe8"/>
+      <!-- Right Ear -->
+      <polygon points="270,310 278,280 292,305" fill="url(#orange-tabby)"/>
+      <polygon points="273,308 279,286 288,304" fill="#fbcfe8"/>
+
+      <!-- Sleeping Eyes (Closed ^ ^ curved arcs) -->
+      <path d="M 238 342 Q 244 347 250 342" fill="none" stroke="#451a03" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 258 344 Q 264 349 270 344" fill="none" stroke="#451a03" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- Cute Pink Nose & Mouth -->
+      <polygon points="252,352 256,352 254,355" fill="#f472b6"/>
+      <path d="M 250 357 Q 254 360 258 357" stroke="#78350f" stroke-width="1.5" fill="none"/>
+
+      <!-- Sleeping Whiskers -->
+      <path d="M 235 352 Q 215 350 205 345" stroke="#fef3c7" stroke-width="1.5" fill="none" opacity="0.9"/>
+      <path d="M 236 357 Q 218 360 208 362" stroke="#fef3c7" stroke-width="1.5" fill="none" opacity="0.9"/>
+    </g>
+
+    <!-- Front Tucked Paws -->
+    <ellipse cx="270" cy="385" rx="14" ry="10" fill="url(#cream-fur)"/>
+    <ellipse cx="290" cy="392" rx="14" ry="10" fill="url(#cream-fur)"/>
+
+    <!-- Fluffy Tail Curled Around Body -->
+    <!-- Tail Curve from back around to front nose -->
+    <path d="M 405 385 
+             C 435 425, 360 450, 290 440 
+             C 240 435, 220 395, 235 375 
+             C 245 390, 260 420, 310 422 
+             C 365 425, 410 405, 390 380 Z" 
+          fill="url(#orange-tabby)"/>
+    <!-- Cream Tail Tip -->
+    <path d="M 235 375 C 240 382, 248 395, 258 405 C 248 405, 235 395, 235 375 Z" fill="url(#cream-fur)"/>
+    <!-- Tail Calico Ring -->
+    <path d="M 370 425 C 380 415, 395 410, 390 428 C 380 430, 372 430, 370 425 Z" fill="url(#calico-dark)"/>
+
+    <!-- Warm Firelight Rim Highlight on Left Facing Side of Cat -->
+    <path d="M 220 285 C 225 295, 220 315, 225 325" fill="none" stroke="#fff176" stroke-width="3" filter="url(#campfire-bloom)" opacity="0.9"/>
+    <path d="M 228 318 C 220 340, 225 365, 235 375" fill="none" stroke="#ffca28" stroke-width="3" filter="url(#campfire-bloom)" opacity="0.95"/>
+    <path d="M 250 410 C 275 435, 330 435, 370 425" fill="none" stroke="#ff9800" stroke-width="2.5" opacity="0.85"/>
+  </g>
+
+  <!-- ================= 4. FLOATING SPARKS & COZY PARTICLES ================= -->
+  <g filter="url(#campfire-bloom)">
+    <circle cx="150" cy="220" r="3" fill="#ffffff" opacity="0.95"/>
+    <circle cx="125" cy="190" r="2.5" fill="#fff176" opacity="0.9"/>
+    <circle cx="170" cy="170" r="3.5" fill="#ff9800" opacity="0.85"/>
+    <circle cx="140" cy="130" r="2" fill="#ffca28" opacity="0.9"/>
+    <circle cx="190" cy="230" r="2.5" fill="#ff5722" opacity="0.8"/>
+    <circle cx="110" cy="250" r="2" fill="#fff176" opacity="0.85"/>
+
+    <!-- Cozy Zzz's floating from sleeping cat -->
+    <text x="220" y="270" font-family="sans-serif" font-weight="bold" font-size="22" fill="#fed7aa" opacity="0.85">Z</text>
+    <text x="200" y="245" font-family="sans-serif" font-weight="bold" font-size="16" fill="#fde68a" opacity="0.75">z</text>
+    <text x="185" y="228" font-family="sans-serif" font-weight="bold" font-size="12" fill="#fef08a" opacity="0.65">z</text>
+  </g>
+</svg>

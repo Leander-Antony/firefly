@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Glow & Soft Blur Filters -->
+    <filter id="sun-halo" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="16" result="blur1"/>
+      <feGaussianBlur stdDeviation="35" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b1"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <!-- Sunset Sky Gradient -->
+    <linearGradient id="sunset-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f1133"/>
+      <stop offset="25%" stop-color="#4a2559"/>
+      <stop offset="50%" stop-color="#8c3a68"/>
+      <stop offset="72%" stop-color="#d95d6a"/>
+      <stop offset="88%" stop-color="#f79c65"/>
+      <stop offset="100%" stop-color="#fcd385"/>
+    </linearGradient>
+
+    <!-- Setting Sun Glow -->
+    <radialGradient id="sun-glow-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fff5c0"/>
+      <stop offset="50%" stop-color="#ffb366" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#f26a5a" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f26a5a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Pastel Cloak Blend (Sunset Rose, Lavender & Soft Coral) -->
+    <linearGradient id="pastel-cloak" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffe5ec"/>
+      <stop offset="30%" stop-color="#ffb7b2"/>
+      <stop offset="65%" stop-color="#e2b0ff"/>
+      <stop offset="100%" stop-color="#9b72cf"/>
+    </linearGradient>
+
+    <linearGradient id="cloak-shadow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8a5b8"/>
+      <stop offset="50%" stop-color="#b37bb8"/>
+      <stop offset="100%" stop-color="#5c3866"/>
+    </linearGradient>
+
+    <!-- Tree Silhouettes (Dusk Purple/Indigo Layers) -->
+    <linearGradient id="tree-far" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#502952"/>
+      <stop offset="100%" stop-color="#2d1733"/>
+    </linearGradient>
+
+    <linearGradient id="tree-mid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#381b3d"/>
+      <stop offset="100%" stop-color="#1b0b21"/>
+    </linearGradient>
+
+    <linearGradient id="tree-fore" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#210c26"/>
+      <stop offset="100%" stop-color="#0b030d"/>
+    </linearGradient>
+
+    <linearGradient id="ground-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#421f42"/>
+      <stop offset="40%" stop-color="#220e26"/>
+      <stop offset="100%" stop-color="#0b030d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= 1. SUNSET SKY & SUN ================= -->
+  <rect width="512" height="512" fill="url(#sunset-sky)"/>
+
+  <!-- Low Setting Sun & Halo Radius -->
+  <circle cx="256" cy="310" r="140" fill="url(#sun-glow-grad)" filter="url(#sun-halo)" opacity="0.9"/>
+  <circle cx="256" cy="310" r="45" fill="#ffffff" filter="url(#soft-glow)"/>
+  <circle cx="256" cy="310" r="24" fill="#fffdf0"/>
+
+  <!-- Sun Rays / Light Shafts -->
+  <polygon points="256,310 120,0 180,0" fill="#fff1b5" opacity="0.12"/>
+  <polygon points="256,310 220,0 290,0" fill="#fff1b5" opacity="0.15"/>
+  <polygon points="256,310 340,0 410,0" fill="#fff1b5" opacity="0.12"/>
+  <polygon points="256,310 440,0 512,0" fill="#fff1b5" opacity="0.08"/>
+
+  <!-- ================= 2. DISTANT MOUNTAINS & BACKGROUND TREES ================= -->
+  <!-- Far Mountain Ridges -->
+  <path d="M 0 340 Q 120 310 210 330 Q 320 295 410 325 Q 470 315 512 335 L 512 512 L 0 512 Z" fill="#693059" opacity="0.7"/>
+
+  <!-- Far Layer Pine Tree Silhouette Line -->
+  <g fill="url(#tree-far)" opacity="0.85">
+    <!-- Left far trees -->
+    <polygon points="30,340 45,280 60,340"/>
+    <polygon points="55,345 70,270 85,345"/>
+    <polygon points="80,340 92,290 104,340"/>
+    <polygon points="120,345 135,260 150,345"/>
+    <polygon points="145,340 160,285 175,340"/>
+
+    <!-- Right far trees -->
+    <polygon points="330,340 345,275 360,340"/>
+    <polygon points="355,345 372,255 388,345"/>
+    <polygon points="385,340 398,280 412,340"/>
+    <polygon points="425,345 440,265 455,345"/>
+    <polygon points="450,340 468,270 485,340"/>
+  </g>
+
+  <!-- Ground Base Plane -->
+  <path d="M 0 350 Q 256 365 512 350 L 512 512 L 0 512 Z" fill="url(#ground-grad)"/>
+
+  <!-- Sunset Light Reflection Path on Ground -->
+  <polygon points="230,355 282,355 320,512 190,512" fill="url(#sun-glow-grad)" opacity="0.25"/>
+
+  <!-- ================= 3. MID-GROUND TREES (FRAMING THE PATH) ================= -->
+  <!-- Mid-ground Left Pine Trees -->
+  <g fill="url(#tree-mid)">
+    <!-- Tree 1 -->
+    <polygon points="0,380 25,210 50,380"/>
+    <polygon points="5,330 25,190 45,330"/>
+    <!-- Tree 2 -->
+    <polygon points="40,390 70,180 100,390"/>
+    <polygon points="48,310 70,150 92,310"/>
+    <!-- Tree 3 -->
+    <polygon points="90,400 115,230 140,400"/>
+    <rect x="63" y="380" width="14" height="60" fill="#1b0b21"/>
+  </g>
+
+  <!-- Mid-ground Right Deciduous & Pine Trees -->
+  <g fill="url(#tree-mid)">
+    <polygon points="370,400 395,210 420,400"/>
+    <polygon points="378,320 395,180 412,320"/>
+    <!-- Large Branching Birch / Forest Tree Trunk -->
+    <path d="M 430 440 Q 445 310 460 220 Q 470 170 480 120 L 500 120 Q 485 180 475 250 Q 460 330 455 440 Z"/>
+    <path d="M 450 280 Q 410 240 380 220 L 388 212 Q 418 232 453 268 Z"/>
+  </g>
+
+  <!-- ================= 4. THE GIRL WHO WALKS BEFORE SUNSET ================= -->
+  <!-- Positioned center-right, walking gracefully into the woods -->
+  <g filter="url(#soft-glow)">
+    <!-- Pastel Cloak Flow (Trailing back to the left as she walks right towards trees) -->
+    <!-- Outer Pastel Flowing Fold Base -->
+    <path d="M 285 270 
+             C 255 285, 215 320, 190 375 
+             C 215 385, 250 375, 270 360 
+             C 240 390, 210 415, 225 435 
+             C 260 430, 290 395, 310 360 
+             C 320 320, 315 285, 300 270 Z" 
+          fill="url(#pastel-cloak)" stroke="#ffd4e5" stroke-width="1"/>
+
+    <!-- Inner Cloak Soft Shading & Folds -->
+    <path d="M 285 270 C 260 310, 240 360, 225 435 C 248 410, 275 370, 292 320 Z" fill="url(#cloak-shadow-grad)" opacity="0.6"/>
+
+    <!-- Bright Sunset Rim Highlight on Cloak Left Edge -->
+    <path d="M 285 270 C 255 285, 215 320, 190 375 C 215 385, 250 375, 270 360" fill="none" stroke="#fff4c2" stroke-width="2.5" opacity="0.9"/>
+    <path d="M 270 360 C 240 390, 210 415, 225 435" fill="none" stroke="#ffc0d3" stroke-width="2" opacity="0.85"/>
+
+    <!-- Graceful Female Silhouette (Walking profile/back view) -->
+    <!-- Sleek Dress / Shadow Body beneath cloak -->
+    <path d="M 292 265 C 285 290, 280 340, 278 410 L 290 425 L 296 410 C 300 360, 305 300, 302 265 Z" fill="#140718"/>
+    
+    <!-- Walking Feet (Graceful step into dusk) -->
+    <!-- Back Foot (stepping back) -->
+    <path d="M 274 415 Q 268 422 262 425 Q 272 427 278 420 Z" fill="#0b030d"/>
+    <!-- Front Foot (stepping forward under hem) -->
+    <path d="M 294 420 Q 302 426 310 428 Q 305 431 292 427 Z" fill="#0b030d"/>
+
+    <!-- Slender Arm holding cloak fold slightly -->
+    <path d="M 292 275 Q 282 300 286 315 Q 292 312 295 295 Z" fill="#1b0b21"/>
+
+    <!-- Head & Flowing Hair Profile -->
+    <!-- Hair flowing softly in the dusk breeze -->
+    <path d="M 288 235 C 275 242, 260 252, 248 265 C 262 262, 278 255, 288 250 Z" fill="#2d1233"/>
+    <path d="M 248 265 C 262 262, 278 255, 288 250" stroke="#ffb7c5" stroke-width="1.5" fill="none" opacity="0.8"/>
+    
+    <!-- Graceful Head & Neck Silhouette facing right into trees -->
+    <circle cx="293" cy="242" r="10" fill="#140718"/>
+    <!-- Sunset Rim Light on Hair & Profile -->
+    <path d="M 284 235 C 288 232, 295 232, 298 236 C 293 240, 288 245, 285 252" stroke="#ffe599" stroke-width="2" fill="none"/>
+
+    <!-- Soft Golden Sunset Dust / Sparkles around her -->
+    <circle cx="240" cy="320" r="3" fill="#ffffff" opacity="0.9"/>
+    <circle cx="210" cy="360" r="2" fill="#fff3a8" opacity="0.8"/>
+    <circle cx="275" cy="250" r="2.5" fill="#ffccd5" opacity="0.85"/>
+    <circle cx="315" cy="380" r="3" fill="#ffe5ec" opacity="0.9"/>
+  </g>
+
+  <!-- ================= 5. FOREGROUND TREES (CLOAK DISAPPEARING BEHIND TREES) ================= -->
+  <!-- Prominent Foreground Tree Trunks on Right & Left overlapping the path & character -->
+  <g fill="url(#tree-fore)">
+    <!-- Right Main Foreground Trunk (Overlapping her right side & cloak edge) -->
+    <path d="M 325 512 
+             C 335 440, 345 340, 355 240 
+             C 365 140, 380 40, 395 0 
+             L 440 0 
+             C 420 50, 405 150, 395 250 
+             C 385 350, 375 440, 370 512 Z"/>
+    
+    <!-- Branch stretching across top sunset sky -->
+    <path d="M 362 210 Q 300 170 230 150 L 235 138 Q 310 160 370 198 Z"/>
+    <path d="M 310 172 Q 270 130 240 100 L 246 92 Q 278 124 318 164 Z"/>
+
+    <!-- Left Foreground Trunk & Leaves framing scene -->
+    <path d="M -10 512 L 25 512 C 35 420, 20 300, 10 180 C 0 80, -10 0, -20 0 L -50 0 L -10 512 Z"/>
+    <path d="M 15 220 Q 70 190 140 175 L 136 163 Q 62 180 5 210 Z"/>
+
+    <!-- Foreground Foliage Overhang Canopy -->
+    <!-- Top Left Canopy -->
+    <path d="M -20 -10 C 30 20, 80 10, 130 40 C 180 20, 220 50, 260 10 C 200 -20, 100 -10, -20 -10 Z"/>
+    <!-- Top Right Canopy -->
+    <path d="M 280 -10 C 320 30, 370 10, 420 45 C 470 15, 520 35, 540 -10 Z"/>
+  </g>
+
+  <!-- ================= 6. DUSK FIREFLIES & EVENING LEAF PARTICLES ================= -->
+  <g filter="url(#soft-glow)">
+    <!-- Glowing Golden & Rose Fireflies -->
+    <circle cx="160" cy="270" r="3.5" fill="#fff3a8" opacity="0.9"/>
+    <circle cx="190" cy="210" r="2.5" fill="#ffb7c5" opacity="0.85"/>
+    <circle cx="340" cy="190" r="4" fill="#ffe599" opacity="0.95"/>
+    <circle cx="370" cy="290" r="3" fill="#ffc2d1" opacity="0.8"/>
+    <circle cx="430" cy="360" r="3.5" fill="#fff0a6" opacity="0.9"/>
+    <circle cx="110" cy="420" r="2" fill="#ffd1dc" opacity="0.75"/>
+    <circle cx="280" cy="140" r="3" fill="#ffffff" opacity="0.85"/>
+    <circle cx="230" cy="460" r="2.5" fill="#ffe599" opacity="0.8"/>
+
+    <!-- Leaves drifting in sunset breeze -->
+    <path d="M 175 190 Q 185 182 187 195 Q 177 198 175 190 Z" fill="#d95d6a" opacity="0.8"/>
+    <path d="M 330 150 Q 342 142 344 156 Q 332 160 330 150 Z" fill="#f79c65" opacity="0.85"/>
+    <path d="M 390 230 Q 400 222 402 235 Q 392 238 390 230 Z" fill="#e2b0ff" opacity="0.75"/>
+    <path d="M 120 310 Q 130 302 132 315 Q 122 318 120 310 Z" fill="#ffb7b2" opacity="0.8"/>
+  </g>
+</svg>

@@ -167,6 +167,7 @@ export interface InteractivePoint {
     | 'stone_skipping'
     | 'cat'
     | 'birds'
+    | 'telescope'
     | 'lantern'
     | 'easter_egg'
     | 'train_campfire';

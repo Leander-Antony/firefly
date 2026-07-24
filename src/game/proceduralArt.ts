@@ -1,6 +1,7 @@
 // Procedural Graphics Generator with Top-Down and Cinematic Side-View Illustration Modes
 
 import type { FacingDirection } from '../types/game';
+import { getCachedSvgImage } from '../utils/AssetManager';
 
 export class ProceduralArt {
   // --- 1. TOP-DOWN OPEN WORLD GRAPHICS ---
@@ -89,6 +90,42 @@ export class ProceduralArt {
   ): void {
     ctx.save();
     ctx.translate(x, y);
+
+    const glowPalette = {
+      amber: { inner: 'rgba(251, 146, 60, 0.85)', mid: 'rgba(251, 146, 60, 0.3)', core: '#fb923c' },
+      gold: { inner: 'rgba(254, 240, 138, 0.85)', mid: 'rgba(254, 240, 138, 0.3)', core: '#fef08a' },
+      cyan: { inner: 'rgba(56, 189, 248, 0.85)', mid: 'rgba(56, 189, 248, 0.3)', core: '#38bdf8' },
+      emerald: { inner: 'rgba(52, 211, 153, 0.85)', mid: 'rgba(52, 211, 153, 0.3)', core: '#34d399' },
+      violet: { inner: 'rgba(192, 132, 252, 0.85)', mid: 'rgba(192, 132, 252, 0.3)', core: '#c084fc' },
+    }[lanternGlow] || { inner: 'rgba(251, 146, 60, 0.85)', mid: 'rgba(251, 146, 60, 0.3)', core: '#fb923c' };
+
+    const svgSprite = getCachedSvgImage('forestSpiritTopDown');
+    if (svgSprite) {
+      // Drop shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+      ctx.beginPath();
+      ctx.ellipse(0, 6, 14, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Lantern glow bloom
+      const flicker = Math.sin(Date.now() * 0.01 + x * 0.05) * 3;
+      const lX = (facing === 'left' || facing === 'up_left' || facing === 'down_left') ? -14 : 14;
+      const lY = (facing === 'up' || facing === 'up_left' || facing === 'up_right') ? -16 : -2;
+      const bloom = ctx.createRadialGradient(lX, lY, 1, lX, lY, 28 + flicker);
+      bloom.addColorStop(0, glowPalette.inner);
+      bloom.addColorStop(0.5, glowPalette.mid);
+      bloom.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = bloom;
+      ctx.beginPath();
+      ctx.arc(lX, lY, 28 + flicker, 0, Math.PI * 2);
+      ctx.fill();
+
+      const bob = isWalking ? Math.sin(Date.now() * 0.015) * 2 : 0;
+      ctx.drawImage(svgSprite, -20, -28 + bob, 40, 48);
+
+      ctx.restore();
+      return;
+    }
 
     const cloakColors = {
       violet: { base: '#312e81', hood: '#c084fc', inner: '#1e1b4b' },
@@ -183,6 +220,15 @@ export class ProceduralArt {
   }
 
   public static drawTopDownBench(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('rainShelterBench');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.drawImage(svgImg, -60, -50, 120, 100);
+      ctx.restore();
+      return;
+    }
+
     ctx.save();
     ctx.translate(x, y);
 
@@ -205,6 +251,27 @@ export class ProceduralArt {
     y: number,
     isLit: boolean = true
   ): void {
+    const svgImg = getCachedSvgImage('fireflyLantern');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+      if (isLit) {
+        const flicker = Math.sin(Date.now() * 0.01 + x * 0.05) * 3;
+        const bloom = ctx.createRadialGradient(0, 0, 2, 0, 0, 48 + flicker);
+        bloom.addColorStop(0, 'rgba(251, 146, 60, 0.85)');
+        bloom.addColorStop(0.4, 'rgba(251, 146, 60, 0.25)');
+        bloom.addColorStop(1, 'rgba(251, 146, 60, 0)');
+
+        ctx.fillStyle = bloom;
+        ctx.beginPath();
+        ctx.arc(0, 0, 48 + flicker, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.drawImage(svgImg, -16, -16, 32, 32);
+      ctx.restore();
+      return;
+    }
+
     ctx.save();
     ctx.translate(x, y);
 
@@ -235,6 +302,15 @@ export class ProceduralArt {
   }
 
   public static drawTopDownCoffeeStand(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('coffeeKiosk');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.drawImage(svgImg, -60, -50, 120, 100);
+      ctx.restore();
+      return;
+    }
+
     ctx.save();
     ctx.translate(x, y);
 
@@ -259,6 +335,28 @@ export class ProceduralArt {
   }
 
   public static drawTopDownWhisperTree(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('whisperTree');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      const time = Date.now() * 0.001;
+      const auraPulse = Math.sin(time * 1.5) * 20;
+      const canopyGlow = ctx.createRadialGradient(0, 0, 20, 0, 0, 240 + auraPulse);
+      canopyGlow.addColorStop(0, 'rgba(167, 139, 250, 0.7)');
+      canopyGlow.addColorStop(0.5, 'rgba(139, 92, 246, 0.25)');
+      canopyGlow.addColorStop(1, 'rgba(139, 92, 246, 0)');
+
+      ctx.fillStyle = canopyGlow;
+      ctx.beginPath();
+      ctx.arc(0, 0, 240 + auraPulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.drawImage(svgImg, -180, -180, 360, 360);
+      ctx.restore();
+      return;
+    }
+
     ctx.save();
     ctx.translate(x, y);
 
@@ -299,6 +397,26 @@ export class ProceduralArt {
   }
 
   public static drawTopDownTrainStation(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('stationCampfire');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      const time = Date.now() * 0.005;
+      const fireGlow = ctx.createRadialGradient(0, 20, 4, 0, 20, 70 + Math.sin(time * 3) * 10);
+      fireGlow.addColorStop(0, 'rgba(249, 115, 22, 0.85)');
+      fireGlow.addColorStop(0.6, 'rgba(234, 88, 12, 0.3)');
+      fireGlow.addColorStop(1, 'transparent');
+      ctx.fillStyle = fireGlow;
+      ctx.beginPath();
+      ctx.arc(0, 20, 70, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.drawImage(svgImg, -110, -70, 220, 140);
+      ctx.restore();
+      return;
+    }
+
     ctx.save();
     ctx.translate(x, y);
 
@@ -334,6 +452,105 @@ export class ProceduralArt {
     ctx.beginPath();
     ctx.arc(0, 20, 4, 0, Math.PI * 2);
     ctx.fill();
+
+    ctx.restore();
+  }
+
+  public static drawTopDownArcade(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('retroArcadeMachine');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.drawImage(svgImg, -40, -60, 80, 120);
+      ctx.restore();
+      return;
+    }
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    // Cabinet Base
+    ctx.fillStyle = '#1e1b4b';
+    ctx.fillRect(-20, -30, 40, 60);
+
+    // Glowing Neon Screen
+    const time = Date.now() * 0.003;
+    ctx.fillStyle = `rgba(168, 85, 247, ${0.7 + Math.sin(time) * 0.2})`;
+    ctx.fillRect(-14, -24, 28, 20);
+
+    ctx.fillStyle = '#fde047';
+    ctx.fillRect(-10, -20, 8, 8);
+
+    // Coin Slot
+    ctx.fillStyle = '#fbbf24';
+    ctx.fillRect(-4, 10, 8, 4);
+
+    ctx.restore();
+  }
+
+  public static drawTopDownBridge(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('waterfallBridge');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.drawImage(svgImg, -80, -40, 160, 80);
+      ctx.restore();
+      return;
+    }
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    // Wooden Bridge Deck
+    ctx.fillStyle = '#78350f';
+    ctx.fillRect(-60, -25, 120, 50);
+
+    // Planks
+    ctx.fillStyle = '#451a03';
+    for (let px = -55; px < 55; px += 12) {
+      ctx.fillRect(px, -25, 2, 50);
+    }
+
+    // Railings
+    ctx.fillStyle = '#92400e';
+    ctx.fillRect(-60, -28, 120, 6);
+    ctx.fillRect(-60, 22, 120, 6);
+
+    ctx.restore();
+  }
+
+  public static drawTopDownObservatory(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    const svgImg = getCachedSvgImage('observatoryTower');
+    if (svgImg) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.drawImage(svgImg, -70, -70, 140, 140);
+      ctx.restore();
+      return;
+    }
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    // Stone Tower Base
+    ctx.fillStyle = '#334155';
+    ctx.beginPath();
+    ctx.arc(0, 0, 45, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Dome Roof
+    ctx.fillStyle = '#1e293b';
+    ctx.beginPath();
+    ctx.arc(0, 0, 32, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Brass Telescope
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(25, -25);
+    ctx.stroke();
 
     ctx.restore();
   }

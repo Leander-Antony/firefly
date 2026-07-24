@@ -5,6 +5,7 @@ import { GameEngine } from '../game/GameEngine';
 import type { JournalEntry } from '../types/game';
 import { SoundEngine } from '../audio/SoundEngine';
 import { saveGameState } from '../utils/storage';
+import { SVG_ASSETS } from '../utils/AssetManager';
 
 interface JournalModalProps {
   engine: GameEngine;
@@ -51,6 +52,12 @@ export const JournalModal: React.FC<JournalModalProps> = ({ engine, onClose }) =
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         className="journal-modal"
       >
+        {/* Notebook Cover Decorative SVG */}
+        <img
+          src={SVG_ASSETS.journalCover}
+          alt="Journal Cover"
+          className="absolute -top-8 left-1/2 -translate-x-1/2 w-24 h-24 pointer-events-none opacity-90 drop-shadow-lg z-10"
+        />
         {/* Header */}
         <div className="journal-header flex items-center justify-between">
           <div className="flex items-center gap-2">

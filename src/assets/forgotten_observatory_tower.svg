@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Starlight Glow Filter -->
+    <filter id="observatory-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b1"/>
+      <feGaussianBlur stdDeviation="16" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="stone-tower" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="35%" stop-color="#475569"/>
+      <stop offset="75%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+
+    <linearGradient id="brass-telescope" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="35%" stop-color="#eab308"/>
+      <stop offset="75%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <linearGradient id="dome-roof" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#observatory-glow)" transform="translate(10, 0)">
+    <!-- ================= 1. ANCIENT STONE TOWER STRUCTURE ================= -->
+    <!-- Tower Main Shaft -->
+    <polygon points="180,480 195,190 317,190 332,480" fill="url(#stone-tower)" stroke="#0f172a" stroke-width="2.5"/>
+
+    <!-- Brick Mortar Texture Lines -->
+    <g opacity="0.3" stroke="#cbd5e1" stroke-width="1.5">
+      <line x1="192" y1="230" x2="320" y2="230"/>
+      <line x1="190" y1="280" x2="322" y2="280"/>
+      <line x1="187" y1="330" x2="325" y2="330"/>
+      <line x1="185" y1="380" x2="327" y2="380"/>
+      <line x1="182" y1="430" x2="330" y2="430"/>
+    </g>
+
+    <!-- Arched Windows with Soft Blue Starlight Glow Inside -->
+    <!-- Top Window -->
+    <path d="M 236 240 A 20 20 0 0 1 276 240 L 276 270 L 236 270 Z" fill="#38bdf8" filter="url(#observatory-glow)"/>
+    <path d="M 236 240 A 20 20 0 0 1 276 240 L 276 270 L 236 270 Z" stroke="#1e293b" stroke-width="2.5" fill="none"/>
+    <line x1="256" y1="220" x2="256" y2="270" stroke="#1e293b" stroke-width="2"/>
+
+    <!-- Lower Window -->
+    <path d="M 236 340 A 20 20 0 0 1 276 340 L 276 370 L 236 370 Z" fill="#38bdf8" filter="url(#observatory-glow)"/>
+    <path d="M 236 340 A 20 20 0 0 1 276 340 L 276 370 L 236 370 Z" stroke="#1e293b" stroke-width="2.5" fill="none"/>
+
+    <!-- Crumbling Overgrown Vines & Moss -->
+    <g fill="#15803d">
+      <!-- Left side vines -->
+      <path d="M 188 260 C 180 300, 195 340, 185 390 C 195 390, 205 320, 192 260 Z"/>
+      <path d="M 192 290 Q 210 280 215 295 Q 200 305 192 290 Z"/>
+      <path d="M 186 360 Q 205 350 210 365 Q 195 375 186 360 Z"/>
+      <!-- Right side vines -->
+      <path d="M 322 220 C 330 270, 315 320, 325 380 C 315 380, 305 310, 318 220 Z"/>
+      <path d="M 320 240 Q 300 230 295 245 Q 310 255 320 240 Z"/>
+    </g>
+
+    <!-- ================= 2. OBSERVATORY DOME ROOF ================= -->
+    <!-- Dome Base Ring Slab -->
+    <rect x="180" y="175" width="152" height="18" rx="4" fill="#334155" stroke="#0f172a" stroke-width="2"/>
+
+    <!-- Metallic Observatory Dome (Half Sphere) -->
+    <path d="M 185 175 A 71 71 0 0 1 327 175 Z" fill="url(#dome-roof)" stroke="#0369a1" stroke-width="2"/>
+    
+    <!-- Open Hatch Slot in Dome -->
+    <polygon points="230,175 282,175 272,110 240,110" fill="#0284c7"/>
+    <line x1="230" y1="175" x2="240" y2="110" stroke="#fde047" stroke-width="2"/>
+    <line x1="282" y1="175" x2="272" y2="110" stroke="#fde047" stroke-width="2"/>
+
+    <!-- ================= 3. BRASS TELESCOPE POINTING SKYWARD ================= -->
+    <g transform="rotate(-35 256 140)" filter="url(#observatory-glow)">
+      <!-- Heavy Tripod Base -->
+      <line x1="256" y1="140" x2="230" y2="190" stroke="#78350f" stroke-width="4"/>
+      <line x1="256" y1="140" x2="282" y2="190" stroke="#78350f" stroke-width="4"/>
+
+      <!-- Mount Swivel Ring -->
+      <circle cx="256" cy="140" r="10" fill="url(#brass-telescope)"/>
+
+      <!-- Main Telescope Brass Barrel -->
+      <polygon points="252,145 260,145 268,20 244,20" fill="url(#brass-telescope)" stroke="#451a03" stroke-width="1.5"/>
+      <rect x="242" y="15" width="28" height="8" rx="2" fill="#fde047"/>
+
+      <!-- Eyepiece Assembly -->
+      <rect x="250" y="145" width="12" height="25" rx="2" fill="url(#brass-telescope)"/>
+      <circle cx="256" cy="170" r="6" fill="#1e293b"/>
+
+      <!-- Starlight Beam Emerging from Objective Lens Pointing to Sky -->
+      <polygon points="242,15 270,15 310,-100 202,-100" fill="#38bdf8" opacity="0.3" filter="url(#observatory-glow)"/>
+    </g>
+
+    <!-- ================= 4. FLOATING CELESTIAL STARS ================= -->
+    <g filter="url(#observatory-glow)">
+      <!-- 4-point Stars in Sky -->
+      <polygon points="120,80 123,88 131,91 123,94 120,102 117,94 109,91 117,88" fill="#ffffff"/>
+      <polygon points="380,60 383,67 390,70 383,73 380,80 377,73 370,70 377,67" fill="#fde047"/>
+      <polygon points="410,140 412,144 416,146 412,148 410,152 408,148 404,146 408,144" fill="#ffffff"/>
+      
+      <!-- Constellation Sparks -->
+      <circle cx="100" cy="140" r="3" fill="#38bdf8"/>
+      <circle cx="140" cy="50" r="2.5" fill="#ffffff"/>
+      <circle cx="350" cy="110" r="3.5" fill="#fde047"/>
+    </g>
+  </g>
+</svg>

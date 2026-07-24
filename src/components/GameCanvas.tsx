@@ -68,37 +68,42 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
       ctx.scale(cam.zoom, cam.zoom);
       ctx.translate(-cam.x - w / 2, -cam.y - h / 2);
 
-      // Ground Landscape
-      const groundGrad = ctx.createLinearGradient(0, 0, 6000, 6000);
+      // Ground Landscape (10,000px × 10,000px)
+      const groundGrad = ctx.createLinearGradient(0, 0, 10000, 10000);
       groundGrad.addColorStop(0, '#0c1a12');
       groundGrad.addColorStop(0.5, '#12261a');
       groundGrad.addColorStop(1, '#09150d');
       ctx.fillStyle = groundGrad;
-      ctx.fillRect(0, 0, 6000, 6000);
+      ctx.fillRect(0, 0, 10000, 10000);
 
       // Cobblestone Pathways connecting Biomes
+      // Dirt Trail Network across 10,000px × 10,000px Map
       ctx.strokeStyle = '#1f2e22';
-      ctx.lineWidth = 45;
+      ctx.lineWidth = 55;
       ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(3000, 3000); // Center Glade
-      ctx.lineTo(1400, 3000); // West to Meadow
-      ctx.lineTo(1400, 1200); // North to Rain Canopy
-      ctx.lineTo(3000, 1100); // East to Whisper Tree
-      ctx.lineTo(4500, 1400); // East to Lake
-      ctx.lineTo(4400, 3100); // South to Coffee Corner
-      ctx.lineTo(4500, 4600); // South to Memory Hollow
-      ctx.lineTo(1500, 5100); // West to Train Station
+      ctx.moveTo(5000, 5000); // Central Glade
+      ctx.lineTo(2000, 1500); // Arcade Ruins
+      ctx.lineTo(2000, 2800); // Rain Bench
+      ctx.lineTo(2000, 4800); // Meadow
+      ctx.lineTo(5000, 2000); // Whisper Tree
+      ctx.lineTo(8000, 1500); // Starlight Bridge
+      ctx.lineTo(8000, 3500); // Firefly Lake
+      ctx.lineTo(8000, 4800); // Coffee Corner
+      ctx.lineTo(8000, 7800); // Memory Hollow
+      ctx.lineTo(5000, 8500); // Observatory
+      ctx.lineTo(2000, 8200); // Cauliflower Ridge
+      ctx.lineTo(2000, 9200); // Train Station
       ctx.stroke();
 
-      // Firefly Lake Water Body
-      const lakeGrad = ctx.createRadialGradient(4700, 1400, 80, 4700, 1400, 600);
+      // Firefly Lake Water Body (East - 8000, 3500)
+      const lakeGrad = ctx.createRadialGradient(8000, 3500, 100, 8000, 3500, 850);
       lakeGrad.addColorStop(0, '#0c4a6e');
       lakeGrad.addColorStop(0.7, '#0369a1');
       lakeGrad.addColorStop(1, 'transparent');
       ctx.fillStyle = lakeGrad;
       ctx.beginPath();
-      ctx.arc(4700, 1400, 600, 0, Math.PI * 2);
+      ctx.arc(8000, 3500, 850, 0, Math.PI * 2);
       ctx.fill();
 
       // Water Starlight Ripples
@@ -106,11 +111,21 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
       ctx.lineWidth = 2;
       for (let r = 1; r <= 3; r++) {
-        const rippleR = ((time * 30 + r * 120) % 500);
+        const rippleR = ((time * 30 + r * 120) % 700);
         ctx.beginPath();
-        ctx.arc(4700, 1400, rippleR, 0, Math.PI * 2);
+        ctx.arc(8000, 3500, rippleR, 0, Math.PI * 2);
         ctx.stroke();
       }
+
+      // Waterfall Pool (Northeast - 8000, 1500)
+      const wfGrad = ctx.createRadialGradient(8000, 1500, 50, 8000, 1500, 600);
+      wfGrad.addColorStop(0, '#38bdf8');
+      wfGrad.addColorStop(0.8, '#0284c7');
+      wfGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = wfGrad;
+      ctx.beginPath();
+      ctx.arc(8000, 1500, 600, 0, Math.PI * 2);
+      ctx.fill();
 
       // Collect Y-Sorted Objects for Depth Rendering
       const renderables: RenderableObject[] = [];
@@ -140,11 +155,14 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
         });
       }
 
-      // Trees scattered across 6000x6000px
-      for (let tx = 150; tx < 5900; tx += 320) {
-        for (let ty = 150; ty < 5900; ty += 320) {
-          if (Math.hypot(tx - 4700, ty - 1400) < 620) continue;
-          if (Math.hypot(tx - 3000, ty - 3000) < 220) continue;
+      // Trees scattered across 10,000px × 10,000px
+      for (let tx = 200; tx < 9800; tx += 340) {
+        for (let ty = 200; ty < 9800; ty += 340) {
+          if (Math.hypot(tx - 8000, ty - 3500) < 880) continue; // Lake
+          if (Math.hypot(tx - 8000, ty - 1500) < 620) continue; // Waterfall
+          if (Math.hypot(tx - 5000, ty - 5000) < 260) continue; // Central Glade
+          if (Math.hypot(tx - 5000, ty - 2000) < 320) continue; // Whisper Tree
+          if (Math.hypot(tx - 2000, ty - 1500) < 280) continue; // Arcade
 
           if (tx >= cam.x - 200 && tx <= cam.x + w + 200 && ty >= cam.y - 200 && ty <= cam.y + h + 200) {
             const type = (tx + ty) % 3 === 0 ? 'pine' : (tx + ty) % 2 === 0 ? 'oak' : 'birch';
@@ -156,31 +174,140 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
         }
       }
 
-      // Landmarks
+      // Landmarks (Drawn at EXACT interactive coordinates matching INTERACTIVE_POINTS)
       renderables.push({
-        y: 1200,
+        y: 2800,
         draw: (c) => {
-          ProceduralArt.drawTopDownBench(c, 1400, 1200);
-          ProceduralArt.drawTopDownLantern(c, 1340, 1200, true);
+          ProceduralArt.drawTopDownBench(c, 2000, 2800);
+          ProceduralArt.drawTopDownLantern(c, 1940, 2800, true);
+        },
+      });
+
+      // Directive 4: World Transformations when Memories are collected
+      if (engine.hasCoffeeMemory()) {
+        renderables.push({
+          y: 4850,
+          draw: (c) => {
+            const fireGlow = c.createRadialGradient(8060, 4820, 2, 8060, 4820, 35);
+            fireGlow.addColorStop(0, 'rgba(251, 146, 60, 0.9)');
+            fireGlow.addColorStop(1, 'transparent');
+            c.fillStyle = fireGlow;
+            c.beginPath();
+            c.arc(8060, 4820, 35, 0, Math.PI * 2);
+            c.fill();
+            c.fillStyle = '#f97316';
+            c.beginPath();
+            c.arc(8060, 4820, 6, 0, Math.PI * 2);
+            c.fill();
+          },
+        });
+      }
+
+      if (engine.hasFootballMemory()) {
+        renderables.push({
+          y: 7820,
+          draw: (c) => {
+            c.fillStyle = '#7c2d12';
+            c.beginPath();
+            c.ellipse(8040, 7820, 10, 6, 0.4, 0, Math.PI * 2);
+            c.fill();
+            c.strokeStyle = '#fef08a';
+            c.lineWidth = 1.5;
+            c.beginPath();
+            c.moveTo(8036, 7820);
+            c.lineTo(8044, 7820);
+            c.stroke();
+          },
+        });
+      }
+
+      if (engine.hasNotebookMemory()) {
+        renderables.push({
+          y: 5020,
+          draw: (c) => {
+            const pTime = Date.now() * 0.001;
+            for (let i = 0; i < 4; i++) {
+              const px = 5000 + Math.cos(pTime * 0.8 + i * 1.5) * 60;
+              const py = 5000 + Math.sin(pTime * 0.8 + i * 1.5) * 40 - i * 10;
+              c.fillStyle = 'rgba(254, 243, 199, 0.85)';
+              c.fillRect(px, py, 7, 10);
+            }
+          },
+        });
+      }
+
+      if (engine.hasChocolateMemory()) {
+        renderables.push({
+          y: 8520,
+          draw: (c) => {
+            c.fillStyle = '#b45309';
+            c.beginPath();
+            c.arc(5060, 8520, 7, 0, Math.PI * 2);
+            c.fill();
+            c.fillStyle = '#451a03';
+            c.fillRect(5062, 8522, 4, 4);
+          },
+        });
+      }
+
+      if (engine.hasCauliflowerMemory()) {
+        renderables.push({
+          y: 8210,
+          draw: (c) => {
+            c.fillStyle = '#fde047';
+            for (let f = 0; f < 6; f++) {
+              const fx = 2030 + Math.sin(f * 2) * 25;
+              const fy = 8210 + Math.cos(f * 2) * 25;
+              c.beginPath();
+              c.arc(fx, fy, 4, 0, Math.PI * 2);
+              c.fill();
+            }
+          },
+        });
+      }
+
+      renderables.push({
+        y: 1500,
+        draw: (c) => {
+          ProceduralArt.drawTopDownArcade(c, 2000, 1500);
+          ProceduralArt.drawTopDownLantern(c, 1940, 1500, true);
         },
       });
 
       renderables.push({
-        y: 3100,
+        y: 4800,
         draw: (c) => {
-          ProceduralArt.drawTopDownCoffeeStand(c, 4400, 3100);
-          ProceduralArt.drawTopDownLantern(c, 4320, 3100, true);
+          ProceduralArt.drawTopDownCoffeeStand(c, 8000, 4800);
+          ProceduralArt.drawTopDownLantern(c, 7920, 4800, true);
         },
       });
 
       renderables.push({
-        y: 1100,
-        draw: (c) => ProceduralArt.drawTopDownWhisperTree(c, 3000, 1100),
+        y: 2000,
+        draw: (c) => ProceduralArt.drawTopDownWhisperTree(c, 5000, 2000),
       });
 
       renderables.push({
-        y: 5100,
-        draw: (c) => ProceduralArt.drawTopDownTrainStation(c, 1500, 5100),
+        y: 1500,
+        draw: (c) => ProceduralArt.drawTopDownBridge(c, 8000, 1500),
+      });
+
+      renderables.push({
+        y: 8200,
+        draw: (c) => {
+          ProceduralArt.drawTopDownBench(c, 2000, 8200);
+          ProceduralArt.drawTopDownLantern(c, 1940, 8200, true);
+        },
+      });
+
+      renderables.push({
+        y: 8500,
+        draw: (c) => ProceduralArt.drawTopDownObservatory(c, 5000, 8500),
+      });
+
+      renderables.push({
+        y: 9200,
+        draw: (c) => ProceduralArt.drawTopDownTrainStation(c, 2000, 9200),
       });
 
       // Letters

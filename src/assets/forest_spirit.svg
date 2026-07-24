@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Filters -->
+    <filter id="side-spirit-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur1" />
+      <feGaussianBlur stdDeviation="20" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="side-lantern-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="side-lantern-beam" cx="10%" cy="50%" r="90%">
+      <stop offset="0%" stop-color="#fff2a3" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#ffb703" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#f77f00" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d94e00" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="spirit-body-glow" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#e0ffff"/>
+      <stop offset="35%" stop-color="#64eed8"/>
+      <stop offset="70%" stop-color="#1ba38c"/>
+      <stop offset="100%" stop-color="#0b4d42"/>
+    </radialGradient>
+
+    <linearGradient id="side-cloak-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#244d44"/>
+      <stop offset="40%" stop-color="#14332d"/>
+      <stop offset="80%" stop-color="#0a1d1a"/>
+      <stop offset="100%" stop-color="#040d0c"/>
+    </linearGradient>
+
+    <linearGradient id="side-iron-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c757d"/>
+      <stop offset="40%" stop-color="#343a40"/>
+      <stop offset="100%" stop-color="#1a1d20"/>
+    </linearGradient>
+
+    <linearGradient id="ground-light-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1ba38c" stop-opacity="0.1"/>
+      <stop offset="40%" stop-color="#64eed8" stop-opacity="0.4"/>
+      <stop offset="75%" stop-color="#ffb703" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffb703" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ground Line & Light Reflection -->
+  <ellipse cx="270" cy="445" rx="200" ry="18" fill="url(#ground-light-grad)" />
+  <path d="M 60 445 L 470 445" stroke="#1f443c" stroke-width="2" stroke-dasharray="6,6" opacity="0.4"/>
+
+  <!-- Lantern Forward Beam / Cast Light Cone -->
+  <polygon points="345,285 490,190 500,445 345,340" fill="url(#side-lantern-beam)" opacity="0.85"/>
+
+  <!-- Ethereal Spirit Feet / Trailing Wisps on Ground (Walking stance) -->
+  <path d="M 170 380 Q 140 410 110 435 Q 150 430 185 400 Z" fill="#4de3c9" opacity="0.6" filter="url(#side-spirit-glow)"/>
+  <path d="M 240 370 Q 260 410 275 435 Q 285 435 270 410 Q 250 375 240 370 Z" fill="#64eed8" opacity="0.8" filter="url(#side-spirit-glow)"/>
+
+  <!-- Trailing Flowing Cloak (Back section blowing dynamically behind) -->
+  <path d="M 190 180 C 130 190, 80 240, 50 310 C 90 315, 130 290, 160 270 C 100 320, 60 370, 75 420 C 120 400, 165 370, 205 320 Z" fill="url(#side-cloak-grad)"/>
+
+  <!-- Inner Spirit Core (Glowing torso profile visible under draped cloak) -->
+  <path d="M 205 170 Q 255 190 245 280 Q 225 350 205 380 Q 240 340 260 280 Q 270 210 220 170 Z" fill="url(#spirit-body-glow)" filter="url(#side-spirit-glow)"/>
+
+  <!-- Main Outer Cloak & Flowing Hood -->
+  <path d="M 220 100 
+           C 160 100, 130 150, 150 210 
+           C 165 240, 185 270, 175 340 
+           C 170 370, 150 400, 125 425 
+           C 170 415, 215 385, 245 340 
+           C 270 300, 280 250, 275 200 
+           C 285 185, 290 160, 275 140 
+           C 260 120, 245 100, 220 100 Z" 
+        fill="url(#side-cloak-grad)" stroke="#2d5e53" stroke-width="1.5"/>
+
+  <!-- Hood Profile Fold & Crown -->
+  <path d="M 220 100 C 265 105, 285 135, 270 165 C 240 165, 210 150, 195 130 C 205 110, 215 100, 220 100 Z" fill="#1b3d36" stroke="#3b7a6d" stroke-width="2"/>
+
+  <!-- Deep Shadow inside Hood opening (Facing Right) -->
+  <path d="M 235 125 C 265 135, 270 160, 255 175 C 240 175, 230 160, 230 145 Z" fill="#061210"/>
+
+  <!-- Glowing Spirit Face / Eye Core inside Hood -->
+  <ellipse cx="250" cy="148" rx="10" ry="12" fill="url(#spirit-body-glow)" filter="url(#side-spirit-glow)"/>
+  <ellipse cx="254" cy="146" rx="4" ry="3" fill="#ffffff" filter="url(#side-spirit-glow)"/>
+
+  <!-- Flowing Hood Tail / Peak behind head -->
+  <path d="M 195 115 C 160 105, 120 120, 95 145 C 130 140, 165 135, 185 130 Z" fill="#14332d" filter="url(#side-spirit-glow)"/>
+
+  <!-- Extended Arm (Reaching forward carrying lantern) -->
+  <path d="M 240 200 Q 285 210 325 235 Q 315 250 270 230 Q 245 220 240 200 Z" fill="#14332d" stroke="#2d5e53" stroke-width="1.5"/>
+  <ellipse cx="330" cy="238" rx="7" ry="5" transform="rotate(-15 330 238)" fill="#8bf4e3" filter="url(#side-spirit-glow)"/>
+
+  <!-- Iron Lantern Chain -->
+  <line x1="332" y1="240" x2="345" y2="265" stroke="#3a3e45" stroke-width="2" stroke-dasharray="3,2"/>
+
+  <!-- Small Iron Lantern (Detailed Side Profile) -->
+  <circle cx="345" cy="263" r="4" fill="none" stroke="#5a626a" stroke-width="2"/>
+  <path d="M 337 268 L 353 268 L 349 274 L 341 274 Z" fill="url(#side-iron-grad)" stroke="#1a1c1e" stroke-width="1"/>
+
+  <!-- Lantern Roof -->
+  <polygon points="333,274 357,274 362,284 328,284" fill="url(#side-iron-grad)" stroke="#1a1c1e" stroke-width="1.5"/>
+
+  <!-- Glass Housing & Radiant Light -->
+  <rect x="333" y="284" width="24" height="34" rx="2" fill="#ffb703" filter="url(#side-lantern-glow)"/>
+  <circle cx="345" cy="301" r="7" fill="#ffffff" filter="url(#side-spirit-glow)"/>
+
+  <!-- Iron Frame Bars -->
+  <rect x="331" y="284" width="28" height="4" fill="#2c3035"/>
+  <rect x="331" y="314" width="28" height="4" fill="#2c3035"/>
+  <line x1="333" y1="284" x2="333" y2="318" stroke="#1a1c1e" stroke-width="2"/>
+  <line x1="345" y1="284" x2="345" y2="318" stroke="#1a1c1e" stroke-width="1.5"/>
+  <line x1="357" y1="284" x2="357" y2="318" stroke="#1a1c1e" stroke-width="2"/>
+
+  <!-- Lantern Base & Bottom Spire -->
+  <polygon points="330,318 360,318 354,326 336,326" fill="url(#side-iron-grad)" stroke="#1a1c1e" stroke-width="1.5"/>
+  <polygon points="343,326 347,326 345,333" fill="#2c3035"/>
+
+  <!-- Floating Spirit Leaves & Light Particles -->
+  <circle cx="380" cy="270" r="3" fill="#ffe066" filter="url(#side-lantern-glow)"/>
+  <circle cx="410" cy="320" r="2.5" fill="#ffb703" filter="url(#side-lantern-glow)"/>
+  <circle cx="430" cy="240" r="3.5" fill="#ffd000" opacity="0.8" filter="url(#side-lantern-glow)"/>
+  <circle cx="360" cy="360" r="2" fill="#ff9f1c"/>
+
+  <circle cx="120" cy="180" r="3.5" fill="#64eed8" opacity="0.8" filter="url(#side-spirit-glow)"/>
+  <circle cx="80" cy="260" r="4.5" fill="#38f0d2" opacity="0.7" filter="url(#side-spirit-glow)"/>
+  <circle cx="160" cy="350" r="3" fill="#8bf4e3" opacity="0.9" filter="url(#side-spirit-glow)"/>
+  <circle cx="210" cy="80" r="2.5" fill="#a7f3d0" opacity="0.8"/>
+  <circle cx="290" cy="110" r="3" fill="#64eed8" opacity="0.8" filter="url(#side-spirit-glow)"/>
+
+  <!-- Floating Leaf Wisps -->
+  <path d="M 100 220 Q 112 210 115 225 Q 103 230 100 220 Z" fill="#20b298" opacity="0.7"/>
+  <path d="M 140 140 Q 150 132 153 144 Q 143 148 140 140 Z" fill="#20b298" opacity="0.7"/>
+  <path d="M 70 340 Q 82 332 84 345 Q 73 349 70 340 Z" fill="#20b298" opacity="0.6"/>
+</svg>

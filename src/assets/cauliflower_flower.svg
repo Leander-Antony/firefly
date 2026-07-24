@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Soft Glow Filter -->
+    <filter id="rework-cauli-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#14532d" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="cauli-head-rework" cx="45%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#fef9c3"/>
+      <stop offset="60%" stop-color="#fde047"/>
+      <stop offset="90%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </radialGradient>
+
+    <linearGradient id="cauli-leaf-rework" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="40%" stop-color="#22c55e"/>
+      <stop offset="80%" stop-color="#15803d"/>
+      <stop offset="100%" stop-color="#052e16"/>
+    </linearGradient>
+
+    <linearGradient id="petal-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#rework-cauli-glow)" transform="translate(10, 10)">
+    <!-- Base Shadow -->
+    <ellipse cx="256" cy="430" rx="140" ry="25" fill="#052e16" opacity="0.3"/>
+
+    <!-- ================= 1. CRISP OUTER LEAVES ================= -->
+    <g fill="url(#cauli-leaf-rework)" stroke="#052e16" stroke-width="2.5">
+      <!-- Back leaves -->
+      <path d="M 256 420 C 140 430, 70 340, 100 230 C 140 250, 170 330, 256 420 Z"/>
+      <path d="M 256 420 C 372 430, 442 340, 412 230 C 372 250, 342 330, 256 420 Z"/>
+      <path d="M 256 430 C 200 480, 110 420, 130 330 C 180 350, 220 400, 256 430 Z"/>
+      <path d="M 256 430 C 312 480, 402 420, 382 330 C 332 350, 292 400, 256 430 Z"/>
+
+      <!-- Front Wrapper Leaves -->
+      <path d="M 130 330 C 140 240, 190 190, 210 220 C 190 280, 160 360, 256 425 Z"/>
+      <path d="M 382 330 C 372 240, 322 190, 302 220 C 322 280, 352 360, 256 425 Z"/>
+    </g>
+
+    <!-- Leaf Vein Ribs -->
+    <g fill="none" stroke="#bbf7d0" stroke-width="3" stroke-linecap="round">
+      <path d="M 100 230 Q 150 320 256 420"/>
+      <path d="M 412 230 Q 362 320 256 420"/>
+    </g>
+
+    <!-- ================= 2. REWORKED GOLDEN CAULIFLOWER BLOOM HEAD ================= -->
+    <g filter="url(#rework-cauli-glow)">
+      <!-- Main Cauliflower Curd Cluster (Bumpy cloud-like shape) -->
+      <path d="M 210 210 
+               C 170 190, 160 250, 175 280 
+               C 160 310, 190 350, 230 355 
+               C 270 370, 320 350, 335 320 
+               C 360 290, 350 240, 320 210 
+               C 310 170, 260 160, 230 180 
+               C 210 170, 190 190, 210 210 Z" 
+            fill="url(#cauli-head-rework)" stroke="#ca8a04" stroke-width="2"/>
+
+      <!-- Detailed Floret Micro-Bumps -->
+      <circle cx="210" cy="220" r="24" fill="#ffffff" opacity="0.6"/>
+      <circle cx="260" cy="200" r="28" fill="#ffffff" opacity="0.7"/>
+      <circle cx="310" cy="220" r="24" fill="#ffffff" opacity="0.6"/>
+      <circle cx="200" cy="270" r="26" fill="#ffffff" opacity="0.5"/>
+      <circle cx="256" cy="260" r="32" fill="#ffffff" opacity="0.8"/>
+      <circle cx="310" cy="270" r="26" fill="#ffffff" opacity="0.5"/>
+      <circle cx="256" cy="315" r="28" fill="#ffffff" opacity="0.6"/>
+    </g>
+
+    <!-- ================= 3. BLOOMING YELLOW FLOWER PETALS SPROUTING FROM HEAD ================= -->
+    <g fill="url(#petal-gold)" stroke="#d97706" stroke-width="1.5">
+      <!-- Flower 1 (Center Top) -->
+      <g transform="translate(256, 170)">
+        <path d="M 0 -22 C 10 -10, 10 10, 0 0 Z"/>
+        <path d="M 22 0 C 10 10, -10 10, 0 0 Z"/>
+        <path d="M 0 22 C -10 10, -10 -10, 0 0 Z"/>
+        <path d="M -22 0 C -10 -10, 10 -10, 0 0 Z"/>
+        <circle cx="0" cy="0" r="5" fill="#78350f"/>
+      </g>
+
+      <!-- Flower 2 (Left) -->
+      <g transform="translate(195, 230) scale(0.8)">
+        <path d="M 0 -22 C 10 -10, 10 10, 0 0 Z"/>
+        <path d="M 22 0 C 10 10, -10 10, 0 0 Z"/>
+        <path d="M 0 22 C -10 10, -10 -10, 0 0 Z"/>
+        <path d="M -22 0 C -10 -10, 10 -10, 0 0 Z"/>
+        <circle cx="0" cy="0" r="5" fill="#78350f"/>
+      </g>
+
+      <!-- Flower 3 (Right) -->
+      <g transform="translate(315, 230) scale(0.8)">
+        <path d="M 0 -22 C 10 -10, 10 10, 0 0 Z"/>
+        <path d="M 22 0 C 10 10, -10 10, 0 0 Z"/>
+        <path d="M 0 22 C -10 10, -10 -10, 0 0 Z"/>
+        <path d="M -22 0 C -10 -10, 10 -10, 0 0 Z"/>
+        <circle cx="0" cy="0" r="5" fill="#78350f"/>
+      </g>
+    </g>
+  </g>
+</svg>

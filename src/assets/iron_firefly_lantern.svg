@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Firefly Bloom & Glow Filter -->
+    <filter id="firefly-bloom-lantern" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="b1"/>
+      <feGaussianBlur stdDeviation="22" result="b2"/>
+      <feGaussianBlur stdDeviation="40" result="b3"/>
+      <feMerge>
+        <feMergeNode in="b3"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="lantern-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#020d0b" flood-opacity="0.8"/>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="firefly-light-cast" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#fff099" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#ffab00" stop-opacity="0.45"/>
+      <stop offset="85%" stop-color="#d95200" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#571900" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="iron-lantern-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="35%" stop-color="#334155"/>
+      <stop offset="70%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Golden Firefly Aura Spread -->
+  <circle cx="256" cy="280" r="220" fill="url(#firefly-light-cast)"/>
+
+  <g filter="url(#lantern-shadow)" transform="translate(0, 0)">
+    <!-- ================= 1. VINTAGE IRON LANTERN STRUCTURE ================= -->
+    <!-- Top Hanging Ring & Chain -->
+    <circle cx="256" cy="70" r="24" fill="none" stroke="url(#iron-lantern-metallic)" stroke-width="8"/>
+    <rect x="251" y="90" width="10" height="25" fill="#1e293b"/>
+
+    <!-- Iron Roof Cap -->
+    <polygon points="256,110 330,140 182,140" fill="url(#iron-lantern-metallic)" stroke="#0f172a" stroke-width="2"/>
+    <rect x="170" y="140" width="172" height="16" rx="3" fill="url(#iron-lantern-metallic)" stroke="#0f172a" stroke-width="2"/>
+
+    <!-- Glass Chamber Base Background (Glowing Core) -->
+    <rect x="180" y="156" width="152" height="210" rx="6" fill="#ffb703" filter="url(#firefly-bloom-lantern)"/>
+    <rect x="185" y="160" width="142" height="202" rx="4" fill="#fff099" opacity="0.6"/>
+
+    <!-- ================= 2. THREE GLOWING FIREFLIES INSIDE ================= -->
+    <!-- Firefly 1 (Top Left) -->
+    <g filter="url(#firefly-bloom-lantern)">
+      <circle cx="220" cy="210" r="14" fill="#ffffff"/>
+      <circle cx="220" cy="210" r="7" fill="#ffea00"/>
+      <!-- Tiny Firefly Body & Wings -->
+      <ellipse cx="220" cy="204" rx="3" ry="5" fill="#1e293b"/>
+      <path d="M 216 200 Q 210 192 216 195 Z" fill="#e0f2fe" opacity="0.8"/>
+      <path d="M 224 200 Q 230 192 224 195 Z" fill="#e0f2fe" opacity="0.8"/>
+    </g>
+
+    <!-- Firefly 2 (Center Right) -->
+    <g filter="url(#firefly-bloom-lantern)">
+      <circle cx="285" cy="245" r="16" fill="#ffffff"/>
+      <circle cx="285" cy="245" r="8" fill="#ffea00"/>
+      <!-- Body & Wings -->
+      <ellipse cx="285" cy="238" rx="3.5" ry="6" fill="#1e293b"/>
+      <path d="M 280 234 Q 272 224 280 228 Z" fill="#e0f2fe" opacity="0.8"/>
+      <path d="M 290 234 Q 298 224 290 228 Z" fill="#e0f2fe" opacity="0.8"/>
+    </g>
+
+    <!-- Firefly 3 (Bottom Center) -->
+    <g filter="url(#firefly-bloom-lantern)">
+      <circle cx="240" cy="300" r="15" fill="#ffffff"/>
+      <circle cx="240" cy="300" r="7.5" fill="#ffea00"/>
+      <!-- Body & Wings -->
+      <ellipse cx="240" cy="293" rx="3" ry="5.5" fill="#1e293b"/>
+      <path d="M 235 288 Q 228 280 235 284 Z" fill="#e0f2fe" opacity="0.8"/>
+      <path d="M 245 288 Q 252 280 245 284 Z" fill="#e0f2fe" opacity="0.8"/>
+    </g>
+
+    <!-- ================= 3. IRON FRAMEWORK & GLASS HIGHLIGHTS ================= -->
+    <!-- Iron Corner Posts -->
+    <rect x="175" y="156" width="14" height="210" fill="url(#iron-lantern-metallic)"/>
+    <rect x="323" y="156" width="14" height="210" fill="url(#iron-lantern-metallic)"/>
+    <line x1="256" y1="156" x2="256" y2="366" stroke="#0f172a" stroke-width="4"/>
+
+    <!-- Glass Reflection Curved Highlight -->
+    <polygon points="189,160 230,160 195,360 189,360" fill="#ffffff" opacity="0.25"/>
+
+    <!-- Iron Base & Spire -->
+    <rect x="165" y="366" width="182" height="20" rx="4" fill="url(#iron-lantern-metallic)" stroke="#0f172a" stroke-width="2"/>
+    <polygon points="180,386 332,386 320,410 192,410" fill="url(#iron-lantern-metallic)" stroke="#0f172a" stroke-width="2"/>
+    <polygon points="250,410 262,410 256,425" fill="#0f172a"/>
+
+    <!-- Floating Golden Sparks escaping into Night -->
+    <g filter="url(#firefly-bloom-lantern)">
+      <circle cx="140" cy="180" r="3.5" fill="#ffffff"/>
+      <circle cx="370" cy="200" r="4" fill="#ffea00"/>
+      <circle cx="390" cy="300" r="3" fill="#ffe066"/>
+      <circle cx="120" cy="320" r="3.5" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Glow Filters -->
+    <filter id="starlight-water-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur1" />
+      <feGaussianBlur stdDeviation="20" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="bridge-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#021526" flood-opacity="0.8"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="water-pool" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="50%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#0c4a6e"/>
+    </linearGradient>
+
+    <linearGradient id="bridge-planks" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#starlight-water-glow)">
+    <!-- ================= 1. LOWER BIOLUMINESCENT WATER POOL & WATER LILIES ================= -->
+    <!-- Water Pool Base -->
+    <rect x="0" y="270" width="512" height="242" fill="url(#water-pool)"/>
+
+    <!-- Glowing Water Lilies (Underneath the Bridge) -->
+    <g filter="url(#starlight-water-glow)">
+      <!-- Lily 1 (Left Pool) -->
+      <ellipse cx="140" cy="420" rx="25" ry="14" fill="#15803d"/>
+      <path d="M 140 420 L 155 410 L 165 425 Z" fill="url(#water-pool)"/>
+      <circle cx="138" cy="416" r="8" fill="#f472b6"/>
+      <circle cx="138" cy="416" r="3" fill="#fef08a"/>
+
+      <!-- Lily 2 (Center Pool) -->
+      <ellipse cx="260" cy="450" rx="30" ry="16" fill="#166534"/>
+      <circle cx="260" cy="445" r="10" fill="#f472b6"/>
+      <circle cx="260" cy="445" r="4" fill="#ffffff"/>
+
+      <!-- Lily 3 (Right Pool) -->
+      <ellipse cx="380" cy="410" rx="24" ry="13" fill="#15803d"/>
+      <circle cx="378" cy="406" r="8" fill="#e879f9"/>
+      <circle cx="378" cy="406" r="3" fill="#fef08a"/>
+
+      <!-- Lily 4 (Small Foreground) -->
+      <ellipse cx="70" cy="460" rx="20" ry="11" fill="#15803d"/>
+      <circle cx="68" cy="457" r="6" fill="#f472b6"/>
+    </g>
+
+    <!-- ================= 2. WOODEN PLANK FOOTBRIDGE ================= -->
+    <g filter="url(#bridge-shadow)">
+      <!-- Support Posts Anchored in Water -->
+      <rect x="80" y="270" width="16" height="170" fill="#451a03"/>
+      <rect x="416" y="270" width="16" height="170" fill="#451a03"/>
+
+      <!-- Arching Wooden Support Beams -->
+      <path d="M 30 300 Q 256 270 482 300 L 482 315 Q 256 285 30 315 Z" fill="#270e02"/>
+
+      <!-- Individual Wooden Footbridge Planks -->
+      <!-- Plank 1 -->
+      <polygon points="30,295 50,285 55,310 35,320" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 2 -->
+      <polygon points="65,292 85,282 90,307 70,317" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 3 -->
+      <polygon points="100,290 120,280 125,305 105,315" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 4 -->
+      <polygon points="135,288 155,278 160,303 140,313" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 5 -->
+      <polygon points="170,286 190,276 195,301 175,311" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 6 -->
+      <polygon points="205,285 225,275 230,300 210,310" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 7 (Center) -->
+      <polygon points="240,285 260,275 265,300 245,310" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 8 -->
+      <polygon points="275,285 295,275 300,300 280,310" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 9 -->
+      <polygon points="310,286 330,276 335,301 315,311" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 10 -->
+      <polygon points="345,288 365,278 370,303 350,313" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 11 -->
+      <polygon points="380,290 400,280 405,305 385,315" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 12 -->
+      <polygon points="415,292 435,282 440,307 420,317" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+      <!-- Plank 13 -->
+      <polygon points="450,295 470,285 475,310 455,320" fill="url(#bridge-planks)" stroke="#270e02" stroke-width="1"/>
+
+      <!-- Wooden Handrails & Posts -->
+      <path d="M 30 260 Q 256 230 482 260" stroke="#78350f" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M 30 260 Q 256 230 482 260" stroke="#fde047" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+      <!-- Handrail Posts -->
+      <line x1="45" y1="305" x2="45" y2="260" stroke="#451a03" stroke-width="4"/>
+      <line x1="150" y1="295" x2="150" y2="245" stroke="#451a03" stroke-width="4"/>
+      <line x1="256" y1="290" x2="256" y2="240" stroke="#451a03" stroke-width="4"/>
+      <line x1="362" y1="295" x2="362" y2="245" stroke="#451a03" stroke-width="4"/>
+      <line x1="467" y1="305" x2="467" y2="260" stroke="#451a03" stroke-width="4"/>
+    </g>
+
+    <!-- Floating Bioluminescent Water Particles & Reflections -->
+    <g filter="url(#starlight-water-glow)">
+      <circle cx="180" cy="380" r="3" fill="#ffffff"/>
+      <circle cx="320" cy="390" r="3.5" fill="#38bdf8"/>
+      <circle cx="256" cy="410" r="4" fill="#e0f2fe"/>
+      <circle cx="210" cy="460" r="3" fill="#f472b6"/>
+      <circle cx="310" cy="470" r="2.5" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Soft Shadow Filter -->
+    <filter id="kiosk-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#1c1917" flood-opacity="0.5"/>
+    </filter>
+
+    <filter id="steam-glow-coffee" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="kiosk-wood" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+
+    <linearGradient id="awning-stripes" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b91c1c"/>
+      <stop offset="25%" stop-color="#fef3c7"/>
+      <stop offset="50%" stop-color="#b91c1c"/>
+      <stop offset="75%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+
+    <linearGradient id="sack-burlap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="60%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#kiosk-shadow)" transform="translate(10, 0)">
+    <!-- ================= 1. RUSTIC WOODEN STAND STRUCTURE ================= -->
+    <!-- Main Counter Base -->
+    <rect x="100" y="270" width="290" height="180" rx="6" fill="url(#kiosk-wood)" stroke="#270e02" stroke-width="2.5"/>
+
+    <!-- Vertical Wood Planks Lines on Counter Base -->
+    <line x1="150" y1="270" x2="150" y2="450" stroke="#451a03" stroke-width="2"/>
+    <line x1="200" y1="270" x2="200" y2="450" stroke="#451a03" stroke-width="2"/>
+    <line x1="250" y1="270" x2="250" y2="450" stroke="#451a03" stroke-width="2"/>
+    <line x1="300" y1="270" x2="300" y2="450" stroke="#451a03" stroke-width="2"/>
+    <line x1="350" y1="270" x2="350" y2="450" stroke="#451a03" stroke-width="2"/>
+
+    <!-- Counter Top Shelf Slab -->
+    <rect x="80" y="255" width="330" height="18" rx="4" fill="#451a03" stroke="#1c0a00" stroke-width="2"/>
+    <rect x="85" y="257" width="320" height="6" fill="#92400e" opacity="0.6"/>
+
+    <!-- Roof Support Pillars -->
+    <rect x="110" y="80" width="16" height="180" fill="#451a03"/>
+    <rect x="364" y="80" width="16" height="180" fill="#451a03"/>
+
+    <!-- ================= 2. AWNING ROOF & COFFEE SIGN ================= -->
+    <!-- Red & Cream Striped Awning Roof -->
+    <polygon points="70,80 420,80 440,130 50,130" fill="url(#awning-stripes)" stroke="#451a03" stroke-width="2"/>
+    <!-- Awning Scallop Edges -->
+    <path d="M 50 130 Q 65 145 80 130 Q 95 145 110 130 Q 125 145 140 130 Q 155 145 170 130 Q 185 145 200 130 Q 215 145 230 130 Q 245 145 260 130 Q 275 145 290 130 Q 305 145 320 130 Q 335 145 350 130 Q 365 145 380 130 Q 395 145 410 130 Q 425 145 440 130 Z" fill="#b91c1c"/>
+
+    <!-- Hanging Wooden "FRESH COFFEE" Sign -->
+    <g>
+      <line x1="180" y1="130" x2="180" y2="148" stroke="#78350f" stroke-width="2"/>
+      <line x1="310" y1="130" x2="310" y2="148" stroke="#78350f" stroke-width="2"/>
+      <rect x="160" y="148" width="170" height="35" rx="5" fill="#fef3c7" stroke="#78350f" stroke-width="2"/>
+      <text x="245" y="171" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="14" fill="#78350f">☕ COFFEE KIOSK</text>
+    </g>
+
+    <!-- Chalkboard Menu on Stand Left Side -->
+    <rect x="115" y="300" width="70" height="100" rx="3" fill="#18181b" stroke="#78350f" stroke-width="3"/>
+    <text x="150" y="322" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff">MENU</text>
+    <text x="150" y="340" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#fde047">Espresso $3</text>
+    <text x="150" y="355" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#ffffff">Latte $4</text>
+    <text x="150" y="370" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#ffffff">Mocha $4.5</text>
+    <text x="150" y="385" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#4ade80">Brew $2.5</text>
+
+    <!-- ================= 3. COFFEE EQUIPMENT & CERAMIC MUGS ================= -->
+    <!-- Vintage Espresso Machine (Metallic & Chrome) -->
+    <g>
+      <rect x="290" y="180" width="80" height="75" rx="5" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+      <rect x="300" y="190" width="60" height="30" rx="3" fill="#0f172a"/>
+      <!-- Gauge & Steam Lever -->
+      <circle cx="315" cy="205" r="7" fill="#fef08a" stroke="#475569" stroke-width="1.5"/>
+      <rect x="335" y="200" width="20" height="8" rx="2" fill="#ef4444"/>
+      <!-- Portafilter / Spout -->
+      <rect x="320" y="225" width="20" height="10" fill="#94a3b8"/>
+      <line x1="330" y1="235" x2="330" y2="245" stroke="#78350f" stroke-width="3"/>
+    </g>
+
+    <!-- Ceramic Coffee Mugs on Counter -->
+    <!-- Mug 1 (Red Ceramic) -->
+    <rect x="210" y="235" width="16" height="20" rx="3" fill="#ef4444" stroke="#991b1b" stroke-width="1"/>
+    <path d="M 226 240 C 232 240, 232 250, 226 250" stroke="#ef4444" stroke-width="2.5" fill="none"/>
+
+    <!-- Mug 2 (Teal Ceramic) -->
+    <rect x="235" y="238" width="16" height="17" rx="3" fill="#0d9488" stroke="#115e59" stroke-width="1"/>
+    <path d="M 251 242 C 257 242, 257 250, 251 250" stroke="#0d9488" stroke-width="2.5" fill="none"/>
+
+    <!-- Mug 3 (Cream Ceramic) -->
+    <rect x="260" y="235" width="18" height="20" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+    <path d="M 278 240 C 284 240, 284 250, 278 250" stroke="#fef3c7" stroke-width="2.5" fill="none"/>
+
+    <!-- Aromatic Rising Coffee Steam Waves -->
+    <g filter="url(#steam-glow-coffee)" opacity="0.7">
+      <path d="M 218 230 Q 212 215 218 200 Q 224 185 218 170" stroke="#ffffff" stroke-width="2" fill="none"/>
+      <path d="M 243 232 Q 249 217 243 202 Q 237 187 243 172" stroke="#ffffff" stroke-width="2" fill="none"/>
+      <path d="M 268 230 Q 262 215 268 200 Q 274 185 268 170" stroke="#ffffff" stroke-width="2" fill="none"/>
+      <path d="M 330 220 Q 336 205 330 190" stroke="#ffffff" stroke-width="2.5" fill="none"/>
+    </g>
+
+    <!-- ================= 4. BURLAP COFFEE BEAN SACKS ================= -->
+    <!-- Sack 1 (Standing near base right) -->
+    <path d="M 320 450 C 310 390, 325 350, 360 350 C 395 350, 410 390, 400 450 Z" fill="url(#sack-burlap)" stroke="#451a03" stroke-width="2"/>
+    <ellipse cx="360" cy="355" rx="20" ry="8" fill="#b45309" stroke="#78350f" stroke-width="1.5"/>
+    <text x="360" y="405" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="11" fill="#78350f">BEANS</text>
+    <!-- Coffee Bean Icon printed on sack -->
+    <ellipse cx="360" cy="420" rx="8" ry="11" fill="#451a03"/>
+    <path d="M 360 410 Q 356 420 360 430" stroke="#d97706" stroke-width="1.5" fill="none"/>
+
+    <!-- Sack 2 (Leaning near base left) -->
+    <path d="M 220 450 C 210 405, 230 375, 265 375 C 300 375, 310 405, 300 450 Z" fill="url(#sack-burlap)" stroke="#451a03" stroke-width="2"/>
+    <ellipse cx="262" cy="380" rx="18" ry="7" fill="#b45309"/>
+    <text x="262" y="420" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#78350f">JAVA</text>
+  </g>
+</svg>

@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- HUD Glow Filter -->
+    <filter id="compass-hud-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="b1"/>
+      <feGaussianBlur stdDeviation="12" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="minimap-frame-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#020617" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Metallic Gradients -->
+    <linearGradient id="brass-minimap-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5c0"/>
+      <stop offset="25%" stop-color="#fde047"/>
+      <stop offset="50%" stop-color="#eab308"/>
+      <stop offset="75%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+
+    <linearGradient id="needle-north" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="50%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+
+    <linearGradient id="needle-south" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#minimap-frame-shadow)" transform="translate(0, 0)">
+    <!-- Outer Gear/Rivet Brass Ring -->
+    <circle cx="256" cy="256" r="230" fill="url(#brass-minimap-ring)" stroke="#451a03" stroke-width="3"/>
+    <circle cx="256" cy="256" r="214" fill="#1c0a00"/>
+
+    <!-- Decorative Brass Rivets around Outer Ring (12 Rivets) -->
+    <g fill="url(#brass-minimap-ring)" stroke="#451a03" stroke-width="1">
+      <circle cx="256" cy="33" r="5"/>
+      <circle cx="367" cy="63" r="5"/>
+      <circle cx="449" cy="145" r="5"/>
+      <circle cx="479" cy="256" r="5"/>
+      <circle cx="449" cy="367" r="5"/>
+      <circle cx="367" cy="449" r="5"/>
+      <circle cx="256" cy="479" r="5"/>
+      <circle cx="145" cy="449" r="5"/>
+      <circle cx="63" cy="367" r="5"/>
+      <circle cx="33" cy="256" r="5"/>
+      <circle cx="63" cy="145" r="5"/>
+      <circle cx="145" cy="63" r="5"/>
+    </g>
+
+    <!-- Inner Metallic Bezel Ring -->
+    <circle cx="256" cy="256" r="202" fill="url(#brass-minimap-ring)"/>
+    <circle cx="256" cy="256" r="185" fill="none" stroke="#451a03" stroke-width="3"/>
+
+    <!-- Transparent Minimap Center Cutout Area (R=180px where map renders under HUD) -->
+    <circle cx="256" cy="256" r="180" fill="none" stroke="#fde047" stroke-width="2" opacity="0.6"/>
+
+    <!-- Degree Tick Marks around Minimap Viewport (Every 15°) -->
+    <circle cx="256" cy="256" r="184" fill="none" stroke="#451a03" stroke-width="3" stroke-dasharray="2,6"/>
+
+    <!-- ================= 8-POINT COMPASS ROSE CARDINAL BADGES ================= -->
+    <!-- North (Red/Gold Crown) -->
+    <g transform="translate(256, 52)">
+      <polygon points="0,-16 12,8 -12,8" fill="#ef4444" stroke="#7f1d1d" stroke-width="1"/>
+      <text x="0" y="24" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="22" fill="#ef4444" filter="url(#compass-hud-glow)">N</text>
+    </g>
+
+    <!-- South -->
+    <g transform="translate(256, 440)">
+      <text x="0" y="-5" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="20" fill="#fde047">S</text>
+    </g>
+
+    <!-- East -->
+    <g transform="translate(440, 256)">
+      <text x="-5" y="7" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="20" fill="#fde047">E</text>
+    </g>
+
+    <!-- West -->
+    <g transform="translate(72, 256)">
+      <text x="5" y="7" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="20" fill="#fde047">W</text>
+    </g>
+
+    <!-- Ordinals (NE, NW, SE, SW) -->
+    <text x="375" y="142" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="13" fill="#ca8a04">NE</text>
+    <text x="137" y="142" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="13" fill="#ca8a04">NW</text>
+    <text x="375" y="382" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="13" fill="#ca8a04">SE</text>
+    <text x="137" y="382" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="13" fill="#ca8a04">SW</text>
+
+    <!-- ================= COMPASS NEEDLE (INDICATOR OVERLAY) ================= -->
+    <g filter="url(#compass-hud-glow)" transform="rotate(25 256 256)">
+      <!-- North Pointer (Red) -->
+      <polygon points="256,256 244,256 256,90 256,256" fill="url(#needle-north)"/>
+      <polygon points="256,256 268,256 256,90 256,256" fill="#f87171"/>
+
+      <!-- South Pointer (Silver) -->
+      <polygon points="256,256 244,256 256,422 256,256" fill="url(#needle-south)"/>
+      <polygon points="256,256 268,256 256,422 256,256" fill="#cbd5e1"/>
+
+      <!-- Brass Center Pivot Cap -->
+      <circle cx="256" cy="256" r="14" fill="url(#brass-minimap-ring)" stroke="#451a03" stroke-width="2"/>
+      <circle cx="256" cy="256" r="6" fill="#ef4444"/>
+    </g>
+  </g>
+</svg>

@@ -20,28 +20,28 @@ export const PrologueCutscene: React.FC<PrologueCutsceneProps> = ({ onStart }) =
         initial={{ opacity: 0, scale: 0.92, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 1.2 }}
-        className="prologue-modal-card text-center"
+        className="prologue-modal-card text-center max-w-lg"
       >
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/20 text-amber-300 mb-4 animate-pulse">
           <Sparkles size={32} />
         </div>
 
         <h1 className="text-2xl font-serif text-amber-200 tracking-wide mb-1">
-          The Fireflies Remember
+          The Firefly Diary
         </h1>
         <p className="text-xs text-purple-300 uppercase tracking-widest font-semibold mb-6">
           "Some people don't stay beside you all the time. Sometimes they stay inside the places they touched."
         </p>
 
-        <div className="prologue-text-box font-serif text-slate-200 leading-relaxed text-sm md:text-base mb-8 space-y-4">
+        <div className="prologue-text-box font-serif text-slate-200 leading-relaxed text-sm md:text-base mb-8 space-y-3.5">
           <p>
-            Long ago, two travelers walked these woods. One always walked during sunrise; the other always walked after sunset.
+            Long ago... this forest didn't exist. It was created by a single diary.
           </p>
           <p className="italic text-purple-200">
-            They almost never met... yet left tiny surprises, notes, and firefly memories for each other across the forest.
+            Whenever something made someone smile, they wrote it down. Every tiny memory became a firefly.
           </p>
           <p className="text-slate-300 text-xs md:text-sm">
-            Now the forest fireflies are losing their light and the diary has scattered. Wake up as the forest spirit and gather every forgotten page before the final light fades.
+            Then life became louder. Conversations became shorter. "Tomorrow" quietly replaced "Today." Your job isn't saving the forest. Your job is remembering.
           </p>
         </div>
 

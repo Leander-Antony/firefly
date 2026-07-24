@@ -75,6 +75,28 @@ export class GameEngine {
 
   public savedState: SavedGameState = loadGameState();
 
+  public benchStandSeconds: number = 0;
+  public notebookOpenCount: number = 0;
+
+  public hasCoffeeMemory(): boolean {
+    return this.letters.some((l) => l.id === 'letter_1' && l.unlocked);
+  }
+  public hasFootballMemory(): boolean {
+    return this.letters.some((l) => l.id === 'letter_3' && l.unlocked);
+  }
+  public hasNotebookMemory(): boolean {
+    return this.letters.some((l) => l.id === 'letter_5' && l.unlocked);
+  }
+  public hasChocolateMemory(): boolean {
+    return this.letters.some((l) => l.id === 'letter_7' && l.unlocked);
+  }
+  public hasCauliflowerMemory(): boolean {
+    return this.letters.some((l) => l.id === 'letter_4' && l.unlocked);
+  }
+  public hasDreamMemory(): boolean {
+    return this.letters.some((l) => l.id === 'letter_8' && l.unlocked);
+  }
+
   public completedTaskToast: string | null = null;
 
   // Particle systems
@@ -86,7 +108,7 @@ export class GameEngine {
   public targetWalkX: number | null = null;
   public targetWalkY: number | null = null;
 
-  public activeModal: 'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | null = null;
+  public activeModal: 'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding' | null = null;
 
   public isEndingSequenceActive: boolean = false;
   public endingCutsceneProgress: number = 0;
@@ -357,6 +379,12 @@ export class GameEngine {
         this.enterPerspectiveMode('coffee');
         this.activeModal = 'coffee_stand';
         SoundEngine.playPageFlip();
+      } else if (type === 'telescope') {
+        this.activeModal = 'telescope';
+        SoundEngine.playPageFlip();
+      } else if (type === 'birds') {
+        this.activeModal = 'bird_feeding';
+        SoundEngine.playPageFlip();
       } else if (type === 'cat') {
         this.enterPerspectiveMode('cat');
         SoundEngine.playCatPurr();
@@ -529,9 +557,9 @@ export class GameEngine {
     const targetY = this.player.y - viewportHeight / 2;
 
     const minCamX = 0;
-    const maxCamX = 6000 - viewportWidth;
+    const maxCamX = 10000 - viewportWidth;
     const minCamY = 0;
-    const maxCamY = 6000 - viewportHeight;
+    const maxCamY = 10000 - viewportHeight;
 
     this.camera.targetX = Math.max(minCamX, Math.min(maxCamX, targetX));
     this.camera.targetY = Math.max(minCamY, Math.min(maxCamY, targetY));
@@ -556,8 +584,8 @@ export class GameEngine {
     this.fireflies.forEach((f) => {
       if (f.collected) {
         if (this.isEndingSequenceActive) {
-          const campfireX = 1500;
-          const campfireY = 5100;
+          const campfireX = 2000;
+          const campfireY = 9200;
           const orbitR = 30 + Math.sin(time + parseFloat(f.id.replace('firefly_', ''))) * 45;
           const angle = time * 2 + parseFloat(f.id.replace('firefly_', '')) * 0.5;
 
