@@ -204,6 +204,8 @@ export interface GameSettings {
   reducedMotion: boolean;
   colorblindMode: 'none' | 'deuteranopia' | 'protanopia' | 'tritanopia';
   largeText: boolean;
+  cloakStyle: 'violet' | 'emerald' | 'azure' | 'amber' | 'rose';
+  lanternGlow: 'amber' | 'gold' | 'cyan' | 'emerald' | 'violet';
   keymap: {
     up: string;
     down: string;

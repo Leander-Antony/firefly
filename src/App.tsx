@@ -172,7 +172,14 @@ export function App() {
       {isEnding && (
         <EndingScreen
           fireflyCount={engine.fireflies.filter((f) => f.collected).length}
+          is100PercentComplete={engine.is100PercentComplete()}
           onReplay={handleReplay}
+          onContinueExploring={() => {
+            engine.isEndingSequenceActive = false;
+            engine.endingCutsceneProgress = 0;
+            engine.savedState.hasReachedEnding = false;
+            handleCloseModal();
+          }}
         />
       )}
     </div>

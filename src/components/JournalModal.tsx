@@ -68,7 +68,7 @@ export const JournalModal: React.FC<JournalModalProps> = ({ engine, onClose }) =
             className={`tab-btn ${activeTab === 'story' ? 'active' : ''}`}
             onClick={() => { setActiveTab('story'); SoundEngine.playPageFlip(); }}
           >
-            <Sparkles size={16} /> Story ({unlockedStories.length}/5)
+            <Sparkles size={16} /> Story ({unlockedStories.length}/7)
           </button>
           <button
             className={`tab-btn ${activeTab === 'letters' ? 'active' : ''}`}

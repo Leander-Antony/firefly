@@ -174,11 +174,22 @@ export class GameEngine {
 
   public advanceStoryIndex(): void {
     this.activeStoryWaypointModal = null;
+    if (this.activeStoryIndex < this.storyChapters.length) {
+      this.storyChapters[this.activeStoryIndex].unlocked = true;
+    }
     if (this.activeStoryIndex < this.storyWaypoints.length - 1) {
       this.activeStoryIndex += 1;
       this.savedState.activeStoryIndex = this.activeStoryIndex;
       saveGameState(this.savedState);
+    } else {
+      this.triggerEndingSequence();
     }
+  }
+
+  public is100PercentComplete(): boolean {
+    const collectedCount = this.fireflies.filter((f) => f.collected).length;
+    const unlockedLetters = this.letters.filter((l) => l.unlocked).length;
+    return collectedCount >= 45 && unlockedLetters >= 12;
   }
 
   public getActiveStoryWaypoint(): StoryWaypoint | null {
@@ -525,8 +536,9 @@ export class GameEngine {
     this.camera.targetX = Math.max(minCamX, Math.min(maxCamX, targetX));
     this.camera.targetY = Math.max(minCamY, Math.min(maxCamY, targetY));
 
-    this.camera.x += (this.camera.targetX - this.camera.x) * 0.08;
-    this.camera.y += (this.camera.targetY - this.camera.y) * 0.08;
+    const lerpFactor = this.savedState.settings.reducedMotion ? 0.35 : 0.08;
+    this.camera.x += (this.camera.targetX - this.camera.x) * lerpFactor;
+    this.camera.y += (this.camera.targetY - this.camera.y) * lerpFactor;
 
     const targetZoom = this.isEndingSequenceActive
       ? 0.75

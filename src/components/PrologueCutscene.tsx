@@ -27,21 +27,21 @@ export const PrologueCutscene: React.FC<PrologueCutsceneProps> = ({ onStart }) =
         </div>
 
         <h1 className="text-2xl font-serif text-amber-200 tracking-wide mb-1">
-          Firefly Diaries
+          The Fireflies Remember
         </h1>
         <p className="text-xs text-purple-300 uppercase tracking-widest font-semibold mb-6">
-          The Lost Guardian's Tale
+          "Some people don't stay beside you all the time. Sometimes they stay inside the places they touched."
         </p>
 
         <div className="prologue-text-box font-serif text-slate-200 leading-relaxed text-sm md:text-base mb-8 space-y-4">
           <p>
-            You wake up at twilight on the edge of a quiet, forgotten forest.
+            Long ago, two travelers walked these woods. One always walked during sunrise; the other always walked after sunset.
           </p>
           <p className="italic text-purple-200">
-            In your hand is an old iron lantern, and resting upon a wooden guidepost is Evelyn's lost diary...
+            They almost never met... yet left tiny surprises, notes, and firefly memories for each other across the forest.
           </p>
           <p className="text-slate-300 text-xs md:text-sm">
-            Follow the luminous fireflies and story waypoints to piece together the memories of those who walked these paths before you.
+            Now the forest fireflies are losing their light and the diary has scattered. Wake up as the forest spirit and gather every forgotten page before the final light fades.
           </p>
         </div>
 

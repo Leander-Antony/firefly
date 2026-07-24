@@ -83,10 +83,28 @@ export class ProceduralArt {
     facing: FacingDirection,
     isWalking: boolean,
     isSitting: boolean,
-    animFrame: number
+    animFrame: number,
+    cloakStyle: 'violet' | 'emerald' | 'azure' | 'amber' | 'rose' = 'violet',
+    lanternGlow: 'amber' | 'gold' | 'cyan' | 'emerald' | 'violet' = 'amber'
   ): void {
     ctx.save();
     ctx.translate(x, y);
+
+    const cloakColors = {
+      violet: { base: '#312e81', hood: '#c084fc', inner: '#1e1b4b' },
+      emerald: { base: '#064e3b', hood: '#34d399', inner: '#022c22' },
+      azure: { base: '#0c4a6e', hood: '#38bdf8', inner: '#082f49' },
+      amber: { base: '#78350f', hood: '#fbbf24', inner: '#451a03' },
+      rose: { base: '#831843', hood: '#f472b6', inner: '#500724' },
+    }[cloakStyle] || { base: '#312e81', hood: '#c084fc', inner: '#1e1b4b' };
+
+    const glowColors = {
+      amber: { inner: 'rgba(251, 146, 60, 0.85)', mid: 'rgba(251, 146, 60, 0.3)', core: '#fb923c' },
+      gold: { inner: 'rgba(254, 240, 138, 0.85)', mid: 'rgba(254, 240, 138, 0.3)', core: '#fef08a' },
+      cyan: { inner: 'rgba(56, 189, 248, 0.85)', mid: 'rgba(56, 189, 248, 0.3)', core: '#38bdf8' },
+      emerald: { inner: 'rgba(52, 211, 153, 0.85)', mid: 'rgba(52, 211, 153, 0.3)', core: '#34d399' },
+      violet: { inner: 'rgba(192, 132, 252, 0.85)', mid: 'rgba(192, 132, 252, 0.3)', core: '#c084fc' },
+    }[lanternGlow] || { inner: 'rgba(251, 146, 60, 0.85)', mid: 'rgba(251, 146, 60, 0.3)', core: '#fb923c' };
 
     const bob = isWalking ? Math.sin(animFrame * 0.4) * 2.5 : 0;
 
@@ -96,46 +114,46 @@ export class ProceduralArt {
     ctx.fill();
 
     if (isSitting) {
-      ctx.fillStyle = '#312e81';
+      ctx.fillStyle = cloakColors.base;
       ctx.beginPath();
       ctx.arc(0, -6, 11, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#c084fc';
+      ctx.fillStyle = cloakColors.hood;
       ctx.beginPath();
       ctx.arc(0, -10, 8, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#1e1b4b';
+      ctx.fillStyle = cloakColors.inner;
       ctx.beginPath();
       ctx.arc(0, -12, 7, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#fb923c';
+      ctx.fillStyle = glowColors.core;
       ctx.beginPath();
       ctx.arc(14, 0, 4, 0, Math.PI * 2);
       ctx.fill();
     } else {
       if (isWalking) {
         const legOff = Math.sin(animFrame * 0.4) * 5;
-        ctx.fillStyle = '#1e1b4b';
+        ctx.fillStyle = cloakColors.inner;
         ctx.beginPath();
         ctx.arc(-5, 4 + legOff, 3.5, 0, Math.PI * 2);
         ctx.arc(5, 4 - legOff, 3.5, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      ctx.fillStyle = '#312e81';
+      ctx.fillStyle = cloakColors.base;
       ctx.beginPath();
       ctx.arc(0, -6 + bob, 12, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#c084fc';
+      ctx.fillStyle = cloakColors.hood;
       ctx.beginPath();
       ctx.arc(0, -10 + bob, 9, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#1e1b4b';
+      ctx.fillStyle = cloakColors.inner;
       ctx.beginPath();
       ctx.arc(0, -13 + bob, 7.5, 0, Math.PI * 2);
       ctx.fill();
@@ -146,16 +164,16 @@ export class ProceduralArt {
       if (facing === 'up' || facing === 'up_left' || facing === 'up_right') lY = -14;
 
       const bloom = ctx.createRadialGradient(lX, lY + bob, 1, lX, lY + bob, 26);
-      bloom.addColorStop(0, 'rgba(251, 146, 60, 0.85)');
-      bloom.addColorStop(0.5, 'rgba(251, 146, 60, 0.3)');
-      bloom.addColorStop(1, 'rgba(251, 146, 60, 0)');
+      bloom.addColorStop(0, glowColors.inner);
+      bloom.addColorStop(0.5, glowColors.mid);
+      bloom.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
       ctx.fillStyle = bloom;
       ctx.beginPath();
       ctx.arc(lX, lY + bob, 26, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = '#fb923c';
+      ctx.fillStyle = glowColors.core;
       ctx.beginPath();
       ctx.arc(lX, lY + bob, 4, 0, Math.PI * 2);
       ctx.fill();

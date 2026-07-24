@@ -12,6 +12,8 @@ export const DEFAULT_SETTINGS: GameSettings = {
   reducedMotion: false,
   colorblindMode: 'none',
   largeText: false,
+  cloakStyle: 'violet',
+  lanternGlow: 'amber',
   keymap: {
     up: 'KeyW',
     down: 'KeyS',

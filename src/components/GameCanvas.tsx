@@ -237,7 +237,9 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
             engine.player.facing,
             engine.player.isWalking,
             engine.player.isSitting,
-            engine.player.animFrame
+            engine.player.animFrame,
+            engine.savedState.settings.cloakStyle,
+            engine.savedState.settings.lanternGlow
           );
         },
       });
