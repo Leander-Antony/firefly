@@ -532,25 +532,101 @@ export class ProceduralArt {
     ctx.save();
     ctx.translate(x, y);
 
-    // Stone Tower Base
-    ctx.fillStyle = '#334155';
+    const time = Date.now() * 0.001;
+
+    // Ambient star-glow under the tower
+    const aura = ctx.createRadialGradient(0, 0, 8, 0, 0, 70);
+    aura.addColorStop(0, 'rgba(139, 92, 246, 0.55)');
+    aura.addColorStop(0.5, 'rgba(109, 40, 217, 0.18)');
+    aura.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = aura;
     ctx.beginPath();
-    ctx.arc(0, 0, 45, 0, Math.PI * 2);
+    ctx.arc(0, 0, 70, 0, Math.PI * 2);
     ctx.fill();
 
-    // Dome Roof
-    ctx.fillStyle = '#1e293b';
+    // Drop shadow
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
     ctx.beginPath();
-    ctx.arc(0, 0, 32, 0, Math.PI * 2);
+    ctx.ellipse(3, 6, 44, 22, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    // Brass Telescope
-    ctx.strokeStyle = '#fbbf24';
-    ctx.lineWidth = 6;
+    // Stone tower wall (outer ring)
+    const stoneGrad = ctx.createRadialGradient(-8, -8, 4, 0, 0, 48);
+    stoneGrad.addColorStop(0, '#475569');
+    stoneGrad.addColorStop(0.6, '#334155');
+    stoneGrad.addColorStop(1, '#1e293b');
+    ctx.fillStyle = stoneGrad;
     ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(25, -25);
+    ctx.arc(0, 0, 46, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Stone ring accent
+    ctx.strokeStyle = '#64748b';
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.arc(0, 0, 42, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // Dome top (slit opening)
+    const domeGrad = ctx.createRadialGradient(-6, -6, 2, 0, 0, 32);
+    domeGrad.addColorStop(0, '#2d3f5c');
+    domeGrad.addColorStop(0.7, '#1e293b');
+    domeGrad.addColorStop(1, '#0f172a');
+    ctx.fillStyle = domeGrad;
+    ctx.beginPath();
+    ctx.arc(0, 0, 30, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Dome slit (opening for telescope)
+    const slitAngle = Math.PI * -0.35 + Math.sin(time * 0.3) * 0.12;
+    ctx.save();
+    ctx.rotate(slitAngle);
+    ctx.fillStyle = '#020617';
+    ctx.fillRect(-2, -28, 4, 28);
+    ctx.restore();
+
+    // Brass highlight on dome edge
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.globalAlpha = 0.45;
+    ctx.beginPath();
+    ctx.arc(0, 0, 30, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // Brass telescope tube (pointing diagonally)
+
+    // Telescope barrel gradient
+    ctx.save();
+    ctx.rotate(slitAngle);
+    const barrelGrad = ctx.createLinearGradient(-4, -26, 4, -26);
+    barrelGrad.addColorStop(0, '#fef08a');
+    barrelGrad.addColorStop(0.4, '#d97706');
+    barrelGrad.addColorStop(1, '#78350f');
+    ctx.fillStyle = barrelGrad;
+    ctx.fillRect(-3, -26, 6, 22);
+
+    // Telescope lens cap
+    ctx.fillStyle = '#fef08a';
+    ctx.beginPath();
+    ctx.ellipse(0, -26, 5, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // Starfield sparkles around dome
+    for (let i = 0; i < 5; i++) {
+      const angle = (i / 5) * Math.PI * 2 + time * 0.4;
+      const r = 38 + Math.sin(time * 1.2 + i * 1.7) * 4;
+      const sx = Math.cos(angle) * r;
+      const sy = Math.sin(angle) * r;
+      const alpha = 0.4 + 0.4 * Math.sin(time * 2 + i);
+      ctx.fillStyle = `rgba(221, 214, 254, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     ctx.restore();
   }

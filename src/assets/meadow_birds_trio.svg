@@ -1,49 +1,193 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="100%" height="100%">
-  <!-- 1. MEADOW ROBIN -->
-  <g transform="translate(-10, 0)">
-    <svg x="50" y="20" width="360" height="360" viewBox="0 0 512 512">
-      <path d="M 235 348 L 228 375 M 235 348 L 235 378 M 235 348 L 244 374" stroke="#361a05" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 268 342 L 261 368 M 268 342 L 268 372 M 268 342 L 277 367" stroke="#361a05" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 160 300 L 80 365 L 102 378 L 180 320 Z" fill="#78350f"/>
-      <path d="M 210 160 C 170 190, 160 260, 180 315 C 210 335, 270 345, 300 320 Z" fill="#543310"/>
-      <path d="M 245 150 C 285 170, 320 210, 305 275 C 280 295, 240 290, 220 260 Z" fill="#f97316"/>
-      <path d="M 205 190 C 185 230, 175 275, 225 315 C 255 310, 240 260, 220 220 Z" fill="#451a03"/>
-      <circle cx="258" cy="142" r="8" fill="#ffffff"/>
-      <circle cx="258" cy="142" r="5" fill="#1c1917"/>
-      <polygon points="280,140 320,150 278,156" fill="#facc15"/>
-    </svg>
-    <text x="230" y="400" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#ea580c">Meadow Robin</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="100%" height="100%">
+  <defs>
+    <radialGradient id="robin-body" cx="42%" cy="38%" r="58%">
+      <stop offset="0%"  stop-color="#7c2d12"/>
+      <stop offset="55%" stop-color="#431407"/>
+      <stop offset="100%" stop-color="#1c0a02"/>
+    </radialGradient>
+    <radialGradient id="robin-breast" cx="50%" cy="35%" r="55%">
+      <stop offset="0%"  stop-color="#fb923c"/>
+      <stop offset="60%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </radialGradient>
+    <radialGradient id="robin-wing" cx="30%" cy="30%" r="70%">
+      <stop offset="0%"  stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#1c0a02"/>
+    </radialGradient>
+    <radialGradient id="eye-shine" cx="35%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+
+    <radialGradient id="blue-body" cx="42%" cy="38%" r="58%">
+      <stop offset="0%"  stop-color="#3b82f6"/>
+      <stop offset="55%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </radialGradient>
+    <radialGradient id="blue-breast" cx="50%" cy="35%" r="55%">
+      <stop offset="0%"  stop-color="#e0f2fe"/>
+      <stop offset="60%" stop-color="#bae6fd"/>
+      <stop offset="100%" stop-color="#7dd3fc"/>
+    </radialGradient>
+    <radialGradient id="blue-wing" cx="30%" cy="30%" r="70%">
+      <stop offset="0%"  stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </radialGradient>
+
+    <radialGradient id="finch-body" cx="42%" cy="38%" r="58%">
+      <stop offset="0%"  stop-color="#16a34a"/>
+      <stop offset="55%" stop-color="#15803d"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </radialGradient>
+    <radialGradient id="finch-breast" cx="50%" cy="35%" r="55%">
+      <stop offset="0%"  stop-color="#fef08a"/>
+      <stop offset="55%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </radialGradient>
+    <radialGradient id="finch-wing" cx="30%" cy="30%" r="70%">
+      <stop offset="0%"  stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </radialGradient>
+
+    <filter id="bird-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <!--  BIRD 1 — MEADOW ROBIN  (centre x≈200)                          -->
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(200, 220) scale(1)" filter="url(#soft-shadow)">
+    <!-- Tail feathers -->
+    <path d="M -10 55 L -28 95 L -8 85 L 0 100 L 8 85 L 28 95 L 10 55 Z"
+          fill="#361407" opacity="0.85"/>
+    <!-- Wing (left/back) -->
+    <ellipse cx="-20" cy="18" rx="34" ry="18" transform="rotate(-18,-20,18)"
+             fill="url(#robin-wing)" opacity="0.9"/>
+    <!-- Wing primary feather tips -->
+    <path d="M -46 22 C -52 38, -48 50, -36 48 C -30 46, -18 30, -8 38"
+          fill="none" stroke="#7c2d12" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Main body -->
+    <ellipse cx="0" cy="20" rx="42" ry="38" fill="url(#robin-body)"/>
+    <!-- Orange-red breast -->
+    <ellipse cx="12" cy="24" rx="26" ry="30" fill="url(#robin-breast)"/>
+    <!-- Head -->
+    <circle cx="16" cy="-28" r="26" fill="url(#robin-body)"/>
+    <!-- Eye white ring -->
+    <circle cx="26" cy="-34" r="8" fill="#f5f5f5"/>
+    <!-- Pupil -->
+    <circle cx="27" cy="-34" r="5.5" fill="#0c0a09"/>
+    <!-- Eye shine -->
+    <circle cx="29" cy="-37" r="2.5" fill="url(#eye-shine)"/>
+    <!-- Beak upper -->
+    <path d="M 38 -32 L 60 -28 L 38 -22 Z" fill="#ca8a04"/>
+    <!-- Beak lower -->
+    <path d="M 38 -22 L 58 -20 L 38 -16 Z" fill="#a16207" opacity="0.8"/>
+    <!-- Legs -->
+    <line x1="-8"  y1="58" x2="-10" y2="90" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-10" y1="90" x2="-22" y2="100" stroke="#78350f" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="-10" y1="90" x2="-4"  y2="102" stroke="#78350f" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="8"  y1="58"  x2="10"  y2="90" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+    <line x1="10" y1="90"  x2="-2"  y2="102" stroke="#78350f" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="10" y1="90"  x2="22"  y2="100" stroke="#78350f" stroke-width="2.5" stroke-linecap="round"/>
   </g>
 
-  <!-- 2. STARLIGHT BLUEBIRD -->
-  <g transform="translate(390, 0)">
-    <svg x="50" y="20" width="360" height="360" viewBox="0 0 512 512">
-      <path d="M 235 340 L 228 368 M 235 340 L 235 372 M 235 340 L 244 367" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 265 334 L 258 360 M 265 334 L 265 364 M 265 334 L 274 360" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 210 150 C 170 180, 160 250, 180 305 C 210 325, 270 335, 300 310 Z" fill="#1d4ed8"/>
-      <path d="M 240 155 C 280 175, 315 215, 300 275 C 275 295, 235 290, 215 260 Z" fill="#38bdf8"/>
-      <path d="M 200 190 C 180 230, 170 275, 220 315 C 250 310, 235 260, 215 220 Z" fill="#2563eb"/>
-      <polygon points="205,225 208,232 215,235 208,238 205,245 202,238 195,235 202,232" fill="#ffffff"/>
-      <circle cx="258" cy="142" r="8" fill="#ffffff"/>
-      <circle cx="258" cy="142" r="5" fill="#0f172a"/>
-      <polygon points="280,140 320,150 278,156" fill="#e0f2fe"/>
-    </svg>
-    <text x="230" y="400" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#0284c7">Starlight Bluebird</text>
+  <!-- Label -->
+  <text x="200" y="380" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="bold"
+        fill="#f97316" letter-spacing="0.5">Meadow Robin</text>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <!--  BIRD 2 — STARLIGHT BLUEBIRD  (centre x≈600)                    -->
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(600, 210) scale(1.08)" filter="url(#soft-shadow)">
+    <!-- Tail feathers -->
+    <path d="M -10 55 L -28 95 L -8 85 L 0 100 L 8 85 L 28 95 L 10 55 Z"
+          fill="#1e3a8a" opacity="0.85"/>
+    <!-- Wing back -->
+    <ellipse cx="-22" cy="16" rx="36" ry="19" transform="rotate(-16,-22,16)"
+             fill="url(#blue-wing)" opacity="0.9"/>
+    <!-- Wing feather edge detail -->
+    <path d="M -50 20 C -56 36, -52 48, -40 46 C -32 44, -20 28, -8 36"
+          fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Star sparkle on wing -->
+    <g filter="url(#bird-glow)" transform="translate(-30, 10)">
+      <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="#e0f2fe" opacity="0.9"/>
+    </g>
+    <!-- Main body -->
+    <ellipse cx="0" cy="20" rx="42" ry="38" fill="url(#blue-body)"/>
+    <!-- Pale breast -->
+    <ellipse cx="12" cy="26" rx="24" ry="28" fill="url(#blue-breast)"/>
+    <!-- Head -->
+    <circle cx="16" cy="-28" r="26" fill="url(#blue-body)"/>
+    <!-- Star marking on forehead -->
+    <g filter="url(#bird-glow)" transform="translate(10,-42)">
+      <polygon points="0,-5 1.5,-1.5 5,0 1.5,1.5 0,5 -1.5,1.5 -5,0 -1.5,-1.5" fill="#bae6fd"/>
+    </g>
+    <!-- Eye -->
+    <circle cx="26" cy="-34" r="8" fill="#f0f9ff"/>
+    <circle cx="27" cy="-34" r="5.5" fill="#0c1a2e"/>
+    <circle cx="29" cy="-37" r="2.5" fill="url(#eye-shine)"/>
+    <!-- Beak upper -->
+    <path d="M 38 -32 L 62 -26 L 38 -22 Z" fill="#bae6fd"/>
+    <path d="M 38 -22 L 60 -18 L 38 -16 Z" fill="#93c5fd" opacity="0.8"/>
+    <!-- Legs -->
+    <line x1="-8"  y1="58" x2="-10" y2="90" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-10" y1="90" x2="-22" y2="100" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="-10" y1="90" x2="-4"  y2="102" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="8"  y1="58"  x2="10"  y2="90" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
+    <line x1="10" y1="90"  x2="-2"  y2="102" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="10" y1="90"  x2="22"  y2="100" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round"/>
   </g>
 
-  <!-- 3. FOREST FINCH -->
-  <g transform="translate(790, 0)">
-    <svg x="50" y="20" width="360" height="360" viewBox="0 0 512 512">
-      <path d="M 235 348 L 228 375 M 235 348 L 235 378 M 235 348 L 244 374" stroke="#1f2937" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 265 342 L 258 368 M 265 342 L 265 372 M 265 342 L 274 367" stroke="#1f2937" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M 210 160 C 170 190, 160 260, 180 315 C 210 335, 270 345, 300 320 Z" fill="#10b981"/>
-      <path d="M 245 160 C 285 180, 320 220, 305 285 C 280 305, 240 300, 220 270 Z" fill="#facc15"/>
-      <path d="M 205 200 C 185 240, 175 285, 225 325 C 255 320, 240 270, 220 230 Z" fill="#047857"/>
-      <path d="M 200 220 C 190 250, 190 285, 220 315" stroke="#facc15" stroke-width="3" fill="none"/>
-      <circle cx="258" cy="150" r="8" fill="#ffffff"/>
-      <circle cx="258" cy="150" r="5" fill="#022c22"/>
-      <polygon points="278,145 318,154 276,164" fill="#fbbf24"/>
-    </svg>
-    <text x="230" y="400" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="22" fill="#059669">Forest Finch</text>
+  <!-- Label -->
+  <text x="600" y="380" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="bold"
+        fill="#38bdf8" letter-spacing="0.5">Starlight Bluebird</text>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <!--  BIRD 3 — FOREST FINCH  (centre x≈1000)                         -->
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1000, 218) scale(1.04)" filter="url(#soft-shadow)">
+    <!-- Tail feathers -->
+    <path d="M -10 55 L -28 95 L -8 85 L 0 100 L 8 85 L 28 95 L 10 55 Z"
+          fill="#14532d" opacity="0.85"/>
+    <!-- Wing back -->
+    <ellipse cx="-20" cy="18" rx="34" ry="18" transform="rotate(-20,-20,18)"
+             fill="url(#finch-wing)" opacity="0.9"/>
+    <!-- Wing feather edge -->
+    <path d="M -46 22 C -52 38, -48 50, -36 48 C -28 46, -16 30, -6 38"
+          fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Main body -->
+    <ellipse cx="0" cy="20" rx="41" ry="37" fill="url(#finch-body)"/>
+    <!-- Yellow breast -->
+    <ellipse cx="12" cy="24" rx="25" ry="28" fill="url(#finch-breast)"/>
+    <!-- Head -->
+    <circle cx="16" cy="-28" r="26" fill="url(#finch-body)"/>
+    <!-- Yellow cheek patch -->
+    <ellipse cx="28" cy="-22" rx="12" ry="9" fill="#fde047" opacity="0.75"/>
+    <!-- Eye -->
+    <circle cx="26" cy="-34" r="8" fill="#f9fbe7"/>
+    <circle cx="27" cy="-34" r="5.5" fill="#052e16"/>
+    <circle cx="29" cy="-37" r="2.5" fill="url(#eye-shine)"/>
+    <!-- Beak upper (seed-cracker, slightly chunkier) -->
+    <path d="M 38 -34 L 64 -26 L 38 -18 Z" fill="#ca8a04"/>
+    <path d="M 38 -18 L 62 -12 L 38 -10 Z" fill="#a16207" opacity="0.8"/>
+    <!-- Legs -->
+    <line x1="-8"  y1="58" x2="-10" y2="90" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-10" y1="90" x2="-22" y2="100" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="-10" y1="90" x2="-4"  y2="102" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="8"  y1="58"  x2="10"  y2="90" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+    <line x1="10" y1="90"  x2="-2"  y2="102" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="10" y1="90"  x2="22"  y2="100" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
   </g>
+
+  <!-- Label -->
+  <text x="1000" y="380" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="bold"
+        fill="#4ade80" letter-spacing="0.5">Forest Finch</text>
 </svg>

@@ -1,100 +1,86 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Viewfinder Glow Filter -->
-    <filter id="telescope-glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="6" result="b1"/>
-      <feGaussianBlur stdDeviation="15" result="b2"/>
+    <!-- Brass gradient for the eyepiece ring -->
+    <linearGradient id="brass-ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#fff5c0"/>
+      <stop offset="20%"  stop-color="#fde047"/>
+      <stop offset="45%"  stop-color="#d97706"/>
+      <stop offset="70%"  stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+
+    <!-- Inner thin accent ring -->
+    <linearGradient id="brass-inner-grad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#fef08a"/>
+      <stop offset="50%"  stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <!-- Glow filter for crosshairs & reticle -->
+    <filter id="reticle-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge>
-        <feMergeNode in="b2"/>
-        <feMergeNode in="b1"/>
+        <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
 
-    <filter id="viewfinder-shadow" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#020617" flood-opacity="0.8"/>
+    <!-- Outer drop shadow on the bezel -->
+    <filter id="bezel-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000000" flood-opacity="0.9"/>
     </filter>
 
-    <!-- Metallic & Lens Gradients -->
-    <linearGradient id="brass-eyepiece-ring" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff5c0"/>
-      <stop offset="25%" stop-color="#fde047"/>
-      <stop offset="50%" stop-color="#eab308"/>
-      <stop offset="75%" stop-color="#ca8a04"/>
-      <stop offset="100%" stop-color="#451a03"/>
-    </linearGradient>
+    <!-- Clip to the outer bezel circle -->
+    <clipPath id="bezel-clip">
+      <circle cx="256" cy="256" r="232"/>
+    </clipPath>
 
-    <radialGradient id="viewfinder-space" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1e1b4b"/>
-      <stop offset="50%" stop-color="#0f172a"/>
-      <stop offset="85%" stop-color="#020617"/>
-      <stop offset="100%" stop-color="#000000"/>
-    </radialGradient>
+    <!-- Mask that punches a transparent hole in the centre -->
+    <mask id="ring-mask">
+      <rect width="512" height="512" fill="white"/>
+      <!-- transparent hole — radius 178 leaves 20px for the inner accent ring -->
+      <circle cx="256" cy="256" r="178" fill="black"/>
+    </mask>
   </defs>
 
-  <g filter="url(#viewfinder-shadow)" transform="translate(0, 0)">
-    <!-- Outer Heavy Brass Eyepiece Ring -->
-    <circle cx="256" cy="256" r="230" fill="url(#brass-eyepiece-ring)"/>
-    <circle cx="256" cy="256" r="208" fill="#1e1003"/>
-    <circle cx="256" cy="256" r="198" fill="url(#brass-eyepiece-ring)"/>
-
-    <!-- Inner Viewfinder Space Aperture Window -->
-    <circle cx="256" cy="256" r="180" fill="url(#viewfinder-space)"/>
-
-    <!-- Lens Flare Blue Glass Ring -->
-    <circle cx="256" cy="256" r="180" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.5" filter="url(#telescope-glow)"/>
-
-    <!-- ================= CONSTELLATION STARS & NEBULA INSIDE ================= -->
-    <g filter="url(#telescope-glow)">
-      <!-- Constellation Line 1 (Ursa Major / Dipper motif) -->
-      <polyline points="140,160 170,180 200,175 230,200 270,195 290,225 250,230 230,200" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.8"/>
-      
-      <!-- Constellation Star Nodes -->
-      <circle cx="140" cy="160" r="4.5" fill="#ffffff"/>
-      <circle cx="170" cy="180" r="3.5" fill="#fde047"/>
-      <circle cx="200" cy="175" r="4" fill="#ffffff"/>
-      <circle cx="230" cy="200" r="4" fill="#38bdf8"/>
-      <circle cx="270" cy="195" r="4.5" fill="#ffffff"/>
-      <circle cx="290" cy="225" r="5" fill="#fde047"/>
-      <circle cx="250" cy="230" r="4" fill="#ffffff"/>
-
-      <!-- Random Deep Space Stars & 4-Point Sparkles -->
-      <polygon points="340,140 343,148 351,151 343,154 340,162 337,154 329,151 337,148" fill="#ffffff"/>
-      <polygon points="160,300 162,305 167,307 162,309 160,314 158,309 153,307 158,305" fill="#fde047"/>
-      <polygon points="320,310 322,314 326,316 322,318 320,322 318,318 314,316 318,314" fill="#ffffff"/>
-
-      <circle cx="180" cy="240" r="2" fill="#ffffff"/>
-      <circle cx="360" cy="240" r="3" fill="#38bdf8"/>
-      <circle cx="220" cy="330" r="2.5" fill="#ffffff"/>
-      <circle cx="290" cy="340" r="3.5" fill="#fde047"/>
-      <circle cx="140" cy="220" r="2.5" fill="#ffffff"/>
-    </g>
-
-    <!-- ================= BRASS RETICLE CROSSHAIRS & MEASUREMENT TICKS ================= -->
-    <!-- Fine Crosshairs Lines -->
-    <g stroke="url(#brass-eyepiece-ring)" stroke-width="1.5" opacity="0.85">
-      <!-- Horizontal Crosshair with Center Gap -->
-      <line x1="80" y1="256" x2="230" y2="256"/>
-      <line x1="282" y1="256" x2="432" y2="256"/>
-      <!-- Vertical Crosshair with Center Gap -->
-      <line x1="256" y1="80" x2="256" y2="230"/>
-      <line x1="256" y1="282" x2="256" y2="432"/>
-
-      <!-- Center Targeting Reticle Rings -->
-      <circle cx="256" cy="256" r="26" fill="none" stroke="#fde047" stroke-width="1.5" opacity="0.9"/>
-      <circle cx="256" cy="256" r="4" fill="#fde047" opacity="0.9"/>
-
-      <!-- Outer Degree Measurement Ticks around Rim (360° Ticks) -->
-      <circle cx="256" cy="256" r="185" fill="none" stroke="#eab308" stroke-width="2" stroke-dasharray="2,6"/>
-    </g>
-
-    <!-- Compass Degree Markings (N, S, E, W) on Brass Ring -->
-    <text x="256" y="96" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="14" fill="#451a03">N 0°</text>
-    <text x="256" y="424" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="14" fill="#451a03">S 180°</text>
-    <text x="420" y="261" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="14" fill="#451a03">E 90°</text>
-    <text x="92" y="261" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="14" fill="#451a03">W 270°</text>
-
-    <!-- Metallic Reflection Arc on Outer Bezel -->
-    <path d="M 120 120 C 180 60, 332 60, 392 120 C 340 85, 172 85, 120 120 Z" fill="#ffffff" opacity="0.3"/>
+  <!-- ── OUTER BRASS BEZEL RING (solid, with hole punched) ── -->
+  <g filter="url(#bezel-shadow)">
+    <!-- Wide outer ring filled with brass gradient, hole masked out -->
+    <circle cx="256" cy="256" r="232" fill="url(#brass-ring-grad)" mask="url(#ring-mask)"/>
+    <!-- Dark separator channel between outer and inner ring -->
+    <circle cx="256" cy="256" r="202" fill="none" stroke="#1c1003" stroke-width="6" mask="url(#ring-mask)"/>
+    <!-- Inner thin brass accent ring -->
+    <circle cx="256" cy="256" r="196" fill="none" stroke="url(#brass-inner-grad)" stroke-width="14" mask="url(#ring-mask)"/>
   </g>
+
+  <!-- ── COMPASS LETTERS on Outer Brass Bezel ── -->
+  <text x="256" y="40"  text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="18" fill="#1c1003" letter-spacing="1">N 0°</text>
+  <text x="256" y="482" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="18" fill="#1c1003" letter-spacing="1">S 180°</text>
+  <text x="474" y="263" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="18" fill="#1c1003" letter-spacing="1">E</text>
+  <text x="38"  y="263" text-anchor="middle" font-family="'Courier New', monospace" font-weight="900" font-size="18" fill="#1c1003" letter-spacing="1">W</text>
+
+  <!-- ── TICK MARKS around inner edge of bezel ── -->
+  <g stroke="#ca8a04" stroke-width="2" opacity="0.7">
+    <circle cx="256" cy="256" r="183" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="3 7"/>
+  </g>
+
+  <!-- ── RETICLE CROSSHAIRS (brass, glow) — rendered over the transparent hole ── -->
+  <g filter="url(#reticle-glow)" stroke="url(#brass-ring-grad)" stroke-width="1.2" opacity="0.75">
+    <!-- Horizontal crosshair, gap at centre -->
+    <line x1="84"  y1="256" x2="228" y2="256"/>
+    <line x1="284" y1="256" x2="428" y2="256"/>
+    <!-- Vertical crosshair, gap at centre -->
+    <line x1="256" y1="84"  x2="256" y2="228"/>
+    <line x1="256" y1="284" x2="256" y2="428"/>
+  </g>
+
+  <!-- ── CENTRE RETICLE RINGS & DOT ── -->
+  <g filter="url(#reticle-glow)">
+    <circle cx="256" cy="256" r="30"  fill="none" stroke="#fde047" stroke-width="1.5" opacity="0.85"/>
+    <circle cx="256" cy="256" r="60"  fill="none" stroke="#fde047" stroke-width="0.8" opacity="0.45" stroke-dasharray="4 6"/>
+    <circle cx="256" cy="256" r="5"   fill="#fde047" opacity="0.9"/>
+  </g>
+
+  <!-- ── METALLIC SHEEN ARC on outer bezel highlight ── -->
+  <path d="M 100 100 C 160 48, 352 48, 412 100 C 356 72, 156 72, 100 100 Z" fill="#ffffff" opacity="0.22" clip-path="url(#bezel-clip)"/>
 </svg>
