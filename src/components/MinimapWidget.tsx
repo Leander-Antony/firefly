@@ -84,6 +84,32 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
         }
       });
 
+      // Cassette Tape Markers on Minimap (Static, non-blinking markers)
+      engine.tapes.forEach((t) => {
+        const tx = t.x * scale;
+        const ty = t.y * scale;
+
+        if (!t.unlocked) {
+          // Uncollected Tape: Solid Cyan Box with Outer Halo Ring
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.45)';
+          ctx.beginPath();
+          ctx.arc(tx, ty, 6, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#38bdf8';
+          ctx.fillRect(tx - 3.5, ty - 2.5, 7, 5);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(tx - 1.5, ty - 1, 3, 2);
+        } else {
+          // Unlocked Tape: Soft Cyan Circle
+          ctx.fillStyle = '#0284c7';
+          ctx.beginPath();
+          ctx.arc(tx, ty, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
       // Active Story Destination Beacon
       const activeWp = engine.getActiveStoryWaypoint();
       if (activeWp) {

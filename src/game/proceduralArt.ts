@@ -397,22 +397,31 @@ export class ProceduralArt {
   }
 
   public static drawTopDownTrainStation(ctx: CanvasRenderingContext2D, x: number, y: number): void {
-    const svgImg = getCachedSvgImage('stationCampfire');
-    if (svgImg) {
+    const campfireSvg = getCachedSvgImage('stationCampfire');
+    const catSvg = getCachedSvgImage('stationCat');
+
+    if (campfireSvg || catSvg) {
       ctx.save();
       ctx.translate(x, y);
 
       const time = Date.now() * 0.005;
-      const fireGlow = ctx.createRadialGradient(0, 20, 4, 0, 20, 70 + Math.sin(time * 3) * 10);
+      const fireGlow = ctx.createRadialGradient(0, 20, 4, 0, 20, 75 + Math.sin(time * 3) * 10);
       fireGlow.addColorStop(0, 'rgba(249, 115, 22, 0.85)');
       fireGlow.addColorStop(0.6, 'rgba(234, 88, 12, 0.3)');
       fireGlow.addColorStop(1, 'transparent');
       ctx.fillStyle = fireGlow;
       ctx.beginPath();
-      ctx.arc(0, 20, 70, 0, Math.PI * 2);
+      ctx.arc(0, 20, 75, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.drawImage(svgImg, -110, -70, 220, 140);
+      if (campfireSvg) {
+        ctx.drawImage(campfireSvg, -110, -70, 220, 140);
+      }
+
+      if (catSvg) {
+        ctx.drawImage(catSvg, 35, 5, 55, 45);
+      }
+
       ctx.restore();
       return;
     }
@@ -689,6 +698,56 @@ export class ProceduralArt {
       ctx.moveTo(rx, ry);
       ctx.lineTo(rx + 3, ry + 16);
       ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+
+  public static drawSideViewCampfire(ctx: CanvasRenderingContext2D, w: number, h: number): void {
+    ctx.save();
+    // Night Sky Gradient
+    const sky = ctx.createLinearGradient(0, 0, 0, h);
+    sky.addColorStop(0, '#020617');
+    sky.addColorStop(0.5, '#0f172a');
+    sky.addColorStop(1, '#1e1b4b');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, w, h);
+
+    const time = Date.now() * 0.001;
+    const groundY = h * 0.75;
+    const fireX = w / 2;
+
+    // Distant Pines
+    for (let x = 40; x < w; x += 120) {
+      this.drawSideViewPineTree(ctx, x, groundY, 220);
+    }
+
+    // Station Platform Wooden Shelter Beams
+    ctx.fillStyle = '#292524';
+    ctx.fillRect(fireX - 160, groundY - 140, 20, 140);
+    ctx.fillRect(fireX + 140, groundY - 140, 20, 140);
+    ctx.fillStyle = '#44403c';
+    ctx.fillRect(fireX - 180, groundY - 150, 360, 16);
+
+    // Warm Campfire Bloom & Radial Light
+    const flicker = Math.sin(time * 8) * 8 + Math.cos(time * 15) * 4;
+    const fireBloom = ctx.createRadialGradient(fireX, groundY - 30, 10, fireX, groundY - 30, 180 + flicker);
+    fireBloom.addColorStop(0, 'rgba(249, 115, 22, 0.7)');
+    fireBloom.addColorStop(0.5, 'rgba(234, 88, 12, 0.3)');
+    fireBloom.addColorStop(1, 'transparent');
+    ctx.fillStyle = fireBloom;
+    ctx.beginPath();
+    ctx.arc(fireX, groundY - 30, 180 + flicker, 0, Math.PI * 2);
+    ctx.fill();
+
+    const campfireSvg = getCachedSvgImage('stationCampfire');
+    const catSvg = getCachedSvgImage('stationCat');
+
+    if (campfireSvg) {
+      ctx.drawImage(campfireSvg, fireX - 110, groundY - 135, 220, 140);
+    }
+    if (catSvg) {
+      ctx.drawImage(catSvg, fireX + 45, groundY - 50, 75, 55);
     }
 
     ctx.restore();

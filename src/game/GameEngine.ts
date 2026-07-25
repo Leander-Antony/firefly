@@ -191,19 +191,25 @@ export class GameEngine {
   public completePrologue(): void {
     this.savedState.hasSeenPrologue = true;
     saveGameState(this.savedState);
-    this.activeModal = null;
+    if (this.activeModal === 'prologue') {
+      this.activeModal = null;
+    }
   }
 
   public advanceStoryIndex(): void {
     this.activeStoryWaypointModal = null;
+    if (this.activeStoryIndex < this.storyWaypoints.length) {
+      this.storyWaypoints[this.activeStoryIndex].completed = true;
+    }
     if (this.activeStoryIndex < this.storyChapters.length) {
       this.storyChapters[this.activeStoryIndex].unlocked = true;
     }
-    if (this.activeStoryIndex < this.storyWaypoints.length - 1) {
-      this.activeStoryIndex += 1;
-      this.savedState.activeStoryIndex = this.activeStoryIndex;
-      saveGameState(this.savedState);
-    } else {
+    
+    this.activeStoryIndex += 1;
+    this.savedState.activeStoryIndex = this.activeStoryIndex;
+    saveGameState(this.savedState);
+
+    if (this.activeStoryIndex >= this.storyWaypoints.length) {
       this.triggerEndingSequence();
     }
   }
@@ -307,6 +313,15 @@ export class GameEngine {
       this.triggerInteraction();
     }
 
+    if (code === 'KeyJ') {
+      if (this.activeModal === 'journal') {
+        this.closeModal();
+      } else {
+        this.openModal('journal');
+        SoundEngine.playPageFlip();
+      }
+    }
+
     if (code === 'Space') {
       this.toggleSitting();
     }
@@ -343,7 +358,7 @@ export class GameEngine {
       this.player.isWalking = false;
       this.enterPerspectiveMode('bench');
 
-      if (this.currentZone === 'train_station' && Math.hypot(this.player.x - 1500, this.player.y - 5100) < 160) {
+      if (this.currentZone === 'train_station' && Math.hypot(this.player.x - 2000, this.player.y - 9200) < 250) {
         this.enterPerspectiveMode('campfire');
         this.triggerEndingSequence();
       }
@@ -360,6 +375,19 @@ export class GameEngine {
   public exitPerspectiveMode(): void {
     this.perspectiveMode = 'topdown';
     this.activeCinematicType = null;
+  }
+
+  public openModal(modal: 'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding'): void {
+    if (!this.savedState.hasSeenPrologue && modal !== 'prologue') {
+      this.savedState.hasSeenPrologue = true;
+      saveGameState(this.savedState);
+    }
+    this.exitPerspectiveMode();
+    this.activeModal = modal;
+  }
+
+  public closeModal(): void {
+    this.exitPerspectiveMode();
     this.activeModal = null;
   }
 
@@ -370,42 +398,43 @@ export class GameEngine {
         this.toggleSitting();
       } else if (type === 'whisper_tree') {
         this.enterPerspectiveMode('whisper_tree');
-        this.activeModal = 'whisper_tree';
+        this.openModal('whisper_tree');
         SoundEngine.playPageFlip();
       } else if (type === 'stone_skipping') {
         this.enterPerspectiveMode('lake');
-        this.activeModal = 'stone_skipping';
+        this.openModal('stone_skipping');
       } else if (type === 'coffee_stand') {
         this.enterPerspectiveMode('coffee');
-        this.activeModal = 'coffee_stand';
+        this.openModal('coffee_stand');
         SoundEngine.playPageFlip();
       } else if (type === 'telescope') {
-        this.activeModal = 'telescope';
+        this.openModal('telescope');
         SoundEngine.playPageFlip();
       } else if (type === 'birds') {
-        this.activeModal = 'bird_feeding';
+        this.openModal('bird_feeding');
         SoundEngine.playPageFlip();
       } else if (type === 'cat') {
         this.enterPerspectiveMode('cat');
+        this.triggerEndingSequence();
         SoundEngine.playCatPurr();
       } else if (type === 'train_campfire') {
-        this.toggleSitting();
+        this.enterPerspectiveMode('campfire');
+        this.player.isSitting = true;
+        this.triggerEndingSequence();
       }
       return;
     }
 
     if (this.nearLetter) {
       this.unlockLetter(this.nearLetter.id);
-      this.enterPerspectiveMode('letter');
-      this.activeModal = 'journal';
+      this.openModal('journal');
       SoundEngine.playPageFlip();
       return;
     }
 
     if (this.nearTape) {
       this.unlockTape(this.nearTape.id);
-      this.enterPerspectiveMode('tape');
-      this.activeModal = 'journal';
+      this.openModal('journal');
       SoundEngine.playCassetteClick();
       return;
     }
@@ -464,8 +493,9 @@ export class GameEngine {
 
   private updateStoryWaypointsCheck(): void {
     if (this.activeStoryWaypointModal !== null) return;
+    if (this.activeStoryIndex >= this.storyWaypoints.length) return;
     const currentWp = this.getActiveStoryWaypoint();
-    if (!currentWp) return;
+    if (!currentWp || currentWp.completed) return;
 
     const dist = Math.hypot(this.player.x - currentWp.x, this.player.y - currentWp.y);
     if (dist < 90) {

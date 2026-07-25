@@ -55,6 +55,13 @@ export function loadGameState(): SavedGameState {
     return {
       ...INITIAL_SAVE_STATE,
       ...parsed,
+      keptWhisperNotes: parsed.keptWhisperNotes || [],
+      journalEntries: parsed.journalEntries || [],
+      collectedFireflyIds: parsed.collectedFireflyIds || [],
+      unlockedLetterIds: parsed.unlockedLetterIds || [],
+      unlockedTapeIds: parsed.unlockedTapeIds || [],
+      collectedBeanIds: parsed.collectedBeanIds || [],
+      foundEasterEggIds: parsed.foundEasterEggIds || [],
       settings: {
         ...DEFAULT_SETTINGS,
         ...(parsed.settings || {}),

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { GameEngine } from '../game/GameEngine';
 import { ProceduralArt } from '../game/proceduralArt';
+import { getCachedSvgImage } from '../utils/AssetManager';
 import type { RenderableObject } from '../types/game';
 
 interface GameCanvasProps {
@@ -53,6 +54,8 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
         const type = engine.activeCinematicType;
         if (type === 'whisper_tree') {
           ProceduralArt.drawSideViewWhisperTree(ctx, w, h);
+        } else if (type === 'campfire' || type === 'cat') {
+          ProceduralArt.drawSideViewCampfire(ctx, w, h);
         } else {
           ProceduralArt.drawSideViewBench(ctx, w, h);
         }
@@ -331,8 +334,23 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
           renderables.push({
             y: t.y,
             draw: (c) => {
-              c.fillStyle = '#38bdf8';
-              c.fillRect(t.x - 7, t.y - 5, 14, 10);
+              // Cyan aura glow under cassette
+              const tapeGlow = c.createRadialGradient(t.x, t.y, 2, t.x, t.y, 22);
+              tapeGlow.addColorStop(0, 'rgba(56, 189, 248, 0.85)');
+              tapeGlow.addColorStop(0.6, 'rgba(56, 189, 248, 0.25)');
+              tapeGlow.addColorStop(1, 'transparent');
+              c.fillStyle = tapeGlow;
+              c.beginPath();
+              c.arc(t.x, t.y, 22, 0, Math.PI * 2);
+              c.fill();
+
+              const cassetteImg = getCachedSvgImage('cassette');
+              if (cassetteImg) {
+                c.drawImage(cassetteImg, t.x - 16, t.y - 12, 32, 24);
+              } else {
+                c.fillStyle = '#38bdf8';
+                c.fillRect(t.x - 10, t.y - 7, 20, 14);
+              }
             },
           });
         }
@@ -357,6 +375,19 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
       renderables.push({
         y: engine.player.y,
         draw: (c) => {
+          if (engine.savedState.hasReachedEnding) {
+            const auraTime = Date.now() * 0.002;
+            const auraR = 36 + Math.sin(auraTime) * 6;
+            const auraGrad = c.createRadialGradient(engine.player.x, engine.player.y, 2, engine.player.x, engine.player.y, auraR);
+            auraGrad.addColorStop(0, 'rgba(254, 240, 138, 0.65)');
+            auraGrad.addColorStop(0.5, 'rgba(251, 146, 60, 0.25)');
+            auraGrad.addColorStop(1, 'transparent');
+            c.fillStyle = auraGrad;
+            c.beginPath();
+            c.arc(engine.player.x, engine.player.y, auraR, 0, Math.PI * 2);
+            c.fill();
+          }
+
           ProceduralArt.drawTopDownPlayer(
             c,
             engine.player.x,

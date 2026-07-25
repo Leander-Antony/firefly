@@ -1,4 +1,5 @@
 // Import all 29 SVG Assets from src/assets
+import cassetteSvg from '../assets/cassette.svg';
 import cauliflowerFlowerSvg from '../assets/cauliflower_flower.svg';
 import coffeeKioskSvg from '../assets/coffee_corner_kiosk.svg';
 import compassFrameSvg from '../assets/compass_rose_minimap_frame.svg';
@@ -30,6 +31,7 @@ import journalCoverSvg from '../assets/travelers_journal_notebook_cover.svg';
 import whisperTreeSvg from '../assets/whisper_tree.svg';
 
 export const SVG_ASSETS = {
+  cassette: cassetteSvg,
   cauliflowerFlower: cauliflowerFlowerSvg,
   coffeeKiosk: coffeeKioskSvg,
   compassFrame: compassFrameSvg,

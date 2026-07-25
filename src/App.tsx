@@ -81,24 +81,24 @@ export function App() {
   };
 
   const handleOpenJournal = () => {
-    engine.activeModal = 'journal';
+    engine.openModal('journal');
     setActiveModal('journal');
     SoundEngine.playPageFlip();
   };
 
   const handleOpenTasks = () => {
-    engine.activeModal = 'tasks';
+    engine.openModal('tasks');
     setActiveModal('tasks');
     SoundEngine.playPageFlip();
   };
 
   const handleOpenSettings = () => {
-    engine.activeModal = 'settings';
+    engine.openModal('settings');
     setActiveModal('settings');
   };
 
   const handleCloseModal = () => {
-    engine.activeModal = null;
+    engine.closeModal();
     setActiveModal(null);
   };
 
@@ -181,13 +181,13 @@ export function App() {
       {/* Cutscene Ending Screen */}
       {isEnding && (
         <EndingScreen
-          fireflyCount={engine.fireflies.filter((f) => f.collected).length}
-          is100PercentComplete={engine.is100PercentComplete()}
+          engine={engine}
           onReplay={handleReplay}
           onContinueExploring={() => {
             engine.isEndingSequenceActive = false;
             engine.endingCutsceneProgress = 0;
-            engine.savedState.hasReachedEnding = false;
+            engine.exitPerspectiveMode();
+            setIsEnding(false);
             handleCloseModal();
           }}
         />

@@ -64,7 +64,14 @@ export const UIOverlay: React.FC<UIOverlayProps> = ({
           )}
 
           {/* Tasks Tracker Button */}
-          <button onClick={onOpenTasks} className="ui-btn-icon relative" title="Traveler's Tasks">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenTasks();
+            }}
+            className="ui-btn-icon relative pointer-events-auto cursor-pointer"
+            title="Traveler's Tasks"
+          >
             <Compass size={18} />
             {completedTasksCount > 0 && (
               <span className="task-badge-dot">{completedTasksCount}</span>
@@ -86,34 +93,67 @@ export const UIOverlay: React.FC<UIOverlayProps> = ({
           )}
 
           {/* Journal Button */}
-          <button onClick={onOpenJournal} className="ui-btn" title="Open Journal (J)">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenJournal();
+            }}
+            className="ui-btn pointer-events-auto cursor-pointer"
+            title="Open Journal (J)"
+          >
             <BookOpen size={18} />
             <span className="hidden-mobile">Journal</span>
           </button>
 
           {/* Mute Toggle */}
-          <button onClick={onToggleMute} className="ui-btn-icon" title="Toggle Mute">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleMute();
+            }}
+            className="ui-btn-icon pointer-events-auto cursor-pointer"
+            title="Toggle Mute"
+          >
             {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
 
           {/* Settings Button */}
-          <button onClick={onOpenSettings} className="ui-btn-icon" title="Settings">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenSettings();
+            }}
+            className="ui-btn-icon pointer-events-auto cursor-pointer"
+            title="Settings"
+          >
             <Settings size={18} />
           </button>
         </div>
       </header>
 
-      {/* Guided Story Objective Compass Banner (Updates continuously) */}
-      {!isCinematicMode && storyObj && (
+      {/* Guided Story Objective Compass Banner */}
+      {!isCinematicMode && (
         <div className="story-objective-banner pointer-events-auto">
           <div className="story-banner-card">
             <Navigation size={18} className="text-amber-300 animate-pulse" />
             <div className="story-banner-text">
-              <span className="story-banner-label">Story Goal:</span>
-              <span className="story-banner-title">{storyObj.title}</span>
-              <span className="story-banner-dist">
-                — Head {storyObj.directionStr} to {storyObj.location} ({storyObj.distanceMeters}m)
-              </span>
+              {storyObj ? (
+                <>
+                  <span className="story-banner-label">Story Goal:</span>
+                  <span className="story-banner-title">{storyObj.title}</span>
+                  <span className="story-banner-dist">
+                    — Head {storyObj.directionStr} to {storyObj.location} ({storyObj.distanceMeters}m)
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="story-banner-label text-emerald-300 font-bold">✨ All Chapters Complete!</span>
+                  <span className="story-banner-title">Free Exploration</span>
+                  <span className="story-banner-dist">
+                    — Explore the forest to find 100% of secrets ({collectedFireflies}/50 fireflies)
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>

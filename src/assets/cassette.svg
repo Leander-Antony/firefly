@@ -1,0 +1,327 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Drop Shadow Filter for Cassette Chassis -->
+    <filter id="cassette-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#020617" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+
+    <!-- Inset Shadow Filter for Windows & Cutouts -->
+    <filter id="window-inset" x="-10%" y="-10%" width="120%" height="120%">
+      <feOffset dx="0" dy="3"/>
+      <feGaussianBlur stdDeviation="3" result="offset-blur"/>
+      <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+      <feFlood flood-color="#000000" flood-opacity="0.8" result="color"/>
+      <feComposite operator="in" in2="inverse" result="shadow"/>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+
+    <!-- Gradients -->
+    <!-- Main Shell Plastic Gradient -->
+    <linearGradient id="shell-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="35%" stop-color="#1e293b"/>
+      <stop offset="85%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#090d16"/>
+    </linearGradient>
+
+    <!-- Outer Bevel Edge Gradient -->
+    <linearGradient id="shell-rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="40%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- Sticker Base Gradient -->
+    <linearGradient id="label-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="50%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+
+    <!-- Synthwave Retro Accent Band -->
+    <linearGradient id="retro-stripes" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="20%" stop-color="#3b82f6"/>
+      <stop offset="40%" stop-color="#8b5cf6"/>
+      <stop offset="60%" stop-color="#ec4899"/>
+      <stop offset="80%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+
+    <!-- Magnetic Tape Gradient - Left Spool (Fuller) -->
+    <radialGradient id="tape-left" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="65%" stop-color="#451a03"/>
+      <stop offset="90%" stop-color="#271003"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </radialGradient>
+
+    <!-- Magnetic Tape Gradient - Right Spool (Less Full) -->
+    <radialGradient id="tape-right" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="55%" stop-color="#451a03"/>
+      <stop offset="88%" stop-color="#271003"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </radialGradient>
+
+    <!-- Screw Metal Gradient -->
+    <radialGradient id="screw-gradient" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="40%" stop-color="#cbd5e1"/>
+      <stop offset="75%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </radialGradient>
+
+    <!-- Clear Acrylic Window Glass Gradient -->
+    <linearGradient id="window-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#1e293b" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#020617" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <!-- Glass Specular Reflection Highlight -->
+    <linearGradient id="glare-reflection" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Spool Gear Hub Definition -->
+    <g id="spool-gear-hub">
+      <circle cx="0" cy="0" r="27" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="16" fill="#0f172a"/>
+      <!-- 6 Gear Teeth -->
+      <path d="M -3.5 -26 L 3.5 -26 L 4.5 -16 L -4.5 -16 Z" fill="#f1f5f9"/>
+      <path d="M -3.5 -26 L 3.5 -26 L 4.5 -16 L -4.5 -16 Z" fill="#f1f5f9" transform="rotate(60)"/>
+      <path d="M -3.5 -26 L 3.5 -26 L 4.5 -16 L -4.5 -16 Z" fill="#f1f5f9" transform="rotate(120)"/>
+      <path d="M -3.5 -26 L 3.5 -26 L 4.5 -16 L -4.5 -16 Z" fill="#f1f5f9" transform="rotate(180)"/>
+      <path d="M -3.5 -26 L 3.5 -26 L 4.5 -16 L -4.5 -16 Z" fill="#f1f5f9" transform="rotate(240)"/>
+      <path d="M -3.5 -26 L 3.5 -26 L 4.5 -16 L -4.5 -16 Z" fill="#f1f5f9" transform="rotate(300)"/>
+      <!-- Inner Drive Spline Ring -->
+      <circle cx="0" cy="0" r="12.5" fill="none" stroke="#94a3b8" stroke-dasharray="3,2" stroke-width="1"/>
+      <!-- Center Hex Hole -->
+      <polygon points="0,-7 6.06,-3.5 6.06,3.5 0,7 -6.06,3.5 -6.06,-3.5" fill="#020617"/>
+    </g>
+
+    <!-- Corner Screw Component -->
+    <g id="screw">
+      <circle cx="0" cy="0" r="6" fill="url(#screw-gradient)"/>
+      <circle cx="0" cy="0" r="5.5" fill="none" stroke="#475569" stroke-width="0.5"/>
+      <!-- Cross / Phillips Slot -->
+      <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#1e293b" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#1e293b" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="-2.5" y1="-2.5" x2="2.5" y2="2.5" stroke="#475569" stroke-width="0.6"/>
+    </g>
+  </defs>
+
+  <!-- ================= 1. CASSETTE CHASSIS & OUTER FRAME ================= -->
+  <g filter="url(#cassette-shadow)">
+    <!-- Outer Plastic Shell Rim -->
+    <rect x="36" y="96" width="440" height="290" rx="16" ry="16" fill="url(#shell-rim)"/>
+    
+    <!-- Outer Shell Main Body -->
+    <rect x="39" y="99" width="434" height="284" rx="13" ry="13" fill="url(#shell-bg)"/>
+
+    <!-- Shell Texture Inset Line -->
+    <rect x="44" y="104" width="424" height="274" rx="10" ry="10" fill="none" stroke="#475569" stroke-width="1" opacity="0.6"/>
+
+    <!-- Top Edge Tactile Grip Ribs (Left & Right) -->
+    <g stroke="#0f172a" stroke-width="2" stroke-linecap="round" opacity="0.7">
+      <!-- Left Ribs -->
+      <line x1="80" y1="99" x2="80" y2="110"/>
+      <line x1="88" y1="99" x2="88" y2="110"/>
+      <line x1="96" y1="99" x2="96" y2="110"/>
+      <line x1="104" y1="99" x2="104" y2="110"/>
+      <line x1="112" y1="99" x2="112" y2="110"/>
+
+      <!-- Right Ribs -->
+      <line x1="400" y1="99" x2="400" y2="110"/>
+      <line x1="408" y1="99" x2="408" y2="110"/>
+      <line x1="416" y1="99" x2="416" y2="110"/>
+      <line x1="424" y1="99" x2="424" y2="110"/>
+      <line x1="432" y1="99" x2="432" y2="110"/>
+    </g>
+
+    <!-- Side Grip Ridges -->
+    <g fill="#0f172a" opacity="0.5">
+      <rect x="39" y="180" width="3" height="12" rx="1"/>
+      <rect x="39" y="200" width="3" height="12" rx="1"/>
+      <rect x="39" y="220" width="3" height="12" rx="1"/>
+      <rect x="470" y="180" width="3" height="12" rx="1"/>
+      <rect x="470" y="200" width="3" height="12" rx="1"/>
+      <rect x="470" y="220" width="3" height="12" rx="1"/>
+    </g>
+  </g>
+
+  <!-- ================= 2. RETRO PAPER STICKER LABEL ================= -->
+  <g>
+    <!-- Label Background Plate -->
+    <rect x="54" y="120" width="404" height="162" rx="8" fill="url(#label-bg)" stroke="#d97706" stroke-width="0.5" filter="drop-shadow(0px 2px 3px rgba(0,0,0,0.3))"/>
+
+    <!-- Retro Multicolor Stripe Banner Across Top -->
+    <path d="M 54 136 L 458 136 L 458 154 L 54 154 Z" fill="url(#retro-stripes)"/>
+    <rect x="54" y="154" width="404" height="3" fill="#0f172a"/>
+
+    <!-- Retro Brand Badge "MADZ" on Top Stripe -->
+    <text x="320" y="149" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="13" letter-spacing="3" fill="#ffffff" opacity="0.95" text-anchor="middle">MADZ</text>
+
+    <!-- Printed Tech Text on Sticker Header -->
+    <!-- Noise Reduction Badges -->
+    <rect x="64" y="125" width="22" height="8" rx="1.5" fill="#0f172a"/>
+    <text x="75" y="131.5" font-family="'Courier New', monospace" font-weight="bold" font-size="6" fill="#fef3c7" text-anchor="middle">NR</text>
+
+    <text x="94" y="131" font-family="sans-serif" font-weight="900" font-size="7" fill="#1e293b">HIGH POSITION (TYPE II)</text>
+    <text x="210" y="131" font-family="sans-serif" font-weight="600" font-size="6" fill="#64748b">EQ 70µs • BIAS HIGH</text>
+
+    <!-- Tape Length Specifier -->
+    <rect x="408" y="124" width="42" height="10" rx="2" fill="#0f172a"/>
+    <text x="429" y="131.5" font-family="'Arial Black', sans-serif" font-weight="900" font-size="7.5" fill="#38bdf8" text-anchor="middle">C-90</text>
+
+    <!-- Side A Indicator Circle Badge -->
+    <circle cx="82" cy="180" r="16" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.5"/>
+    <text x="82" y="185.5" font-family="'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="16" fill="#ffffff" text-anchor="middle">A</text>
+    <text x="82" y="203" font-family="sans-serif" font-weight="bold" font-size="6.5" fill="#475569" text-anchor="middle">SIDE</text>
+
+    <!-- Handwritten Title Box Lines -->
+    <g fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,3">
+      <line x1="112" y1="172" x2="442" y2="172"/>
+      <line x1="112" y1="192" x2="442" y2="192"/>
+    </g>
+
+    <!-- Prominent "MADZ" Title & Subtitle -->
+    <text x="120" y="169" font-family="'Impact', 'Trebuchet MS', 'Arial Black', sans-serif" font-weight="900" font-size="24" letter-spacing="4" fill="#0f172a" transform="rotate(-1 120 169)">MADZ</text>
+    <text x="215" y="168" font-family="'Brush Script MT', 'Courier New', cursive, monospace" font-weight="bold" font-size="15" fill="#0284c7" transform="rotate(-1 215 168)">Awesome Mixtape Vol. 1</text>
+    <text x="350" y="188" font-family="'Courier New', monospace" font-weight="bold" font-size="10" fill="#dc2626">★ MADZ SOUNDS ★</text>
+
+    <!-- Index Lines on Right -->
+    <g stroke="#94a3b8" stroke-width="0.8">
+      <line x1="410" y1="140" x2="450" y2="140"/>
+    </g>
+  </g>
+
+  <!-- ================= 3. TRANSPARENT ACRYLIC WINDOW & TAPE SPOOLS ================= -->
+  <!-- Cutout Mask Window Frame -->
+  <g>
+    <!-- Window Outer Bevel / Frame Recess -->
+    <rect x="126" y="200" width="260" height="92" rx="10" fill="#090d16" stroke="#475569" stroke-width="1.5" filter="url(#window-inset)"/>
+
+    <!-- Clear Tinted Glass Interior -->
+    <rect x="129" y="203" width="254" height="86" rx="8" fill="url(#window-glass)"/>
+
+    <!-- Tape Spool Left (Fuller Roll ~ r=56px) -->
+    <g>
+      <!-- Layered Magnetic Tape Coil -->
+      <circle cx="184" cy="246" r="56" fill="url(#tape-left)"/>
+      <circle cx="184" cy="246" r="56" fill="none" stroke="#271003" stroke-width="1"/>
+      <!-- Concentric Tape Line Sheen Details -->
+      <circle cx="184" cy="246" r="50" fill="none" stroke="#9a3412" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="184" cy="246" r="44" fill="none" stroke="#78350f" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="184" cy="246" r="38" fill="none" stroke="#9a3412" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="184" cy="246" r="32" fill="none" stroke="#78350f" stroke-width="0.5" opacity="0.6"/>
+
+      <!-- Transparent Tape Leader Clip Base -->
+      <circle cx="184" cy="246" r="28.5" fill="#f8fafc" opacity="0.9"/>
+
+      <!-- White Gear Hub -->
+      <use href="#spool-gear-hub" x="184" y="246"/>
+    </g>
+
+    <!-- Tape Spool Right (Smaller Roll ~ r=36px) -->
+    <g>
+      <!-- Layered Magnetic Tape Coil -->
+      <circle cx="328" cy="246" r="38" fill="url(#tape-right)"/>
+      <circle cx="328" cy="246" r="38" fill="none" stroke="#271003" stroke-width="1"/>
+      <!-- Concentric Tape Line Sheen Details -->
+      <circle cx="328" cy="246" r="34" fill="none" stroke="#9a3412" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="328" cy="246" r="30" fill="none" stroke="#78350f" stroke-width="0.5" opacity="0.6"/>
+
+      <!-- Transparent Tape Leader Clip Base -->
+      <circle cx="328" cy="246" r="28.5" fill="#f8fafc" opacity="0.9"/>
+
+      <!-- White Gear Hub -->
+      <use href="#spool-gear-hub" x="328" y="246"/>
+    </g>
+
+    <!-- Tape Ribbon Spanning Between Spools to Bottom Rollers -->
+    <path d="M 128 246 L 128 358 L 384 358 L 384 246" fill="none" stroke="#451a03" stroke-width="3" opacity="0.85"/>
+    <path d="M 134 275 C 150 330, 160 354, 180 358" fill="none" stroke="#78350f" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Center Window Scale Grid & Ticks (0 - 50 - 100) -->
+    <g opacity="0.75">
+      <!-- Scale Baseline -->
+      <line x1="216" y1="246" x2="296" y2="246" stroke="#e2e8f0" stroke-width="1"/>
+      
+      <!-- Major Ticks -->
+      <line x1="216" y1="241" x2="216" y2="251" stroke="#e2e8f0" stroke-width="1.5"/>
+      <line x1="236" y1="243" x2="236" y2="249" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="256" y1="240" x2="256" y2="252" stroke="#38bdf8" stroke-width="1.5"/>
+      <line x1="276" y1="243" x2="276" y2="249" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="296" y1="241" x2="296" y2="251" stroke="#e2e8f0" stroke-width="1.5"/>
+
+      <!-- Numerals -->
+      <text x="216" y="236" font-family="monospace" font-size="6.5" font-weight="bold" fill="#f8fafc" text-anchor="middle">100</text>
+      <text x="256" y="235" font-family="monospace" font-size="7" font-weight="bold" fill="#38bdf8" text-anchor="middle">50</text>
+      <text x="296" y="236" font-family="monospace" font-size="6.5" font-weight="bold" fill="#f8fafc" text-anchor="middle">0</text>
+    </g>
+
+    <!-- Glass Reflection Diagonal Highlight -->
+    <path d="M 129 203 L 240 203 L 150 289 L 129 289 Z" fill="url(#glare-reflection)" opacity="0.6"/>
+    <path d="M 280 203 L 340 203 L 254 289 L 194 289 Z" fill="url(#glare-reflection)" opacity="0.25"/>
+  </g>
+
+  <!-- ================= 4. LOWER TRAPEZOIDAL TAPE HEAD & ROLLER ZONE ================= -->
+  <g>
+    <!-- Lower Trapezoid Face Shield -->
+    <polygon points="80,332 432,332 414,380 98,380" fill="url(#shell-bg)" stroke="#334155" stroke-width="1.5" filter="drop-shadow(0px -1px 2px rgba(0,0,0,0.5))"/>
+
+    <!-- Face Shield Inset Bevel Line -->
+    <polygon points="86,336 426,336 410,375 102,375" fill="none" stroke="#475569" stroke-width="1" opacity="0.5"/>
+
+    <!-- Exposed Magnetic Tape Ribbon Across Bottom Edge -->
+    <rect x="110" y="362" width="292" height="10" fill="#271003" stroke="#451a03" stroke-width="0.5"/>
+    <rect x="110" y="364" width="292" height="2" fill="#78350f" opacity="0.8"/>
+
+    <!-- Left & Right Guide Rollers (Brass Pin + White Plastic Roller) -->
+    <!-- Left Roller -->
+    <g>
+      <circle cx="112" cy="354" r="8.5" fill="#cbd5e1" stroke="#475569" stroke-width="1"/>
+      <circle cx="112" cy="354" r="5" fill="#f59e0b"/>
+      <circle cx="112" cy="354" r="2.5" fill="#0f172a"/>
+    </g>
+    <!-- Right Roller -->
+    <g>
+      <circle cx="400" cy="354" r="8.5" fill="#cbd5e1" stroke="#475569" stroke-width="1"/>
+      <circle cx="400" cy="354" r="5" fill="#f59e0b"/>
+      <circle cx="400" cy="354" r="2.5" fill="#0f172a"/>
+    </g>
+
+    <!-- Capstan & Pinch Roller Holes -->
+    <!-- Left Hole -->
+    <circle cx="148" cy="356" r="7.5" fill="#090d16" stroke="#334155" stroke-width="1"/>
+    <!-- Right Hole -->
+    <circle cx="364" cy="356" r="7.5" fill="#090d16" stroke="#334155" stroke-width="1"/>
+
+    <!-- Alignment Pin Holes -->
+    <circle cx="182" cy="356" r="5" fill="#020617"/>
+    <circle cx="330" cy="356" r="5" fill="#020617"/>
+
+    <!-- Central Tape Read Head Access Opening & Bronze Pressure Pad -->
+    <rect x="216" y="344" width="80" height="22" rx="3" fill="#090d16" stroke="#334155" stroke-width="1"/>
+    <!-- Felt Pressure Pad Shield (Copper / Felt Bronze) -->
+    <rect x="236" y="352" width="40" height="12" rx="1.5" fill="#b45309" stroke="#d97706" stroke-width="1"/>
+    <rect x="246" y="354" width="20" height="8" fill="#fef08a" opacity="0.8"/>
+  </g>
+
+  <!-- ================= 5. METAL ASSEMBLY SCREWS ================= -->
+  <use href="#screw" x="54" y="112"/>
+  <use href="#screw" x="458" y="112"/>
+  <use href="#screw" x="256" y="110"/>
+  <use href="#screw" x="54" y="368"/>
+  <use href="#screw" x="458" y="368"/>
+
+  <!-- ================= 6. CASSETTE BODY OVERALL GLASS GLARE HIGHLIGHT ================= -->
+  <!-- Diagonal Sheen across whole shell body -->
+  <path d="M 39 99 L 180 99 L 39 340 Z" fill="url(#glare-reflection)" opacity="0.12"/>
+  <path d="M 240 99 L 330 99 L 110 380 L 39 380 Z" fill="url(#glare-reflection)" opacity="0.06"/>
+</svg>
