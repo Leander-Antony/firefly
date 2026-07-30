@@ -104,7 +104,7 @@ class SoundEngineManager {
     windFilter.frequency.value = 250;
 
     this.windGainNode = this.ctx.createGain();
-    this.windGainNode.gain.value = 0.15;
+    this.windGainNode.gain.value = 0.05;
 
     windSource.connect(windFilter);
     windFilter.connect(this.windGainNode);
@@ -165,14 +165,14 @@ class SoundEngineManager {
 
     const now = this.ctx.currentTime;
     if (zoneSound === 'rain') {
-      this.rainGainNode.gain.setTargetAtTime(0.25, now, 1.5);
-      this.windGainNode.gain.setTargetAtTime(0.2, now, 1.5);
+      this.rainGainNode.gain.setTargetAtTime(0.05, now, 1.5);
+      this.windGainNode.gain.setTargetAtTime(0.04, now, 1.5);
     } else if (zoneSound === 'wind') {
-      this.rainGainNode.gain.setTargetAtTime(0.02, now, 1.5);
-      this.windGainNode.gain.setTargetAtTime(0.35, now, 1.5);
+      this.rainGainNode.gain.setTargetAtTime(0.01, now, 1.5);
+      this.windGainNode.gain.setTargetAtTime(0.07, now, 1.5);
     } else {
-      this.rainGainNode.gain.setTargetAtTime(0.03, now, 1.5);
-      this.windGainNode.gain.setTargetAtTime(0.12, now, 1.5);
+      this.rainGainNode.gain.setTargetAtTime(0.01, now, 1.5);
+      this.windGainNode.gain.setTargetAtTime(0.02, now, 1.5);
     }
   }
 

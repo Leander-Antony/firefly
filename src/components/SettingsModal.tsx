@@ -456,10 +456,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ engine, onClose })
                   <span className="key-cap">{settings.keymap?.sit || 'Space'}</span>
                 </div>
 
-                <div className="settings-card-toggle-item">
-                  <span className="label-title">Open Traveler's Journal</span>
-                  <span className="key-cap">{settings.keymap?.journal?.replace('Key', '') || 'J'}</span>
-                </div>
 
                 <div className="settings-card-toggle-item">
                   <span className="label-title">Exit Perspective View / Close Modals</span>

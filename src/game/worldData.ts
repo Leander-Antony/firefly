@@ -491,7 +491,7 @@ export const INTERACTIVE_POINTS: InteractivePoint[] = [
     x: 2000,
     y: 1500,
     radius: 90,
-    type: 'coffee_stand',
+    type: 'arcade',
     label: 'Inspect Retro Arcade Machine & Insert Token',
     zoneId: 'arcade_ruins',
   },

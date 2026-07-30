@@ -170,7 +170,8 @@ export interface InteractivePoint {
     | 'telescope'
     | 'lantern'
     | 'easter_egg'
-    | 'train_campfire';
+    | 'train_campfire'
+    | 'arcade';
   label: string;
   zoneId: ZoneId;
   extraData?: any;
@@ -186,12 +187,6 @@ export interface EasterEggEntity {
   iconName: string;
 }
 
-export interface JournalEntry {
-  id: string;
-  date: string;
-  prompt: string;
-  content: string;
-}
 
 export interface WhisperNote {
   id: string;
@@ -218,7 +213,6 @@ export interface GameSettings {
     right: string;
     interact: string;
     sit: string;
-    journal: string;
   };
 }
 
@@ -233,7 +227,6 @@ export interface SavedGameState {
   completedTaskIds: string[];
   activeStoryIndex: number;
   hasSeenPrologue: boolean;
-  journalEntries: JournalEntry[];
   keptWhisperNotes: WhisperNote[];
   coffeeCount: number;
   coffeeMessagesUnlocked: string[];

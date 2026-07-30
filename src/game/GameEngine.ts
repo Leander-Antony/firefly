@@ -108,7 +108,7 @@ export class GameEngine {
   public targetWalkX: number | null = null;
   public targetWalkY: number | null = null;
 
-  public activeModal: 'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding' | null = null;
+  public activeModal: 'letter' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'arcade' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding' | null = null;
 
   public isEndingSequenceActive: boolean = false;
   public endingCutsceneProgress: number = 0;
@@ -313,14 +313,6 @@ export class GameEngine {
       this.triggerInteraction();
     }
 
-    if (code === 'KeyJ') {
-      if (this.activeModal === 'journal') {
-        this.closeModal();
-      } else {
-        this.openModal('journal');
-        SoundEngine.playPageFlip();
-      }
-    }
 
     if (code === 'Space') {
       this.toggleSitting();
@@ -377,7 +369,7 @@ export class GameEngine {
     this.activeCinematicType = null;
   }
 
-  public openModal(modal: 'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding'): void {
+  public openModal(modal: 'letter' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'arcade' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding'): void {
     if (!this.savedState.hasSeenPrologue && modal !== 'prologue') {
       this.savedState.hasSeenPrologue = true;
       saveGameState(this.savedState);
@@ -407,6 +399,9 @@ export class GameEngine {
         this.enterPerspectiveMode('coffee');
         this.openModal('coffee_stand');
         SoundEngine.playPageFlip();
+      } else if (type === 'arcade') {
+        this.openModal('arcade');
+        SoundEngine.playPageFlip();
       } else if (type === 'telescope') {
         this.openModal('telescope');
         SoundEngine.playPageFlip();
@@ -427,14 +422,13 @@ export class GameEngine {
 
     if (this.nearLetter) {
       this.unlockLetter(this.nearLetter.id);
-      this.openModal('journal');
+      this.openModal('letter');
       SoundEngine.playPageFlip();
       return;
     }
 
     if (this.nearTape) {
       this.unlockTape(this.nearTape.id);
-      this.openModal('journal');
       SoundEngine.playCassetteClick();
       return;
     }

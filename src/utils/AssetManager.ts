@@ -27,7 +27,6 @@ import starlightBluebirdSvg from '../assets/starlight_bluebird.svg';
 import waterfallBridgeSvg from '../assets/starlight_waterfall_bridge.svg';
 import coffeeMugSvg from '../assets/tiny_ceramic_coffee_mug.svg';
 import chocolateBarSvg from '../assets/tiny_chocolate_bar.svg';
-import journalCoverSvg from '../assets/travelers_journal_notebook_cover.svg';
 import whisperTreeSvg from '../assets/whisper_tree.svg';
 
 export const SVG_ASSETS = {
@@ -59,7 +58,6 @@ export const SVG_ASSETS = {
   waterfallBridge: waterfallBridgeSvg,
   coffeeMug: coffeeMugSvg,
   chocolateBar: chocolateBarSvg,
-  journalCover: journalCoverSvg,
   whisperTree: whisperTreeSvg,
 };
 

@@ -19,9 +19,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
     down: 'KeyS',
     left: 'KeyA',
     right: 'KeyD',
-    interact: 'KeyE',
     sit: 'Space',
-    journal: 'KeyJ',
   },
 };
 
@@ -36,7 +34,6 @@ export const INITIAL_SAVE_STATE: SavedGameState = {
   completedTaskIds: [],
   activeStoryIndex: 0,
   hasSeenPrologue: false,
-  journalEntries: [],
   keptWhisperNotes: [],
   coffeeCount: 0,
   coffeeMessagesUnlocked: [],
@@ -56,7 +53,6 @@ export function loadGameState(): SavedGameState {
       ...INITIAL_SAVE_STATE,
       ...parsed,
       keptWhisperNotes: parsed.keptWhisperNotes || [],
-      journalEntries: parsed.journalEntries || [],
       collectedFireflyIds: parsed.collectedFireflyIds || [],
       unlockedLetterIds: parsed.unlockedLetterIds || [],
       unlockedTapeIds: parsed.unlockedTapeIds || [],

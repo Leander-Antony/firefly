@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { GameEngine } from './game/GameEngine';
 import { GameCanvas } from './components/GameCanvas';
 import { UIOverlay } from './components/UIOverlay';
-import { JournalModal } from './components/JournalModal';
+import { LetterModal } from './components/LetterModal';
 import { WhisperTreeModal } from './components/WhisperTreeModal';
 import { StoneSkippingModal } from './components/StoneSkippingModal';
+import { CoffeeStandModal } from './components/CoffeeStandModal';
+import { ArcadeModal } from './components/ArcadeModal';
 import { SettingsModal } from './components/SettingsModal';
 import { TaskTrackerModal } from './components/TaskTrackerModal';
 import { PrologueCutscene } from './components/PrologueCutscene';
@@ -22,7 +24,7 @@ export function App() {
   const engine = engineRef.current;
 
   const [activeModal, setActiveModal] = useState<
-    'journal' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding' | null
+    'letter' | 'whisper_tree' | 'stone_skipping' | 'coffee_stand' | 'arcade' | 'settings' | 'tasks' | 'prologue' | 'telescope' | 'bird_feeding' | null
   >(engine.activeModal);
 
   const [isMuted, setIsMuted] = useState(false);
@@ -80,11 +82,6 @@ export function App() {
     setStoryWaypointModal(null);
   };
 
-  const handleOpenJournal = () => {
-    engine.openModal('journal');
-    setActiveModal('journal');
-    SoundEngine.playPageFlip();
-  };
 
   const handleOpenTasks = () => {
     engine.openModal('tasks');
@@ -128,7 +125,6 @@ export function App() {
       {/* Main HUD overlay */}
       <UIOverlay
         engine={engine}
-        onOpenJournal={handleOpenJournal}
         onOpenTasks={handleOpenTasks}
         onOpenSettings={handleOpenSettings}
         onToggleMute={handleToggleMute}
@@ -145,9 +141,10 @@ export function App() {
         <RPGDialogueBox waypoint={storyWaypointModal} onContinue={handleContinueStory} />
       )}
 
+
       {/* Modals */}
-      {activeModal === 'journal' && (
-        <JournalModal engine={engine} onClose={handleCloseModal} />
+      {activeModal === 'letter' && engine.nearLetter && (
+        <LetterModal letter={engine.nearLetter} onClose={handleCloseModal} />
       )}
 
       {activeModal === 'tasks' && (
@@ -163,7 +160,11 @@ export function App() {
       )}
 
       {activeModal === 'coffee_stand' && (
-        <JournalModal engine={engine} onClose={handleCloseModal} />
+        <CoffeeStandModal engine={engine} onClose={handleCloseModal} />
+      )}
+
+      {activeModal === 'arcade' && (
+        <ArcadeModal engine={engine} onClose={handleCloseModal} />
       )}
 
       {activeModal === 'settings' && (

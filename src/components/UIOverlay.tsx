@@ -6,7 +6,6 @@ import { MinimapWidget } from './MinimapWidget';
 
 interface UIOverlayProps {
   engine: GameEngine;
-  onOpenJournal: () => void;
   onOpenTasks: () => void;
   onOpenSettings: () => void;
   onToggleMute: () => void;
@@ -15,7 +14,6 @@ interface UIOverlayProps {
 
 export const UIOverlay: React.FC<UIOverlayProps> = ({
   engine,
-  onOpenJournal,
   onOpenTasks,
   onOpenSettings,
   onToggleMute,
@@ -92,18 +90,6 @@ export const UIOverlay: React.FC<UIOverlayProps> = ({
             </div>
           )}
 
-          {/* Journal Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenJournal();
-            }}
-            className="ui-btn pointer-events-auto cursor-pointer"
-            title="Open Journal (J)"
-          >
-            <BookOpen size={18} />
-            <span className="hidden-mobile">Journal</span>
-          </button>
 
           {/* Mute Toggle */}
           <button

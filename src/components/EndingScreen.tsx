@@ -24,7 +24,7 @@ interface EndingScreenProps {
   onContinueExploring: () => void;
 }
 
-type EndingTab = 'reflection' | 'radio' | 'cat' | 'journal';
+type EndingTab = 'reflection' | 'radio' | 'cat';
 
 export const EndingScreen: React.FC<EndingScreenProps> = ({
   engine,
@@ -214,16 +214,6 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
             <Heart size={14} /> Station Cat
           </button>
 
-          <button
-            onClick={() => setActiveTab('journal')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-serif transition-all ${
-              activeTab === 'journal'
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <BookOpen size={14} /> Full Journey Summary
-          </button>
         </div>
 
         {/* Tab Body Content (Scrollable) */}
@@ -433,41 +423,7 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
                   </p>
                 )}
               </motion.div>
-            )}
-
-            {/* TAB 4: FULL JOURNEY SUMMARY */}
-            {activeTab === 'journal' && (
-              <motion.div
-                key="tab-journal"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-3"
-              >
-                <p className="text-xs text-amber-200/80 italic font-serif text-center">
-                  All 10 story chapters unlocked during your journey through the firefly twilight:
-                </p>
-
-                <div className="space-y-2 max-h-56 overflow-y-auto pr-1 custom-scrollbar">
-                  {engine.storyWaypoints.map((wp) => (
-                    <div
-                      key={wp.id}
-                      className="p-3 rounded-xl bg-slate-950/80 border border-purple-500/20 flex items-start gap-3"
-                    >
-                      <CheckCircle2 size={16} className="text-emerald-400 shrink-0 mt-0.5" />
-                      <div className="min-w-0">
-                        <div className="text-xs font-bold text-amber-200 font-serif">
-                          Chapter {wp.chapterNumber}: {wp.title}
-                        </div>
-                        <div className="text-[11px] text-purple-200/80 font-serif italic mt-0.5 line-clamp-2">
-                          "{wp.dialogText}"
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+             )}
           </AnimatePresence>
         </div>
 

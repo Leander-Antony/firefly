@@ -144,6 +144,24 @@ export const MinimapWidget: React.FC<MinimapWidgetProps> = ({ engine }) => {
         ctx.fill();
       }
 
+      // Render Arcade Token (egg_6) if not collected
+      const tokenEgg = engine.easterEggs.find(e => e.id === 'egg_6');
+      if (tokenEgg && !engine.savedState.foundEasterEggIds.includes('egg_6')) {
+        const tx = tokenEgg.x * scale;
+        const ty = tokenEgg.y * scale;
+        
+        ctx.fillStyle = '#fbbf24'; // Amber-400
+        ctx.beginPath();
+        ctx.arc(tx, ty, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.strokeStyle = `rgba(251, 191, 36, ${0.4 + Math.abs(Math.sin(Date.now() / 400)) * 0.6})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(tx, ty, 6.5, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
       // Player Icon (Center purple dot)
       const px = engine.player.x * scale;
       const py = engine.player.y * scale;
