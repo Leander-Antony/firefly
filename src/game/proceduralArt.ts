@@ -660,31 +660,65 @@ export class ProceduralArt {
 
     // Wooden Bench
     const benchX = w / 2;
-    ctx.fillStyle = '#44281d';
-    ctx.fillRect(benchX - 80, groundY - 30, 160, 12);
-    ctx.fillRect(benchX - 80, groundY - 60, 160, 10);
-    ctx.fillStyle = '#1c1917';
-    ctx.fillRect(benchX - 70, groundY - 60, 8, 42);
-    ctx.fillRect(benchX + 62, groundY - 60, 8, 42);
+    
+    const benchSvg = getCachedSvgImage('rainShelterBench');
+    if (benchSvg) {
+      // Draw SVG Bench
+      const svgW = 320;
+      const svgH = 320;
+      // Feet are at ~86% of the SVG height.
+      const svgY = groundY - (svgH * 0.86);
+      ctx.drawImage(benchSvg, benchX - (svgW / 2), svgY, svgW, svgH);
 
-    // Traveler sitting peacefully
-    ctx.fillStyle = '#312e81';
-    ctx.fillRect(benchX - 15, groundY - 55, 30, 30);
-    ctx.fillStyle = '#c084fc';
-    ctx.fillRect(benchX - 12, groundY - 62, 24, 8);
-    ctx.fillStyle = '#1e1b4b';
-    ctx.beginPath();
-    ctx.arc(benchX, groundY - 74, 12, 0, Math.PI * 2);
-    ctx.fill();
+      // Seat is at ~66.5% of the SVG height.
+      const seatY = svgY + (svgH * 0.665);
+
+      // Traveler sitting peacefully on SVG Bench
+      // Body
+      ctx.fillStyle = '#312e81';
+      ctx.fillRect(benchX - 15, seatY - 35, 30, 35); 
+      // Legs dangling over edge
+      ctx.fillStyle = '#1e1b4b';
+      ctx.fillRect(benchX - 12, seatY, 10, 18);
+      ctx.fillRect(benchX + 2, seatY, 10, 18);
+      // Scarf
+      ctx.fillStyle = '#c084fc';
+      ctx.fillRect(benchX - 18, seatY - 30, 24, 10); 
+      ctx.fillRect(benchX - 18, seatY - 20, 8, 15); // Scarf tail
+      // Head
+      ctx.fillStyle = '#1e1b4b';
+      ctx.beginPath();
+      ctx.arc(benchX, seatY - 48, 14, 0, Math.PI * 2); 
+      ctx.fill();
+    } else {
+      // Fallback Hand-drawn Bench
+      ctx.fillStyle = '#44281d';
+      ctx.fillRect(benchX - 80, groundY - 30, 160, 12);
+      ctx.fillRect(benchX - 80, groundY - 60, 160, 10);
+      ctx.fillStyle = '#1c1917';
+      ctx.fillRect(benchX - 70, groundY - 60, 8, 42);
+      ctx.fillRect(benchX + 62, groundY - 60, 8, 42);
+
+      // Traveler sitting peacefully on fallback bench
+      const seatY = groundY - 60;
+      ctx.fillStyle = '#312e81';
+      ctx.fillRect(benchX - 15, seatY - 35, 30, 35);
+      ctx.fillStyle = '#c084fc';
+      ctx.fillRect(benchX - 12, seatY - 30, 24, 8);
+      ctx.fillStyle = '#1e1b4b';
+      ctx.beginPath();
+      ctx.arc(benchX, seatY - 45, 12, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     // Lantern Glow beside Bench
     const flicker = Math.sin(Date.now() * 0.01) * 4;
-    const bloom = ctx.createRadialGradient(benchX + 100, groundY - 10, 2, benchX + 100, groundY - 10, 80 + flicker);
+    const bloom = ctx.createRadialGradient(benchX + 110, groundY - 10, 2, benchX + 110, groundY - 10, 80 + flicker);
     bloom.addColorStop(0, 'rgba(251, 146, 60, 0.85)');
     bloom.addColorStop(1, 'transparent');
     ctx.fillStyle = bloom;
     ctx.beginPath();
-    ctx.arc(benchX + 100, groundY - 10, 80 + flicker, 0, Math.PI * 2);
+    ctx.arc(benchX + 110, groundY - 10, 80 + flicker, 0, Math.PI * 2);
     ctx.fill();
 
     // Falling Raindrops

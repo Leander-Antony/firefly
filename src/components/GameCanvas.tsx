@@ -443,6 +443,38 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
       renderables.sort((a, b) => a.y - b.y);
       renderables.forEach((r) => r.draw(ctx));
 
+      // Forest Spirit Animation
+      if (engine.isForestSpiritActive) {
+        const fsImg = getCachedSvgImage('forestSpirit');
+        if (fsImg) {
+          const elapsed = Date.now() - engine.forestSpiritTime;
+          const progress = Math.min(1, elapsed / 2000);
+          
+          // Eases out, floats up, fades out at end
+          const floatY = (1 - Math.pow(1 - progress, 3)) * -120; 
+          const hoverY = Math.sin(elapsed * 0.01) * 5;
+          const opacity = progress > 0.8 ? (1 - (progress - 0.8) * 5) : (progress < 0.2 ? progress * 5 : 1);
+          
+          ctx.save();
+          ctx.globalAlpha = opacity;
+          
+          // Add a subtle glow behind it
+          const cx = engine.player.x;
+          const cy = engine.player.y - 60 + floatY + hoverY;
+          
+          const glow = ctx.createRadialGradient(cx, cy, 5, cx, cy, 40);
+          glow.addColorStop(0, 'rgba(167, 139, 250, 0.4)');
+          glow.addColorStop(1, 'transparent');
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(cx, cy, 40, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.drawImage(fsImg, cx - 30, cy - 30, 60, 60);
+          ctx.restore();
+        }
+      }
+
       // Overlay Fireflies
       engine.fireflies.forEach((f) => {
         if (f.x >= cam.x - 100 && f.x <= cam.x + w + 100 && f.y >= cam.y - 100 && f.y <= cam.y + h + 100) {

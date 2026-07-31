@@ -27,7 +27,7 @@ class SoundEngineManager {
     largeText: false,
     cloakStyle: 'violet',
     lanternGlow: 'amber',
-    keymap: { up: 'KeyW', down: 'KeyS', left: 'KeyA', right: 'KeyD', interact: 'KeyE', sit: 'Space', journal: 'KeyJ' }
+    keymap: { up: 'KeyW', down: 'KeyS', left: 'KeyA', right: 'KeyD', interact: 'KeyE', sit: 'Space' }
   };
 
   private currentZoneSound: string = 'forest';

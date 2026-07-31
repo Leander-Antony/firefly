@@ -114,6 +114,9 @@ export class GameEngine {
   public isEndingSequenceActive: boolean = false;
   public endingCutsceneProgress: number = 0;
 
+  public isForestSpiritActive: boolean = false;
+  public forestSpiritTime: number = 0;
+
   private keyState: Record<string, boolean> = {};
 
   constructor() {
@@ -316,7 +319,11 @@ export class GameEngine {
 
 
     if (code === 'Space') {
-      this.toggleSitting();
+      if (!this.isForestSpiritActive) {
+        this.isForestSpiritActive = true;
+        this.forestSpiritTime = Date.now();
+        SoundEngine.playFireflyCollect();
+      }
     }
 
     if (code === 'Escape') {
@@ -495,6 +502,15 @@ export class GameEngine {
   }
 
   public update(viewportWidth: number, viewportHeight: number): void {
+    if (this.isEndingSequenceActive) {
+      this.endingCutsceneProgress = Math.min(1.0, this.endingCutsceneProgress + 0.005);
+      return;
+    }
+
+    if (this.isForestSpiritActive && Date.now() - this.forestSpiritTime > 2000) {
+      this.isForestSpiritActive = false;
+    }
+
     this.updatePlayerMovement();
     this.updateCamera(viewportWidth, viewportHeight);
     this.updateFireflies();

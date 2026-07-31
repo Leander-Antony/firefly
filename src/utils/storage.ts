@@ -19,6 +19,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
     down: 'KeyS',
     left: 'KeyA',
     right: 'KeyD',
+    interact: 'KeyE',
     sit: 'Space',
   },
 };
