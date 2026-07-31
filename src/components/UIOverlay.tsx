@@ -28,7 +28,8 @@ export const UIOverlay: React.FC<UIOverlayProps> = ({
   const nearPrompt =
     engine.nearInteractivePoint?.label ||
     (engine.nearLetter ? `Read Letter: "${engine.nearLetter.title}"` : null) ||
-    (engine.nearTape ? `Discover Cassette Tape: "${engine.nearTape.songTitle}"` : null);
+    (engine.nearTape ? `Discover Cassette Tape: "${engine.nearTape.songTitle}"` : null) ||
+    (engine.nearEasterEgg ? `Discover Secret: ${engine.nearEasterEgg.name}` : null);
 
   const isCinematicMode = engine.perspectiveMode === 'cinematic_side';
 

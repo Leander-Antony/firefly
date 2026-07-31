@@ -72,6 +72,7 @@ export class GameEngine {
   public nearInteractivePoint: InteractivePoint | null = null;
   public nearLetter: LetterEntity | null = null;
   public nearTape: CassetteTapeEntity | null = null;
+  public nearEasterEgg: EasterEggEntity | null = null;
 
   public savedState: SavedGameState = loadGameState();
 
@@ -384,6 +385,12 @@ export class GameEngine {
   }
 
   public triggerInteraction(): void {
+    if (this.nearEasterEgg) {
+      this.collectEasterEgg(this.nearEasterEgg.id);
+      SoundEngine.playFireflyCollect();
+      return;
+    }
+
     if (this.nearInteractivePoint) {
       const type = this.nearInteractivePoint.type;
       if (type === 'bench') {
@@ -443,6 +450,18 @@ export class GameEngine {
         saveGameState(this.savedState);
       }
       this.updateTaskProgress();
+    }
+  }
+
+  public collectEasterEgg(eggId: string): void {
+    const egg = this.easterEggs.find((e) => e.id === eggId);
+    if (egg && !egg.found) {
+      egg.found = true;
+      if (!this.savedState.foundEasterEggIds.includes(eggId)) {
+        this.savedState.foundEasterEggIds.push(eggId);
+        saveGameState(this.savedState);
+      }
+      this.showTaskToast(`Found Secret: ${egg.name}`);
     }
   }
 
@@ -694,6 +713,19 @@ export class GameEngine {
       }
     });
     this.nearTape = closestTape;
+
+    let closestEgg: EasterEggEntity | null = null;
+    let minEggDist = 75;
+    this.easterEggs.forEach((e) => {
+      if (!e.found) {
+        const dist = Math.hypot(this.player.x - e.x, this.player.y - e.y);
+        if (dist < minEggDist) {
+          minEggDist = dist;
+          closestEgg = e;
+        }
+      }
+    });
+    this.nearEasterEgg = closestEgg;
   }
 
   private updateZoneDetection(): void {

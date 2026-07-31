@@ -434,97 +434,111 @@ export const TelescopeModal: React.FC<TelescopeModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="modal-backdrop z-50 flex items-center justify-center p-4">
+    <div className="modal-backdrop">
       <motion.div
-        initial={{ opacity: 0, scale: 0.88 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.88 }}
-        className="relative bg-slate-950 border border-purple-500/20 rounded-3xl p-6 max-w-2xl w-full shadow-2xl text-center text-slate-100 overflow-hidden"
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        className="letter-modal-card"
+        style={{ perspective: 1000, maxWidth: '500px', background: 'rgba(10, 5, 25, 0.95)' }}
       >
-        {/* Ambient card glow */}
-        <div
-          className="absolute inset-0 rounded-3xl pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 75% 50% at 50% 25%, rgba(88,28,135,0.2) 0%, transparent 70%)',
-          }}
-        />
-
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors z-40"
-          title="Close Telescope View"
-        >
-          <X size={20} />
-        </button>
-
-        {/* Header */}
-        <div className="relative z-10 flex items-center justify-center gap-2 mb-4 text-purple-300 font-serif">
-          <Eye size={22} className="text-amber-300 animate-pulse" />
-          <h2 className="text-xl font-bold tracking-wide">Forgotten Observatory Lens</h2>
-        </div>
-
-        {/* ── CANVAS VIEWPORT ── */}
-        <div
-          ref={containerRef}
-          className="relative mx-auto"
-          style={{ width: 'min(340px, 78vw)', height: 'min(340px, 78vw)' }}
-        >
-          <canvas
-            ref={canvasRef}
-            onClick={handleCanvasClick}
-            className="rounded-full cursor-crosshair block"
-            style={{ width: '100%', height: '100%' }}
-          />
-        </div>
-
-        {/* ── Constellation selector pills ── */}
-        <div className="relative z-10 flex gap-2 justify-center mt-5 flex-wrap">
-          {CONSTELLATIONS.map((c) => {
-            const isActive = selected.id === c.id;
-            return (
-              <button
-                key={c.id}
-                onClick={() => handleSelect(c)}
-                className="px-3 py-1.5 rounded-full text-xs font-mono border transition-all duration-200 flex items-center gap-1.5"
-                style={{
-                  backgroundColor: isActive ? c.color : 'rgba(15,23,42,0.6)',
-                  borderColor: isActive ? c.color : 'rgba(100,116,139,0.35)',
-                  color: isActive ? '#0f172a' : '#94a3b8',
-                  fontWeight: isActive ? 700 : 400,
-                  transform: isActive ? 'scale(1.06)' : 'scale(1)',
-                  boxShadow: isActive ? `0 0 14px ${c.color}60` : 'none',
-                }}
-              >
-                <Sparkles size={11} />
-                {c.name}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ── Description card ── */}
-        <motion.div
-          key={selected.id}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative z-10 mt-3 p-4 rounded-2xl border text-center"
-          style={{
-            backgroundColor: `${selected.color}0d`,
-            borderColor: `${selected.color}28`,
-          }}
-        >
-          <h3
-            className="text-sm font-serif font-bold flex items-center justify-center gap-2"
-            style={{ color: selected.color }}
+        <div className="letter-modal-inner" style={{ padding: '1rem', textAlign: 'center' }}>
+          <div className="letter-ambient-light" style={{ background: 'radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%)' }} />
+          
+          <button
+            onClick={onClose}
+            className="close-btn"
+            style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 20 }}
+            title="Leave Telescope"
           >
-            <Sparkles size={14} /> {selected.name}
-          </h3>
-          <p className="text-xs font-serif italic text-purple-200/75 mt-1 leading-relaxed">
-            "{selected.description}"
-          </p>
-        </motion.div>
+            <X size={16} />
+          </button>
+          
+          <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+            
+            {/* Header inline */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+              <div style={{
+                width: '32px', height: '32px', borderRadius: '8px',
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05))',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: '1px solid rgba(167, 139, 250, 0.3)',
+                boxShadow: '0 0 10px rgba(139, 92, 246, 0.2)'
+              }}>
+                <Eye size={18} color="#c084fc" />
+              </div>
+              <h2 className="letter-title" style={{ 
+                fontSize: '1.2rem', margin: 0,
+                background: 'linear-gradient(to right, #e9d5ff, #c084fc, #e9d5ff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>Forgotten Observatory Lens</h2>
+            </div>
+
+            {/* ── CANVAS VIEWPORT ── */}
+            <div
+              ref={containerRef}
+              className="relative shadow-[0_0_40px_rgba(0,0,0,0.8)] rounded-full mb-2"
+              style={{ width: 'min(300px, 70vw, 45vh)', height: 'min(300px, 70vw, 45vh)' }}
+            >
+              <canvas
+                ref={canvasRef}
+                onClick={handleCanvasClick}
+                className="cursor-crosshair block w-full h-full rounded-full"
+              />
+            </div>
+
+            {/* ── Constellation selector pills ── */}
+            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '0.5rem' }}>
+              {CONSTELLATIONS.map((c) => {
+                const isActive = selected.id === c.id;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => handleSelect(c)}
+                    style={{
+                      padding: '0.4rem 1rem',
+                      borderRadius: '999px',
+                      fontSize: '0.85rem',
+                      fontFamily: 'monospace',
+                      fontWeight: isActive ? 700 : 400,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      transition: 'all 0.2s',
+                      backgroundColor: isActive ? c.color : 'rgba(15,23,42,0.6)',
+                      border: isActive ? `1px solid ${c.color}` : '1px solid rgba(100,116,139,0.35)',
+                      color: isActive ? '#0f172a' : '#94a3b8',
+                      boxShadow: isActive ? `0 0 14px ${c.color}60` : 'none',
+                      transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                    }}
+                  >
+                    <Sparkles size={12} />
+                    {c.name}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* ── Description card ── */}
+            <motion.div
+              key={selected.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                background: 'rgba(0,0,0,0.4)', borderRadius: '16px', padding: '1.2rem', width: '100%',
+                border: '1px solid rgba(167, 139, 250, 0.15)'
+              }}
+            >
+              <div style={{ fontSize: '0.9rem', color: selected.color, fontWeight: 'bold', marginBottom: '0.4rem', fontFamily: 'monospace' }}>
+                &gt; {selected.name}
+              </div>
+              <div style={{ color: '#cbd5e1', fontSize: '0.9rem', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+                "{selected.description}"
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
     </div>
   );

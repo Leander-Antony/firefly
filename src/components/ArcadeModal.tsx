@@ -4,6 +4,7 @@ import { X, Gamepad2 } from 'lucide-react';
 import { GameEngine } from '../game/GameEngine';
 import { SoundEngine } from '../audio/SoundEngine';
 import { saveGameState } from '../utils/storage';
+import { ArcadeMinigame } from './ArcadeMinigame';
 
 interface ArcadeModalProps {
   engine: GameEngine;
@@ -24,12 +25,6 @@ export const ArcadeModal: React.FC<ArcadeModalProps> = ({ engine, onClose }) => 
     if (hasToken) {
       SoundEngine.playCassetteClick();
       setTokenInserted(true);
-      
-      // In a more complex version this might unlock a minigame, 
-      // but for now it's just a sweet little interaction.
-      setTimeout(() => {
-        setTokenInserted(false);
-      }, 5000);
     }
   };
 
@@ -55,44 +50,39 @@ export const ArcadeModal: React.FC<ArcadeModalProps> = ({ engine, onClose }) => 
           </button>
           
           <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-            <div style={{
-              width: '80px', height: '80px', borderRadius: '20px',
-              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05))',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              border: '2px solid rgba(167, 139, 250, 0.3)',
-              marginBottom: '1rem',
-              boxShadow: '0 0 20px rgba(139, 92, 246, 0.2)'
-            }}>
-              <Gamepad2 size={40} color="#c084fc" />
-            </div>
+            {!tokenInserted && (
+              <>
+                <div style={{
+                  width: '80px', height: '80px', borderRadius: '20px',
+                  background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05))',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  border: '2px solid rgba(167, 139, 250, 0.3)',
+                  marginBottom: '1rem',
+                  boxShadow: '0 0 20px rgba(139, 92, 246, 0.2)'
+                }}>
+                  <Gamepad2 size={40} color="#c084fc" />
+                </div>
 
-            <h2 className="letter-title" style={{ 
-              fontSize: '1.8rem', margin: '0 0 0.5rem 0',
-              background: 'linear-gradient(to right, #e9d5ff, #c084fc, #e9d5ff)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>Retro Arcade Shrine</h2>
-            
-            <p style={{ color: '#cbd5e1', fontSize: '0.9rem', fontStyle: 'italic', marginBottom: '1.5rem', fontFamily: 'Georgia, serif' }}>
-              An abandoned arcade cabinet with a flickering CRT screen. The glass is cold, but the machine still hums faintly.
-            </p>
+                <h2 className="letter-title" style={{ 
+                  fontSize: '1.8rem', margin: '0 0 0.5rem 0',
+                  background: 'linear-gradient(to right, #e9d5ff, #c084fc, #e9d5ff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>Retro Arcade Shrine</h2>
+                
+                <p style={{ color: '#cbd5e1', fontSize: '0.9rem', fontStyle: 'italic', marginBottom: '1.5rem', fontFamily: 'Georgia, serif' }}>
+                  An abandoned arcade cabinet with a flickering CRT screen. The glass is cold, but the machine still hums faintly.
+                </p>
+              </>
+            )}
             
             {tokenInserted ? (
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                style={{
-                  background: 'rgba(0,0,0,0.6)', borderRadius: '16px', padding: '1.5rem', width: '100%',
-                  border: '1px solid rgba(16, 185, 129, 0.3)', marginBottom: '1.5rem',
-                  boxShadow: 'inset 0 0 20px rgba(16, 185, 129, 0.1)'
-                }}
+                style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
               >
-                <div style={{ fontSize: '1rem', color: '#6ee7b7', fontWeight: 'bold', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
-                  &gt; INSERT COIN
-                </div>
-                <div style={{ fontSize: '0.9rem', color: '#ecfdf5', fontFamily: 'monospace' }}>
-                  Thank you for playing...
-                </div>
+                <ArcadeMinigame />
               </motion.div>
             ) : (
               <div style={{

@@ -371,6 +371,43 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ engine }) => {
         }
       });
 
+      // Easter Eggs
+      engine.easterEggs.forEach((e) => {
+        if (!e.found && e.x >= cam.x - 100 && e.x <= cam.x + w + 100 && e.y >= cam.y - 100 && e.y <= cam.y + h + 100) {
+          renderables.push({
+            y: e.y,
+            draw: (c) => {
+              const pulse = 0.5 + Math.abs(Math.sin(time * 3)) * 0.5;
+              
+              const eggGlow = c.createRadialGradient(e.x, e.y, 2, e.x, e.y, 22);
+              eggGlow.addColorStop(0, `rgba(251, 191, 36, ${0.8 * pulse})`);
+              eggGlow.addColorStop(1, 'transparent');
+              c.fillStyle = eggGlow;
+              c.beginPath();
+              c.arc(e.x, e.y, 22, 0, Math.PI * 2);
+              c.fill();
+
+              if (e.id === 'egg_6') {
+                const tokenImg = getCachedSvgImage('arcadeToken');
+                if (tokenImg) {
+                  c.drawImage(tokenImg, e.x - 12, e.y - 12, 24, 24);
+                } else {
+                  c.fillStyle = '#fbbf24';
+                  c.beginPath();
+                  c.arc(e.x, e.y, 6, 0, Math.PI * 2);
+                  c.fill();
+                }
+              } else {
+                c.fillStyle = '#fbbf24';
+                c.beginPath();
+                c.arc(e.x, e.y, 4, 0, Math.PI * 2);
+                c.fill();
+              }
+            },
+          });
+        }
+      });
+
       // Player Character
       renderables.push({
         y: engine.player.y,
